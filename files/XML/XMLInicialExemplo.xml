@@ -8,7 +8,7 @@
     -->
 
 <Documento
-    dataInicio="" datafim="" moeda="" dataCriacao="">
+		dataCriacao="">
         
     <loja>
         <!-- Coisas da loja -->
@@ -22,7 +22,8 @@
         <!-- Ver o que está escrito nas vendas -->
     </produtosAssociados>
     
-    <vendas>
+    <vendas 
+		dataInicio="" datafim="" moeda="">
         <!-- Supostamente vão haver produtos e clientes associados às vendas também
         (ver o excel das Sales)
         Vamos ter que ver melhor esta parte.
@@ -31,11 +32,13 @@
         -> Depois este tipo de decisões que vamos fazer é que ficam refletidas no relatório! <-
         -->
         <venda taxaDeImposto="">
-            <!-- Coisas da venda -->
+            <!-- Coisas da venda 
+				(temos que ter em conta a cena do valor das moedas no valor do preço dos produtos aqui)
+				-->
         </venda>
     </vendas>
     
-    <maisCoisas...seNecessario>
-        
-    </maisCoisas...seNecessario>
+    <maisCoisas>
+        <!-- se necessário eh -->
+    </maisCoisas>
 </Documento>
