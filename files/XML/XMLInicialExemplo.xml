@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Estou a colocar os elementos por ordem do que está no enunciado
+    Enunciado: https://moodle.estg.ipp.pt/pluginfile.php/88644/mod_resource/content/2/PEI1819ACP1EI.pdf
+    (o enunciado também está no git)
+    
+    O que fica dentro de cada elemento está descrito nos doc Excel!
+    (também vou enviá-los para o git)
+    -->
+
+<Documento
+    dataInicio="" datafim="" moeda="" dataCriacao="">
+        
+    <loja>
+        <!-- Coisas da loja -->
+    </loja>
+        
+    <clientesAssociados>
+        <!-- Ver o que está escrito nas vendas -->
+    </clientesAssociados>
+    
+    <produtosAssociados>
+        <!-- Ver o que está escrito nas vendas -->
+    </produtosAssociados>
+    
+    <vendas>
+        <!-- Supostamente vão haver produtos e clientes associados às vendas também
+        (ver o excel das Sales)
+        Vamos ter que ver melhor esta parte.
+        Por agora só está aqui chapado o que está no enunciado
+        
+        -> Depois este tipo de decisões que vamos fazer é que ficam refletidas no relatório! <-
+        -->
+        <venda taxaDeImposto="">
+            <!-- Coisas da venda -->
+        </venda>
+    </vendas>
+    
+    <maisCoisas...seNecessario>
+        
+    </maisCoisas...seNecessario>
+</Documento>
