@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="namespace"
+           xmlns="namespace"
+           xmlns:ot="outrosNamespaces"
+           elementFormDefault="qualified">
+    
+    <xs:import schemaLocation="<path>.xsd" 
+               namespace="outrosNamespaces"/>
+    
+    
+    <xs:complexType name="mainType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="other" type="ot:otherType"/>
+        </xs:sequence>
+        <xs:attribute name="att" type="xs:string"/>
+    </xs:complexType>
+        
+    <xs:element name="main type="mainType"/>
+    
+</xs:schema>
