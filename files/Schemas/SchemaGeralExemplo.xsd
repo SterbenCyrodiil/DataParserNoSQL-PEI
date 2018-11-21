@@ -17,6 +17,6 @@
         <xs:attribute name="att" type="xs:string"/>
     </xs:complexType>
         
-    <xs:element name="main type="mainType"/>
+    <xs:element name="main" type="mainType"/>
     
 </xs:schema>
