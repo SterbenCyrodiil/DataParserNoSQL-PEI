@@ -30,11 +30,11 @@
 							<xs:element name="Produto" type="prd:typeProduto"/>
 						</xs:sequence>
 					</xs:complexType>
-				<xs:element name="Vendas" type="vnd:typeVendas/>
+				<xs:element name="Vendas" type="vnd:typeVendas"/>
 			</xs:sequence>
-			
-			<xs:attribute name="dataCriação" type="xs:date"/>
 		</xs:complexType>
+		
+		<xs:attribute name="dataCriação" type="xs:date"/>
     </xs:element>
     
 </xs:schema>
