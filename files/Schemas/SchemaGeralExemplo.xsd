@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- ISTO É SÓ O TEMPLATE!!!!!!
+	SE ACHAM QUE FICA MELHOR DE OUTRA FORMA (os complex types, ou seria melhor complexContent ...)
+	DIGAM E MUDA-SE!-->
+
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="namespace"
-           xmlns="namespace"
-           xmlns:ot="outrosNamespaces"
+           targetNamespace="ProjetoPEI/Grupo<>/Entrega1/"
+           xmlns="ProjetoPEI/Grupo<>/Entrega1/"
+		   
+           xmlns:loj="ProjetoPEI/Grupo<>/Entrega1/Loja"
+		   xmlns:prd="ProjetoPEI/Grupo<>/Entrega1/Produto"
+		   xmlns:vnd="ProjetoPEI/Grupo<>/Entrega1/Vendas"
            elementFormDefault="qualified">
+		   
+    <xs:import schemaLocation="Loja.xsd" 
+               namespace="ProjetoPEI/Grupo<>/Entrega1/Loja"/>
+	<xs:import schemaLocation="Produto.xsd" 
+               namespace="ProjetoPEI/Grupo<>/Entrega1/Produto"/>
+	<xs:import schemaLocation="Vendas.xsd" 
+               namespace="ProjetoPEI/Grupo<>/Entrega1/Vendas"/>
     
-    <xs:import schemaLocation="<path>.xsd" 
-               namespace="outrosNamespaces"/>
-    
-    
-    <xs:complexType name="mainType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-            <xs:element name="other" type="ot:otherType"/>
-        </xs:sequence>
-        <xs:attribute name="att" type="xs:string"/>
-    </xs:complexType>
-        
-    <xs:element name="main" type="mainType"/>
+    <xs:element name="Documento">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Loja" type="loj:typeLoja"/>
+				<xs:element name="ProdutosAssociados"/>
+					<xs:complexType>
+						<xs:sequence minOccurs="1" maxOccurs="unbounded">
+							<xs:element name="Produto" type="prd:typeProduto"/>
+						</xs:sequence>
+					</xs:complexType>
+				<xs:element name="Vendas" type="vnd:typeVendas/>
+			</xs:sequence>
+			
+			<xs:attribute name="dataCriação" type="xs:date"/>
+		</xs:complexType>
+    </xs:element>
     
 </xs:schema>
