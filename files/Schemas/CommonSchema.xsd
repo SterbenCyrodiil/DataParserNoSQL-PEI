@@ -5,25 +5,25 @@
            xmlns="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
       
-        <xs:simpleType name="typeNome">
-		<xs:restriction base="xs:string"/>
-	</xs:simpleType>
+    <xs:simpleType name="nametype">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
 
-	<xs:simpleType name="typeMorada">
-		<xs:restriction base="xs:string"/>
-	</xs:simpleType>
+    <xs:simpleType name="adresstype">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
 	
-	<xs:simpleType name="typeEmail">
-		<xs:restriction base="xs:string">
-			<xs:pattern value="[^@]+@[^\.]+\..+"/>
-		</xs:restriction>
-	</xs:simpleType>
+    <xs:simpleType name="emailtype">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^@]+@[^\.]+\..+"/>
+        </xs:restriction>
+    </xs:simpleType>
 
-	<xs:simpleType name="typeTelefone">
-		<xs:restriction base="xs:integer">
-			<xs:totalDigits value="9"/>
-		</xs:restriction>
-	</xs:simpleType>
+    <xs:simpleType name="phonetype">
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="9"/>
+        </xs:restriction>
+</xs:simpleType>
 
     <xs:simpleType name="baseMoeda">
         <xs:restriction base="xs:string">
