@@ -36,7 +36,13 @@
             <xs:element name="taxaImposto" type="cmn:typeImposto"/>
             <xs:element name="SubTotal" type="cmn:pricetype"/>
             <xs:element name="client" type="cli:typeCliente"/>
-            <xs:element name="receitpLines" type="typeReceiptLine"/>
+            <xs:element name="receiptLines" type="typeReceiptLine">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="receiptLine" type="typeReceiptLine"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
         <xs:attribute name="receiptID" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
@@ -44,12 +50,12 @@
     <!-- Finalmente, CADA LINHA DE RECEITA refere OS PRODUTOS e a sua quantidade -->
     <xs:complexType name="typeReceiptLine">
         <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="receiptLineID" type="xs:unsignedInt"/>
             <xs:element name="Product" type="typeProduto"/>
             <xs:element name="ProductUnitPrice" type="cmn:pricetype"/>
             <xs:element name="Order(quantidade)" type="xs:unsignedInt"/>
             <xs:element name="LineTotal" type="cmn:pricetype"/>
         </xs:sequence>
+        <xs:attribute name="ID" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
     
 </xs:schema>
