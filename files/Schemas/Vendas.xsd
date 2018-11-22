@@ -18,8 +18,24 @@
     
     <xs:complexType name="typeVenda">
         <xs:sequence>
+            <xs:element name="receiptID" type="xs:unsignedInt"/>
+            <xs:element name="receiptLine" type="xs:unsignedInt"/>
             
+            <xs:element name="Order" type="xs:unsignedInt"/>
+            <xs:element name="SubTotal" type="cmn:pricetype"/>
+            <xs:element name="LineTotal" type="cmn:pricetype"/>
+            
+            <xs:element name="taxaImposto" type="cmn:typeImposto"/>
+            <xs:element name="client" type="typeCliente"/>
+            <xs:element name="products">
+                <xs:complexType>
+                    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                        <xs:element name="product" type="typeProduto"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
-        <xs:attribute name="taxaImposto" type="cmn:typeImposto"/>
+        <xs:attribute name="orderDate" type="xs:dateTime"/>
     </xs:complexType>
+    
 </xs:schema>
