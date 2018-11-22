@@ -21,6 +21,7 @@
                 <xs:element name="Nome" type="typeNome"/>
                 <xs:element name="Morada" type="typeMorada"/>
                 <xs:element name="Contactos" type="typeContactos"/>
+                <xs:element name="NIF" type="NIF"/>
             </xs:sequence>
         </xs:complextype>
     </xs:element>	
