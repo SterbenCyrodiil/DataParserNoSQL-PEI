@@ -3,37 +3,40 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="ProjetoPEI/Grupo/Entrega1/Produto"
            xmlns="ProjetoPEI/Grupo/Entrega1/Produto"
+           xmlns:cmn="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
     
     <xs:import schemaLocation="CommonSchema.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
     
-    <xs:simpleType name="TypeListPrice">
-        <xs:restriction base="xs:decimal">
-            <xs:fractionDigits value="2"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="TypeProductDetails">
+    <xs:simpleType name="typeProductDetails">
         <xs:restriction base="xs:string">
-            <xs:pattern value="[A-Z][A-Z]-[A-Z0-9][A-Z0-9][A-Z0-9][A-Z0-9]/>
-                <xs:pattern value="[A-Z][A-Z]-[A-Z0-9][A-Z0-9][A-Z0-9][A-Z0-9]-[A-Z]/>
-                    <xs:pattern value="[A-Z][A-Z]-[A-Z0-9][A-Z0-9][A-Z0-9][A-Z0-9]-[0-9][0-9]/>
+            <xs:pattern value="[A-Z][A-Z]-[A-Z0-9][A-Z0-9][A-Z0-9][A-Z0-9]"/>
+            <xs:pattern value="[A-Z][A-Z]-[A-Z0-9][A-Z0-9][A-Z0-9][A-Z0-9]-[A-Z]"/>
+            <xs:pattern value="[A-Z][A-Z]-[A-Z0-9][A-Z0-9][A-Z0-9][A-Z0-9]-[0-9][0-9]"/>
         </xs:restriction>
     </xs:simpleType>
     
+    <!-- O minOccurs = 0 faz com que seja opcional colocar os elementos, assim pode
+        ficar só o ID do produto 
+        Por agora, o ID está como atributo!
+        Se acharem melhor colocar como elemento, estejam à vontade.-->
     <xs:complexType name="typeProduto>
         <xs:sequence>
-            <xs:element name="Name" type="xs:string"/>
-            <xs:element name="ProductID" type="xs:unsignedInt"/>
-            <xs:element name="ProductDetails" type="xs:TypeProductDetails"/>
-            <xs:element name="Color" type="xs:string"/>
-            <xs:element name="ListPrice" type="xs:ListPriceType"/>
-            <xs:element name="SellStartDate" type="xs:dateTime"/>
-            <xs:element name="SellEndDate" type="xs:dateTime"/>
+            <xs:element name="ProductDetails" type="xs:typeProductDetails"/>
+            <xs:element name="Name" type="cmn:nametype" 
+                        minOccurs="0"/>
+            <xs:element name="Color" type="xs:string" 
+                        minOccurs="0"/>
+            <xs:element name="ListPrice" type="cmn:pricetype" 
+                        minOccurs="0"/>
+            <xs:element name="SellStartDate" type="xs:dateTime" 
+                        minOccurs="0"/>
+            <xs:element name="SellEndDate" type="xs:dateTime" 
+                        minOccurs="0"/>
         </xs:sequence>
+        <xs:attribute name="productID" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
-			   
 </xs:schema>   
       
               

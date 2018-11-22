@@ -9,7 +9,7 @@ DIGAM E MUDA-SE!-->
            xmlns="ProjetoPEI/Grupo/Entrega1/"
               
            xmlns:loj="ProjetoPEI/Grupo/Entrega1/Loja"
-           xmlns:vnd="ProjetoPEI/Grupo/Entrega1/Vendas"
+           xmlns:rcp="ProjetoPEI/Grupo/Entrega1/Vendas"
            elementFormDefault="qualified">
 		   
     <xs:import schemaLocation="Loja.xsd"
@@ -21,22 +21,21 @@ DIGAM E MUDA-SE!-->
         <xs:complexType>
             <xs:sequence>
                 
-                <xs:element name="Loja" type="loj:typeLoja" maxOccurs="1"/>
+                <xs:element name="Loja" type="loj:typeLoja"/>
                 
                 <xs:element name="Vendas">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="Moeda" type="vnd:typeMoeda"/>
-                            <xs:element name="Venda" type="vnd:typeVenda" 
-                                        minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element name="Moeda" type="rcp:typeMoeda"/>
+                            <xs:element name="Receitas" type="rcp:typeReceita"/>
                         </xs:sequence>
-                        <xs:attribute name="dataInicio" type="xs:dateTime"/>
-                        <xs:attribute name="dataFim" type="xs:dateTime"/>
+                        <xs:attribute name="dataInicio" type="xs:dateTime" use="required"/>
+                        <xs:attribute name="dataFim" type="xs:dateTime" use="required"/>
                     </xs:complexType>
                 </xs:element>
                 
             </xs:sequence>
-            <xs:attribute name="dataCriacao" type="xs:dateTime"/>
+            <xs:attribute name="dataCriacao" type="xs:dateTime" use="required"/>
         </xs:complexType>
     </xs:element>
     

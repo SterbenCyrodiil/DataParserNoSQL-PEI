@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- A forma como este Schema está feito está toda descrita em comentários!!!!
+    não se esqueçam de os ler -->
+
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="ProjetoPEI/Grupo/Entrega1/Vendas"
            xmlns="ProjetoPEI/Grupo/Entrega1/Vendas"
+           
+           xmlns:cli="ProjetoPEI/Grupo/Entrega1/Cliente"
            xmlns:cmn="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
     
     <xs:import schemaLocation="CommonSchema.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
+    <xs:import schemaLocation="Cliente.xsd" 
+               namespace="ProjetoPEI/Grupo/Entrega1/Cliente"/>
     
+    <!-- Isto é o complexType da moeda, basicamente tem como texto a enumeração
+        das moedas e tem como atributo o tipo da transferência para USD... -->
     <xs:complexType name="typeMoeda">
         <xs:simpleContent>
             <xs:extension base="cmn:baseMoeda">
@@ -17,30 +26,29 @@
         </xs:simpleContent>
     </xs:complexType>
     
-    <xs:complexType name="typeSale">
-        <xs:sequence>
-            <xs:element name="receiptID" type="xs:unsignedInt"/>
-            <xs:element name="receiptLine" type="xs:unsignedInt"/>
-            
-            <xs:element name="Order" type="xs:unsignedInt"/>
-            <xs:element name="client" type="typeCliente"/>
-            <xs:element name="products">
-                <xs:complexType>
-                    <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                        <xs:element name="product" type="typeProduto"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            
-            <xs:element name="SubTotal" type="cmn:pricetype"/>
-            <xs:element name="LineTotal" type="cmn:pricetype"/>
-            <xs:element name="taxaImposto" type="cmn:typeImposto"/>
-        </xs:sequence>
-    </xs:complexType>
-    
+    <!-- Se forem ver o excel, as sales são identificadas pelas receitas.
+        Basicamente, NUMA DETERMINADA DATA uma loja tem UMA RECEITA dividida
+        em LINHAS DE RECEITA.
+        Então, a receita DE UMA LOJA refere UM CLIENTE, possui UM SUBTOTAL e 
+        divide-se em VÁRIAS LINHAS DE RECEITA!! -->
     <xs:complexType name="typeReceita">
         <xs:sequence>
-            <xs:element name="Sale" type="typeSale"/>
+            <xs:element name="taxaImposto" type="cmn:typeImposto"/>
+            <xs:element name="SubTotal" type="cmn:pricetype"/>
+            <xs:element name="client" type="cli:typeCliente"/>
+            <xs:element name="receitpLines" type="typeReceiptLine"/>
+        </xs:sequence>
+        <xs:attribute name="receiptID" type="xs:unsignedInt" use="required"/>
+    </xs:complexType>
+    
+    <!-- Finalmente, CADA LINHA DE RECEITA refere OS PRODUTOS e a sua quantidade -->
+    <xs:complexType name="typeReceiptLine">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="receiptLineID" type="xs:unsignedInt"/>
+            <xs:element name="Product" type="typeProduto"/>
+            <xs:element name="ProductUnitPrice" type="cmn:pricetype"/>
+            <xs:element name="Order(quantidade)" type="xs:unsignedInt"/>
+            <xs:element name="LineTotal" type="cmn:pricetype"/>
         </xs:sequence>
     </xs:complexType>
     
