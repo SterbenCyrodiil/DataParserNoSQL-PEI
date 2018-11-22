@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo<>/Entrega1/CommonSchema"
-           xmlns="ProjetoPEI/Grupo<>/Entrega1/CommonSchema"
+           targetNamespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"
+           xmlns="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
     
+    <xs:simpleType name="baseMoeda">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="USD"/>
+            <!-- ... -->
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

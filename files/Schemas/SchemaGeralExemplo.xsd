@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ISTO É SÓ O TEMPLATE!!!!!!
-	SE ACHAM QUE FICA MELHOR DE OUTRA FORMA (os complex types, ou seria melhor complexContent ...)
-	DIGAM E MUDA-SE!-->
+SE ACHAM QUE FICA MELHOR DE OUTRA FORMA (os complex types, ou seria melhor complexContent ...)
+DIGAM E MUDA-SE!-->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo<>/Entrega1/"
-           xmlns="ProjetoPEI/Grupo<>/Entrega1/"
-		   
-           xmlns:loj="ProjetoPEI/Grupo<>/Entrega1/Loja"
-		   xmlns:prd="ProjetoPEI/Grupo<>/Entrega1/Produto"
-		   xmlns:vnd="ProjetoPEI/Grupo<>/Entrega1/Vendas"
+           targetNamespace="ProjetoPEI/Grupo/Entrega1/"
+           xmlns="ProjetoPEI/Grupo/Entrega1/"
+              
+           xmlns:loj="ProjetoPEI/Grupo/Entrega1/Loja"
+           xmlns:vnd="ProjetoPEI/Grupo/Entrega1/Venda"
+           xmlns:cmn="ProjetoPEI/Grupe/Entrega1/CommonSchema"
            elementFormDefault="qualified">
 		   
-    <xs:import schemaLocation="Loja.xsd" 
-               namespace="ProjetoPEI/Grupo<>/Entrega1/Loja"/>
-	<xs:import schemaLocation="Produto.xsd" 
-               namespace="ProjetoPEI/Grupo<>/Entrega1/Produto"/>
-	<xs:import schemaLocation="Vendas.xsd" 
-               namespace="ProjetoPEI/Grupo<>/Entrega1/Vendas"/>
+    <xs:import schemaLocation="Loja.xsd"
+               namespace="ProjetoPEI/Grupo/Entrega1/Loja"/>
+    <xs:import schemaLocation="Venda.xsd"
+               namespace="ProjetoPEI/Grupo/Entrega1/Venda"/>
     
     <xs:element name="Documento">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Loja" type="loj:typeLoja"/>
-				<xs:element name="ProdutosAssociados"/>
-					<xs:complexType>
-						<xs:sequence minOccurs="1" maxOccurs="unbounded">
-							<xs:element name="Produto" type="prd:typeProduto"/>
-						</xs:sequence>
-					</xs:complexType>
-				<xs:element name="Vendas" type="vnd:typeVendas"/>
-			</xs:sequence>
-		</xs:complexType>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Loja" type="loj:typeLoja"/>
+                <xs:element name="Vendas">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Moeda" type="typeMoeda"/>
+                            <xs:element name="Venda" type="prd:typeVenda" 
+                                        minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
 		
-		<xs:attribute name="dataCriação" type="xs:date"/>
+        <xs:attribute name="dataCriação" type="xs:date"/>
     </xs:element>
     
+    <xs:complexType name="typeMoeda">
+        <xs:complexContent>
+            <xs:extension base="cmn:baseMoeda">
+                <xs:attribute name="currencyRateID" type="xs:unsignedInt"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 </xs:schema>

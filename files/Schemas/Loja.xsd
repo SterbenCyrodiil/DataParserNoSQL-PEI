@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo<>/Entrega1/Loja"
-           xmlns="ProjetoPEI/Grupo<>/Entrega1/Loja"
+           targetNamespace="ProjetoPEI/Grupo/Entrega1/Loja"
+           xmlns="ProjetoPEI/Grupo/Entrega1/Loja"
            elementFormDefault="qualified">
     
-	<xs:import schemaLocation="CommonSchema.xsd" 
-			   namespace="ProjetoPEI/Grupo<>/Entrega1/CommonSchema"/>
+    <xs:import schemaLocation="CommonSchema.xsd" 
+               namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
 			   
+	
 </xs:schema>

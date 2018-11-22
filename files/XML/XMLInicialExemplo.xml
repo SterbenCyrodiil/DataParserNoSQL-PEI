@@ -8,15 +8,11 @@
     -->
 
 <Documento
-		dataCriacao="">
+    dataCriacao="">
         
     <Loja>
         <!-- Coisas da loja -->
     </Loja>
-        
-    <ProdutosAssociados>
-        <!-- Ver o que está escrito nas vendas -->
-    </ProdutosAssociados>
     
     <Vendas 
 		dataInicio="" datafim="" moeda="">
@@ -27,10 +23,15 @@
         
         -> Depois este tipo de decisões que vamos fazer é que ficam refletidas no relatório! <-
         -->
+        <!-- alternativa a moeda ser atributo -->
+        <Moeda currencyRateID=""> </Moeda>
+        
         <Venda taxaDeImposto="">
             <!-- Coisas da venda 
-				(temos que ter em conta a cena do valor das moedas no valor do preço dos produtos aqui)
-				-->
+            (temos que ter em conta a cena do valor das moedas no valor do preço dos produtos aqui)
+            -->
+            
+            <!-- Produtos e Clientes depois terão os próprios doc Schema -->
         </Venda>
     </Vendas>
 	
