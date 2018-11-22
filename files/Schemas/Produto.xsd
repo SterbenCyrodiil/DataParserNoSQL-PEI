@@ -7,6 +7,34 @@
     
     <xs:import schemaLocation="CommonSchema.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
+    
+    <xs:simpleType name="TypeListPrice">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TypeProductDetails">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z][A-Z]-[A-Z0-9][A-Z0-9][A-Z0-9][A-Z0-9]/>
+                <xs:pattern value="[A-Z][A-Z]-[A-Z0-9][A-Z0-9][A-Z0-9][A-Z0-9]-[A-Z]/>
+                    <xs:pattern value="[A-Z][A-Z]-[A-Z0-9][A-Z0-9][A-Z0-9][A-Z0-9]-[0-9][0-9]/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="typeProduto>
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="ProductID" type="xs:unsignedInt"/>
+            <xs:element name="ProductDetails" type="xs:TypeProductDetails"/>
+            <xs:element name="Color" type="xs:string"/>
+            <xs:element name="ListPrice" type="xs:ListPriceType"/>
+            <xs:element name="SellStartDate" type="xs:dateTime"/>
+            <xs:element name="SellEndDate" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
 			   
-	
-</xs:schema>
+</xs:schema>   
+      
+              
+            

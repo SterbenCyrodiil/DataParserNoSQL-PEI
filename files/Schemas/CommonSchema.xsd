@@ -24,6 +24,12 @@
             <xs:totalDigits value="9"/>
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:simpleType name="pricetype">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <xs:simpleType name="baseMoeda">
         <xs:restriction base="xs:string">
@@ -44,34 +50,6 @@
         </xs:restriction>
     </xs:simpleType>
     
-    <xs:simpleType name="color">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="NULL"/>
-            <xs:enumeration value="RED"/>
-            <xs:enumeration value="ORANGE"/>
-            <xs:enumeration value="YELLOW"/>
-            <xs:enumeration value="GREEN"/>
-            <xs:enumeration value="BLUE"/>
-            <xs:enumeration value="PURPLE"/>
-            <xs:enumeration value="BROWN"/>
-            <xs:enumeration value="MAGENTA"/>
-            <xs:enumeration value="TAN"/>
-            <xs:enumeration value="CYAN"/>
-            <xs:enumeration value="OLIVE"/>
-            <xs:enumeration value="MAROON"/>
-            <xs:enumeration value="NAVY"/>
-            <xs:enumeration value="AQUAMARINE"/>
-            <xs:enumeration value="TURQUOISE"/>
-            <xs:enumeration value="SILVER"/>
-            <xs:enumeration value="LIME"/>
-            <xs:enumeration value="TEAL"/>
-            <xs:enumeration value="INDIGO"/>
-            <xs:enumeration value="VIOLET"/>
-            <xs:enumeration value="PINK"/>
-            <xs:enumeration value="BLACK"/>
-            <xs:enumeration value="WHITE"/>
-            <xs:enumeration value="GREY"/>
-        </xs:restriction>
-    </xs:simpleType>
+
     
 </xs:schema>
