@@ -15,15 +15,13 @@
         </xs:sequence>
     </xs:complextype>
 
-    <xs:element name="Loja" >
-        <xs:complextype>
+        <xs:complextype name="typeLoja">
             <xs:sequence>
                 <xs:element name="Nome" type="nametype"/>
                 <xs:element name="Morada" type="adresstype"/>
                 <xs:element name="Contactos" type="typeContactos"/>
                 <xs:element name="NIF" type="NIF"/>
             </xs:sequence>
-        </xs:complextype>
-    </xs:element>	
+        </xs:complextype>	
 			   
 </xs:schema>

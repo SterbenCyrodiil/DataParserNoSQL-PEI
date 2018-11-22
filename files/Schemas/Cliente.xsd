@@ -8,13 +8,12 @@
     <xs:import schemaLocation="CommonSchema.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
 			
-    <xs:element name="Cliente">
-        <xs:complexType>
+        <xs:complexType name="typeCliente">
             <xs:sequence>
                 <xs:element name="Nome" type="typename"/>
                 <xs:element name="NIF" type="NIF"/>
             </xs:sequence>
         </xs:complexType>
-    </xs:element>   
+  
 	
 </xs:schema>
