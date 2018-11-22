@@ -15,7 +15,7 @@
     </Loja>
     
     <Vendas 
-		dataInicio="" datafim="" moeda="">
+		dataInicio="" datafim="">
         <!-- Supostamente vão haver produtos e clientes associados às vendas também
         (ver o excel das Sales)
         Vamos ter que ver melhor esta parte.

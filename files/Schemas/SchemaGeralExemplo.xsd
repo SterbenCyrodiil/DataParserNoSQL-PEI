@@ -10,7 +10,6 @@ DIGAM E MUDA-SE!-->
               
            xmlns:loj="ProjetoPEI/Grupo/Entrega1/Loja"
            xmlns:vnd="ProjetoPEI/Grupo/Entrega1/Vendas"
-           xmlns:cmn="ProjetoPEI/Grupe/Entrega1/CommonSchema"
            elementFormDefault="qualified">
 		   
     <xs:import schemaLocation="Loja.xsd"
@@ -21,20 +20,25 @@ DIGAM E MUDA-SE!-->
     <xs:element name="Documento">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Loja" type="loj:typeLoja"/>
+                
+                <xs:element name="Loja" type="loj:typeLoja" maxOccurs="1"/>
+                
                 <xs:element name="Vendas">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="Moeda" type="vnd:typeMoeda"/>
+                            <xs:element name="Moeda" type="vnd:typeMoeda" 
+                                        maxOccurs="1"/>
                             <xs:element name="Venda" type="vnd:typeVenda" 
                                         minOccurs="0" maxOccurs="unbounded"/>
                         </xs:sequence>
+                        <xs:attribute name="dataInicio" type="xs:date"/>
+                        <xs:attribute name="dataFim" type="xs:date"/>
                     </xs:complexType>
                 </xs:element>
+                
             </xs:sequence>
+            <xs:attribute name="dataCriacao" type="xs:date"/>
         </xs:complexType>
-		
-        <xs:attribute name="dataCriação" type="xs:date"/>
     </xs:element>
     
 </xs:schema>

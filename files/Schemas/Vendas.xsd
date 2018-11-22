@@ -17,6 +17,9 @@
     </xs:complexType>
     
     <xs:complexType name="typeVenda">
-		
+        <xs:sequence>
+            
+        </xs:sequence>
+        <xs:attribute name="taxaImposto" type="cmn:typeImposto"/>
     </xs:complexType>
 </xs:schema>

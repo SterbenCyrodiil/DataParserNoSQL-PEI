@@ -6,20 +6,24 @@
            elementFormDefault="qualified">
       
     <xs:simpletype name="nametype">
-		<xs:restriction base="xs:string"/>
-	</xs:simpletype>
+        <xs:restriction base="xs:string">
+    </xs:simpletype>
 
-	<xs:simpletype name="adresstype">
-		<xs:restriction base="xs:string"/>
-	</xs:simpletype>
+    <xs:simpletype name="adresstype">
+        <xs:restriction base="xs:string"/>
+    </xs:simpletype>
 	
-	<xs:simpletype name="emailtype">
-		<xs:restriction base="xs:string"/>
-	</xs:simpletype>
+    <xs:simpletype name="emailtype">
+        <xs:restriction base="xs:string"/>
+    </xs:simpletype>
 
-	<xs:simpletype name="phonetype">
-		<xs:restriction base="xs:integer" totalDigits="9"/>
-	</xs:simpletype>
+    <xs:simpletype name="phonetype">
+        <xs:restriction base="xs:integer" totalDigits="9"/>
+    </xs:simpletype>
+    
+    <xs:simpleType name="typeImposto">
+        <xs:restriction
+    </xs:simpleType>
 
     <xs:simpleType name="baseMoeda">
         <xs:restriction base="xs:string">
