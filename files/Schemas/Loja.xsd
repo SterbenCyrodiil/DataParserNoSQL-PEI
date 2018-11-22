@@ -5,23 +5,24 @@
            xmlns="ProjetoPEI/Grupo/Entrega1/Loja"
            elementFormDefault="qualified">
     
-	<xs:import schemaLocation="CommonSchema.xsd" 
-			   namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
+    <xs:import schemaLocation="CommonSchema.xsd" 
+               namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
 	
+    <xs:complextype name="typeContactos">
+        <xs:sequence>
+            <xs:element name="Email" type="emailtype"/>
+            <xs:element name="Phone" type="phonetype"/>	
+        </xs:sequence>
+    </xs:complextype>
 
-	<xs:element name="Loja" >
-		<xs:complextype>
-			<xs:sequence>
-				<xs:element name="Name" type="nametype"/>
-				<xs:element name="Adress" type="adresstype"/>
-				<xs:complextype name="Contacts">
-					<xs:sequence>
-						<xs:element name="Email" type="emailtype"/>
-						<xs:element name="Phone" type="phonetype"/>	
-					</xs:sequence>
-				</xs:complextype>
-			</xs:sequence>
-		</xs:complextype>
-	</xs:element>	
+    <xs:element name="Loja" >
+        <xs:complextype>
+            <xs:sequence>
+                <xs:element name="Name" type="nametype"/>
+                <xs:element name="Adress" type="adresstype"/>
+                <xs:element name="Contactos" type="typeContactos"/>
+            </xs:sequence>
+        </xs:complextype>
+    </xs:element>	
 			   
 </xs:schema>
