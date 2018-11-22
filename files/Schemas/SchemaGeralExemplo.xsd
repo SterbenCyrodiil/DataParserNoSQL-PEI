@@ -9,14 +9,14 @@ DIGAM E MUDA-SE!-->
            xmlns="ProjetoPEI/Grupo/Entrega1/"
               
            xmlns:loj="ProjetoPEI/Grupo/Entrega1/Loja"
-           xmlns:vnd="ProjetoPEI/Grupo/Entrega1/Venda"
+           xmlns:vnd="ProjetoPEI/Grupo/Entrega1/Vendas"
            xmlns:cmn="ProjetoPEI/Grupe/Entrega1/CommonSchema"
            elementFormDefault="qualified">
 		   
     <xs:import schemaLocation="Loja.xsd"
                namespace="ProjetoPEI/Grupo/Entrega1/Loja"/>
-    <xs:import schemaLocation="Venda.xsd"
-               namespace="ProjetoPEI/Grupo/Entrega1/Venda"/>
+    <xs:import schemaLocation="Vendas.xsd"
+               namespace="ProjetoPEI/Grupo/Entrega1/Vendas"/>
     
     <xs:element name="Documento">
         <xs:complexType>
@@ -25,8 +25,8 @@ DIGAM E MUDA-SE!-->
                 <xs:element name="Vendas">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="Moeda" type="typeMoeda"/>
-                            <xs:element name="Venda" type="prd:typeVenda" 
+                            <xs:element name="Moeda" type="vnd:typeMoeda"/>
+                            <xs:element name="Venda" type="vnd:typeVenda" 
                                         minOccurs="0" maxOccurs="unbounded"/>
                         </xs:sequence>
                     </xs:complexType>
@@ -37,11 +37,4 @@ DIGAM E MUDA-SE!-->
         <xs:attribute name="dataCriação" type="xs:date"/>
     </xs:element>
     
-    <xs:complexType name="typeMoeda">
-        <xs:complexContent>
-            <xs:extension base="cmn:baseMoeda">
-                <xs:attribute name="currencyRateID" type="xs:unsignedInt"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
 </xs:schema>

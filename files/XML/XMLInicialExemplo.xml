@@ -26,12 +26,16 @@
         <!-- alternativa a moeda ser atributo -->
         <Moeda currencyRateID=""> </Moeda>
         
-        <Venda taxaDeImposto="">
+        <Venda taxaImposto="">
             <!-- Coisas da venda 
             (temos que ter em conta a cena do valor das moedas no valor do preço dos produtos aqui)
             -->
             
             <!-- Produtos e Clientes depois terão os próprios doc Schema -->
+        </Venda>
+        
+        <Venda taxaImposto="">
+            
         </Venda>
     </Vendas>
 	
