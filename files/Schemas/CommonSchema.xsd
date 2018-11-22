@@ -7,8 +7,20 @@
     
     <xs:simpleType name="baseMoeda">
         <xs:restriction base="xs:string">
+            <xs:enumeration value="ARS"/>
+            <xs:enumeration value="AUD"/>
+            <xs:enumeration value="BRL"/>
+            <xs:enumeration value="CAD"/>
+            <xs:enumeration value="CNY"/>
+            <xs:enumeration value="DEM"/>
+            <xs:enumeration value="EUR"/>
+            <xs:enumeration value="FRF"/>
+            <xs:enumeration value="GBP"/>
+            <xs:enumeration value="JPY"/>
+            <xs:enumeration value="MXN"/>
+            <xs:enumeration value="SAR"/>
             <xs:enumeration value="USD"/>
-            <!-- ... -->
+            <xs:enumeration value="VEB"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
