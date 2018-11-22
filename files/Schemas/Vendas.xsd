@@ -3,29 +3,26 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="ProjetoPEI/Grupo/Entrega1/Vendas"
            xmlns="ProjetoPEI/Grupo/Entrega1/Vendas"
+           xmlns:cmn="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
-		   
+    
     <xs:import schemaLocation="CommonSchema.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
     
     <xs:complexType name="typeMoeda">
-        <xs:complexContent>
+        <xs:simpleContent>
             <xs:extension base="cmn:baseMoeda">
                 <xs:attribute name="currencyRateID" type="xs:unsignedInt"/>
             </xs:extension>
-        </xs:complexContent>
+        </xs:simpleContent>
     </xs:complexType>
     
-    <xs:complexType name="typeVenda">
+    <xs:complexType name="typeSale">
         <xs:sequence>
             <xs:element name="receiptID" type="xs:unsignedInt"/>
             <xs:element name="receiptLine" type="xs:unsignedInt"/>
             
             <xs:element name="Order" type="xs:unsignedInt"/>
-            <xs:element name="SubTotal" type="cmn:pricetype"/>
-            <xs:element name="LineTotal" type="cmn:pricetype"/>
-            
-            <xs:element name="taxaImposto" type="cmn:typeImposto"/>
             <xs:element name="client" type="typeCliente"/>
             <xs:element name="products">
                 <xs:complexType>
@@ -34,8 +31,17 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+            
+            <xs:element name="SubTotal" type="cmn:pricetype"/>
+            <xs:element name="LineTotal" type="cmn:pricetype"/>
+            <xs:element name="taxaImposto" type="cmn:typeImposto"/>
         </xs:sequence>
-        <xs:attribute name="orderDate" type="xs:dateTime"/>
+    </xs:complexType>
+    
+    <xs:complexType name="typeReceita">
+        <xs:sequence>
+            <xs:element name="Sale" type="typeSale"/>
+        </xs:sequence>
     </xs:complexType>
     
 </xs:schema>

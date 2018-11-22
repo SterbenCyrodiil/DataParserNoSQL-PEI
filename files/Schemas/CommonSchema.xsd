@@ -6,11 +6,15 @@
            elementFormDefault="qualified">
       
     <xs:simpleType name="nametype">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="xs:string">
+            
+        </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="adresstype">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="xs:string">
+            
+        </xs:restriction>
     </xs:simpleType>
 	
     <xs:simpleType name="emailtype">
@@ -20,7 +24,7 @@
     </xs:simpleType>
 
     <xs:simpleType name="phonetype">
-        <xs:restriction base="xs:integer">
+        <xs:restriction base="xs:unsignedInt">
             <xs:totalDigits value="9"/>
         </xs:restriction>
     </xs:simpleType>
@@ -32,7 +36,7 @@
     </xs:simpleType>
 
     <xs:simpleType name="NIF">
-        <xs:restriction base="xs:int">
+        <xs:restriction base="xs:unsignedInt">
             <xs:totalDigits value="9"/>
         </xs:restriction>
     </xs:simpleType>
