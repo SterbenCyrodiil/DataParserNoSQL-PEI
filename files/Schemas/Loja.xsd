@@ -10,16 +10,16 @@
 	
     <xs:complextype name="typeContactos">
         <xs:sequence>
-            <xs:element name="Email" type="typeEmail"/>
-            <xs:element name="Telefone" type="typeTelefone"/>	
+            <xs:element name="Email" type="emailtype"/>
+            <xs:element name="Telefone" type="phonetype"/>	
         </xs:sequence>
     </xs:complextype>
 
     <xs:element name="Loja" >
         <xs:complextype>
             <xs:sequence>
-                <xs:element name="Nome" type="typeNome"/>
-                <xs:element name="Morada" type="typeMorada"/>
+                <xs:element name="Nome" type="nametype"/>
+                <xs:element name="Morada" type="adresstype"/>
                 <xs:element name="Contactos" type="typeContactos"/>
                 <xs:element name="NIF" type="NIF"/>
             </xs:sequence>
