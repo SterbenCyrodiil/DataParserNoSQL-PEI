@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo/Entrega1/Vendas"
+           xmlns="ProjetoPEI/Grupo/Entrega1/Vendas"
+           elementFormDefault="qualified">
+		   
+    <xs:import schemaLocation="CommonSchema.xsd" 
+               namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
+    
+    <xs:complexType name="typeMoeda">
+        <xs:complexContent>
+            <xs:extension base="cmn:baseMoeda">
+                <xs:attribute name="currencyRateID" type="xs:unsignedInt"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="typeVenda">
+		
+    </xs:complexType>
+</xs:schema>
