@@ -25,7 +25,7 @@
     ficar só o ID do produto 
     Por agora, o ID está como atributo!
     Se acharem melhor colocar como elemento, estejam à vontade.-->
-    <xs:complexType name="typeProduto>
+    <xs:complexType name="typeProduto">
         <xs:sequence>
             <xs:element name="codigo" type="typeCodigoProduto"/>
             <xs:element name="nome" type="xs:string" 
