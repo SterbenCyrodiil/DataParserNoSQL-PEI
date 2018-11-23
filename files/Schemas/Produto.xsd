@@ -11,9 +11,9 @@
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
     
     <!-- Nos aqui colocamos os patterns todos possíveis.
-        Não sei se poderia ficar melhor que isto
-        -->
-    <xs:simpleType name="typeDetalhesProduto">
+    Não sei se poderia ficar melhor que isto
+    -->
+    <xs:simpleType name="typeCodigoProduto">
         <xs:restriction base="xs:string">
             <xs:pattern value="[A-Z]{2}[-][A-Z0-9]{4}"/>
             <xs:pattern value="[A-Z]{2}[-][A-Z0-9]{4}[-][A-Z]"/>
@@ -22,13 +22,13 @@
     </xs:simpleType>
     
     <!-- O minOccurs = 0 faz com que seja opcional colocar os elementos, assim pode
-        ficar só o ID do produto 
-        Por agora, o ID está como atributo!
-        Se acharem melhor colocar como elemento, estejam à vontade.-->
+    ficar só o ID do produto 
+    Por agora, o ID está como atributo!
+    Se acharem melhor colocar como elemento, estejam à vontade.-->
     <xs:complexType name="typeProduto>
         <xs:sequence>
-            <xs:element name="detalhes" type="typeDetalhesProduto"/>
-            <xs:element name="nome" type="cmn:typeNome" 
+            <xs:element name="codigo" type="typeCodigoProduto"/>
+            <xs:element name="nome" type="xs:string" 
                         minOccurs="0"/>
             <xs:element name="codigoCor" type="cmn:typeCor" 
                         minOccurs="0"/>

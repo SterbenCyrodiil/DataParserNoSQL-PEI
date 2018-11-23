@@ -9,15 +9,23 @@
     
     <xs:import schemaLocation="CommonSchema.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
-			
-        <xs:complexType name="typeClient">
-            <xs:sequence>
-                <xs:element name="nome" type="cmn:typeNome"/>
-                <xs:element name="telefone" type="cmn:typeTelefone"/>
-                <xs:element name="email" type="cmn:typeEmail"/>
-                <xs:element name="NIF" type="cmn:NIF"/>
-            </xs:sequence>
-        </xs:complexType>
+    
+    <xs:complexType name="typeClient">
+        <xs:sequence>
+            <xs:element name="nome">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="primeiroNome" type="xs:string"/>
+                        <xs:element name="ultimoNome" type="xs:string"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="morada" type="xs:string"/>
+            <xs:element name="telefone" type="cmn:typeTelefone"/>
+            <xs:element name="email" type="cmn:typeEmail"/>
+            <xs:element name="NIF" type="cmn:NIF"/>
+        </xs:sequence>
+    </xs:complexType>
   
 	
 </xs:schema>

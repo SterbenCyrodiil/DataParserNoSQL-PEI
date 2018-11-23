@@ -4,18 +4,6 @@
            targetNamespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            xmlns="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
-      
-    <xs:simpleType name="typeNome">
-        <xs:restriction base="xs:string">
-            
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="typeMorada">
-        <xs:restriction base="xs:string">
-            
-        </xs:restriction>
-    </xs:simpleType>
 	
     <xs:simpleType name="typeEmail">
         <xs:restriction base="xs:string">
@@ -27,9 +15,9 @@
         do totalDigits.
         Again, se quiserem alterar digam e altera-se à vontade!    
         
-        Já agora, este telefone é pt-pt. Mas se quisessemos colocar outros tupos
-        bastava adicionar mais patterns, por exemplo.
-        -->
+    Já agora, este telefone é pt-pt. Mas se quisessemos colocar outros tupos
+    bastava adicionar mais patterns, por exemplo.
+    -->
     <xs:simpleType name="typeTelefone">
         <xs:restriction base="xs:integer">
             <xs:pattern value="[0-9]{9}"/>
