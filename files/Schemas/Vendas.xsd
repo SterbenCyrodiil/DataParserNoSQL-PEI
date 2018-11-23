@@ -21,7 +21,7 @@
     <xs:complexType name="typeMoeda">
         <xs:simpleContent>
             <xs:extension base="cmn:baseMoeda">
-                <xs:attribute name="currencyRateID" type="xs:unsignedInt"/>
+                <xs:attribute name="IDTaxaCambio" type="xs:unsignedInt"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -33,29 +33,29 @@
         divide-se em VÁRIAS LINHAS DE RECEITA!! -->
     <xs:complexType name="typeReceita">
         <xs:sequence>
+            <xs:element name="subTotal" type="cmn:pricetype"/>
             <xs:element name="taxaImposto" type="cmn:typeImposto"/>
-            <xs:element name="SubTotal" type="cmn:pricetype"/>
-            <xs:element name="client" type="cli:typeCliente"/>
-            <xs:element name="receiptLines" type="typeReceiptLine">
+            <xs:element name="cliente" type="cli:typeCliente"/>
+            <xs:element name="linhasReceita" type="typeReceiptLine">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="receiptLine" type="typeReceiptLine"/>
+                        <xs:element name="linhaReceita" type="typeLinhaReceita"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
-        <xs:attribute name="receiptID" type="xs:unsignedInt" use="required"/>
+        <xs:attribute name="IDReceita" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
     
     <!-- Finalmente, CADA LINHA DE RECEITA refere OS PRODUTOS e a sua quantidade -->
-    <xs:complexType name="typeReceiptLine">
+    <xs:complexType name="typeLinhaReceita">
         <xs:sequence>
-            <xs:element name="Product" type="typeProduto"/>
-            <xs:element name="ProductUnitPrice" type="cmn:pricetype"/>
-            <xs:element name="Order(quantidade)" type="xs:unsignedInt"/>
-            <xs:element name="LineTotal" type="cmn:pricetype"/>
+            <xs:element name="produto" type="typeProduto"/>
+            <xs:element name="precoPorUnidade" type="cmn:pricetype"/>
+            <xs:element name="quantidade" type="xs:unsignedInt"/>
+            <xs:element name="totalLinha" type="cmn:pricetype"/>
         </xs:sequence>
-        <xs:attribute name="ID" type="xs:unsignedInt" use="required"/>
+        <xs:attribute name="IDLinha" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
     
 </xs:schema>

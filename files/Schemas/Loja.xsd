@@ -3,24 +3,29 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="ProjetoPEI/Grupo/Entrega1/Loja"
            xmlns="ProjetoPEI/Grupo/Entrega1/Loja"
+           
+           xmlns:cmn="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
     
     <xs:import schemaLocation="CommonSchema.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
-	
+    
+    <!-- Assim, com o choice e os min e max Occurs faz com que seja necessário
+        pelo menos um contacto mas também permite que existem mais contactos
+        -->
     <xs:complextype name="typeContactos">
-        <xs:sequence>
-            <xs:element name="Email" type="emailtype"/>
-            <xs:element name="Telefone" type="phonetype"/>	
-        </xs:sequence>
+        <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="email" type="cmn:typeEmail"/>
+            <xs:element name="telefone" type="cmn:typeTelefone"/>	
+        </xs:choice>
     </xs:complextype>
-
+    
         <xs:complextype name="typeLoja">
             <xs:sequence>
-                <xs:element name="Nome" type="nametype"/>
-                <xs:element name="Morada" type="adresstype"/>
-                <xs:element name="Contactos" type="typeContactos"/>
-                <xs:element name="NIF" type="NIF"/>
+                <xs:element name="nome" type="cmn:nametype"/>
+                <xs:element name="morada" type="cmn:adresstype"/>
+                <xs:element name="contactos" type="typeContactos"/>
+                <xs:element name="NIF" type="cmn:NIF"/>
             </xs:sequence>
         </xs:complextype>	
 			   

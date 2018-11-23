@@ -3,15 +3,19 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="ProjetoPEI/Grupo/Entrega1/Cliente"
            xmlns="ProjetoPEI/Grupo/Entrega1/Cliente"
+           
+           xmlns:cmn="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
     
     <xs:import schemaLocation="CommonSchema.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
 			
-        <xs:complexType name="typeCliente">
+        <xs:complexType name="typeClient">
             <xs:sequence>
-                <xs:element name="Nome" type="typename"/>
-                <xs:element name="NIF" type="NIF"/>
+                <xs:element name="nome" type="cmn:typename"/>
+                <xs:element name="telefone" type="cmn:phoneType"/>
+                <xs:element name="email" type="cmn:emailType"/>
+                <xs:element name="NIF" type="cmn:NIF"/>
             </xs:sequence>
         </xs:complexType>
   

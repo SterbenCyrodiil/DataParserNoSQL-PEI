@@ -5,39 +5,46 @@
            xmlns="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
       
-    <xs:simpleType name="nametype">
+    <xs:simpleType name="typeNome">
         <xs:restriction base="xs:string">
             
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="adresstype">
+    <xs:simpleType name="typeMorada">
         <xs:restriction base="xs:string">
             
         </xs:restriction>
     </xs:simpleType>
 	
-    <xs:simpleType name="emailtype">
+    <xs:simpleType name="typeEmail">
         <xs:restriction base="xs:string">
             <xs:pattern value="[^@]+@[^\.]+\..+"/>
         </xs:restriction>
     </xs:simpleType>
-
-    <xs:simpleType name="phonetype">
-        <xs:restriction base="xs:unsignedInt">
-            <xs:totalDigits value="9"/>
+    
+    <!-- Achei que ficava mais de mais facil compreensão em pattern em vez 
+        do totalDigits.
+        Again, se quiserem alterar digam e altera-se à vontade!    
+        
+        Já agora, este telefone é pt-pt. Mas se quisessemos colocar outros tupos
+        bastava adicionar mais patterns, por exemplo.
+        -->
+    <xs:simpleType name="typeTelefone">
+        <xs:restriction base="xs:integer">
+            <xs:pattern value="[0-9]{9}"/>
         </xs:restriction>
     </xs:simpleType>
     
-    <xs:simpleType name="pricetype">
-        <xs:restriction base="xs:decimal">
-            <xs:fractionDigits value="2"/>
+    <xs:simpleType name="NIF">
+        <xs:restriction base="xs:integer">
+            <xs:pattern value="[0-9]{9}"/>
         </xs:restriction>
     </xs:simpleType>
-
-    <xs:simpleType name="NIF">
-        <xs:restriction base="xs:unsignedInt">
-            <xs:totalDigits value="9"/>
+    
+    <xs:simpleType name="typePrice">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="2"/>
         </xs:restriction>
     </xs:simpleType>
     
@@ -60,6 +67,11 @@
         </xs:restriction>
     </xs:simpleType>
     
-
+    <!-- Descobrimos que a cor podia ficar com a identificação hexadecimal, genius -->
+    <xs:simpleType name="typeCor">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[#][0-9A-Za-z]{6}"/>
+        </xs:restriction>
+    </xs:simpleType>
     
 </xs:schema>
