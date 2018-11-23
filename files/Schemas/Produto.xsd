@@ -3,6 +3,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="ProjetoPEI/Grupo/Entrega1/Produto"
            xmlns="ProjetoPEI/Grupo/Entrega1/Produto"
+           
            xmlns:cmn="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
     
@@ -26,12 +27,12 @@
         Se acharem melhor colocar como elemento, estejam à vontade.-->
     <xs:complexType name="typeProduto>
         <xs:sequence>
-            <xs:element name="detalhes" type="xs:typeDetalhesProduto"/>
-            <xs:element name="nome" type="cmn:nametype" 
+            <xs:element name="detalhes" type="typeDetalhesProduto"/>
+            <xs:element name="nome" type="cmn:typeNome" 
                         minOccurs="0"/>
             <xs:element name="codigoCor" type="cmn:typeCor" 
                         minOccurs="0"/>
-            <xs:element name="precoEmLista" type="cmn:pricetype" 
+            <xs:element name="precoEmLista" type="cmn:typePreco" 
                         minOccurs="0"/>
             <xs:element name="dataInicioVenda" type="xs:dateTime" 
                         minOccurs="0"/>

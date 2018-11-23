@@ -12,9 +12,9 @@
 			
         <xs:complexType name="typeClient">
             <xs:sequence>
-                <xs:element name="nome" type="cmn:typename"/>
-                <xs:element name="telefone" type="cmn:phoneType"/>
-                <xs:element name="email" type="cmn:emailType"/>
+                <xs:element name="nome" type="cmn:typeNome"/>
+                <xs:element name="telefone" type="cmn:typeTelefone"/>
+                <xs:element name="email" type="cmn:typeEmail"/>
                 <xs:element name="NIF" type="cmn:NIF"/>
             </xs:sequence>
         </xs:complexType>

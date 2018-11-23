@@ -22,8 +22,8 @@
     
         <xs:complextype name="typeLoja">
             <xs:sequence>
-                <xs:element name="nome" type="cmn:nametype"/>
-                <xs:element name="morada" type="cmn:adresstype"/>
+                <xs:element name="nome" type="cmn:typeNome"/>
+                <xs:element name="morada" type="cmn:typeMorada"/>
                 <xs:element name="contactos" type="typeContactos"/>
                 <xs:element name="NIF" type="cmn:NIF"/>
             </xs:sequence>
