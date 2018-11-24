@@ -13,20 +13,20 @@
     <!-- Assim, com o choice e os min e max Occurs faz com que seja necessário
     pelo menos um contacto mas também permite que existem mais contactos
     -->
-    <xs:complextype name="typeContactos">
+    <xs:complexType name="typeContactos">
         <xs:choice minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="email" type="cmn:typeEmail"/>
-            <xs:element name="telefone" type="cmn:typeTelefone"/>	
+            <xs:element name="Email" type="cmn:typeEmail"/>
+            <xs:element name="Telefone" type="cmn:typeTelefone"/>	
         </xs:choice>
-    </xs:complextype>
+    </xs:complexType>
     
-    <xs:complextype name="typeLoja">
+    <xs:complexType name="typeLoja">
         <xs:sequence>
-            <xs:element name="nome" type="xs:string"/>
-            <xs:element name="morada" type="xs:string"/>
-            <xs:element name="contactos" type="typeContactos"/>
+            <xs:element name="Nome" type="xs:string"/>
+            <xs:element name="Morada" type="xs:string"/>
+            <xs:element name="Contactos" type="typeContactos"/>
             <xs:element name="NIF" type="cmn:NIF"/>
         </xs:sequence>
-    </xs:complextype>	
+    </xs:complexType>	
 			   
 </xs:schema>

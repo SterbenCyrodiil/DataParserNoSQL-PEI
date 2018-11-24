@@ -10,7 +10,7 @@
     <xs:import schemaLocation="CommonSchema.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
     
-    <xs:complexType name="typeClient">
+    <xs:complexType name="typeCliente">
         <xs:sequence>
             <xs:element name="nome">
                 <xs:complexType>

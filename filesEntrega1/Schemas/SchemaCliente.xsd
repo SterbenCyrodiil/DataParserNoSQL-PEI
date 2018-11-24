@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo/Entrega1/Cliente"
+           xmlns="ProjetoPEI/Grupo/Entrega1/Cliente"
+           
+           xmlns:cmn="ProjetoPEI/Grupo/Entrega1/CommonSchema"
+           elementFormDefault="qualified">
+    
+    <xs:import schemaLocation="CommonSchema.xsd" 
+               namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
+    
+    <xs:complexType name="typeCliente">
+        <xs:sequence>
+            <xs:element name="Nome">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="PrimeiroNome" type="xs:string"/>
+                        <xs:element name="UltimoNome" type="xs:string"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Morada" type="xs:string"/>
+            <xs:element name="Telefone" type="cmn:typeTelefone"/>
+            <xs:element name="Email" type="cmn:typeEmail"/>
+            <xs:element name="NIF" type="cmn:NIF"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+</xs:schema>

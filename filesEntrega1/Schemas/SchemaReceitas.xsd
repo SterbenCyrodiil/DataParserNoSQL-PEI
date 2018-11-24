@@ -14,13 +14,11 @@ não se esqueçam de os ler -->
     
     <xs:import schemaLocation="CommonSchema.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
-    <xs:import schemaLocation="Cliente.xsd" 
+    <xs:import schemaLocation="SchemaCliente.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/Cliente"/>
-    <xs:import schemaLocation="Produto.xsd" 
+    <xs:import schemaLocation="SchemaProduto.xsd" 
                namespace="ProjetoPEI/Grupo/Entrega1/Produto"/>
     
-    <!-- Isto é o complexType da moeda, basicamente tem como texto a enumeração
-    das moedas e tem como atributo o tipo da transferência para USD... -->
     <xs:complexType name="typeMoeda">
         <xs:simpleContent>
             <xs:extension base="cmn:baseMoeda">
@@ -36,13 +34,13 @@ não se esqueçam de os ler -->
     divide-se em VÁRIAS LINHAS DE RECEITA!! -->
     <xs:complexType name="typeReceita">
         <xs:sequence>
-            <xs:element name="subTotal" type="cmn:typePrice"/>
-            <xs:element name="taxaImposto" type="xs:decimal"/>
-            <xs:element name="cliente" type="cli:typeCliente"/>
-            <xs:element name="linhasReceita">
+            <xs:element name="SubTotal" type="cmn:typePrice"/>
+            <xs:element name="TaxaImposto" type="xs:decimal"/>
+            <xs:element name="Cliente" type="cli:typeCliente"/>
+            <xs:element name="LinhasReceita">
                 <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="linhaReceita" type="typeLinhaReceita"/>
+                    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                        <xs:element name="LinhaReceita" type="typeLinhaReceita"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -53,10 +51,10 @@ não se esqueçam de os ler -->
     <!-- Finalmente, CADA LINHA DE RECEITA refere OS PRODUTOS e a sua quantidade -->
     <xs:complexType name="typeLinhaReceita">
         <xs:sequence>
-            <xs:element name="produto" type="prd:typeProduto"/>
-            <xs:element name="precoPorUnidade" type="cmn:typePrice"/>
-            <xs:element name="quantidade" type="xs:unsignedInt"/>
-            <xs:element name="totalLinha" type="cmn:typePrice"/>
+            <xs:element name="Produto" type="prd:typeProduto"/>
+            <xs:element name="PrecoPorUnidade" type="cmn:typePrice"/>
+            <xs:element name="Quantidade" type="xs:unsignedInt"/>
+            <xs:element name="TotalLinha" type="cmn:typePrice"/>
         </xs:sequence>
         <xs:attribute name="IDLinha" type="xs:unsignedInt" use="required"/>
     </xs:complexType>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XML de Exemplo aos Schema produzidos com base no enunciado do trabalho!
+
+Grupo 4:
+José Baltar, 8170212
+Rodrigo Coelho, 8170282
+Rui Silva, 8170283
+-->
+
+<Documento
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='ProjetoPEI/Grupo/Entrega1/'
+    
+    xmlns:loj='ProjetoPEI/Grupo/Entrega1/Loja'
+    xmlns:prd='ProjetoPEI/Grupo/Entrega1/Produto'
+    xmlns:rcp='ProjetoPEI/Grupo/Entrega1/Receitas'
+    xmlns:cli='ProjetoPEI/Grupo/Entrega1/Cliente'
+    xsi:schemaLocation='ProjetoPEI/Grupo/Entrega1/Loja Schemas/SchemaLoja.xsd
+   ProjetoPEI/Grupo/Entrega1/Produto Schemas/SchemaProduto.xsd
+   ProjetoPEI/Grupo/Entrega1/ Schemas/SchemaDocumentoGeral.xsd
+   ProjetoPEI/Grupo/Entrega1/Receitas Schemas/SchemaReceitas.xsd
+   ProjetoPEI/Grupo/Entrega1/Cliente Schemas/SchemaCliente.xsd'>
+    
+    <Loja>
+        <loj:Nome></loj:Nome>
+        <loj:Morada></loj:Morada>
+        <loj:Contactos>
+            <loj:Email></loj:Email>
+            <loj:Telefone></loj:Telefone>
+            <loj:Telefone></loj:Telefone>
+        </loj:Contactos>
+        <loj:NIF></loj:NIF>
+    </Loja>
+    
+    <Vendas dataInicio="" dataFim="">
+        <Moeda IDTaxaCambio=""></Moeda>
+        
+        <Receitas IDReceita="">
+            <rcp:SubTotal></rcp:SubTotal>
+            <rcp:TaxaImposto></rcp:TaxaImposto>
+            
+            <rcp:Cliente>
+                <cli:Nome>
+                    <cli:PrimeiroNome></cli:PrimeiroNome>
+                    <cli:UltimoNome></cli:UltimoNome>
+                </cli:Nome>
+                <cli:Morada></cli:Morada>
+                <cli:Telefone></cli:Telefone>
+                <cli:Email></cli:Email>
+                <cli:NIF></cli:NIF>
+            </rcp:Cliente>
+            
+            <rcp:LinhasReceita>
+                <rcp:LinhaReceita IDLinha="">
+                    <rcp:Produto IDProduto="">
+                        <prd:Codigo></prd:Codigo>
+                        <prd:Nome></prd:Nome>
+                        <prd:CodigoCor></prd:CodigoCor>
+                        <prd:PrecoEmLista></prd:PrecoEmLista>
+                        <prd:dataInicioVenda></prd:dataInicioVenda>
+                        <prd:dataFinalVenda></prd:dataFinalVenda>
+                    </rcp:Produto>
+                    <rcp:PrecoPorUnidade></rcp:PrecoPorUnidade>
+                    <rcp:Quantidade></rcp:Quantidade>
+                    <rcp:TotalLinha></rcp:TotalLinha>
+                </rcp:LinhaReceita>
+                
+<!-- Coloca as linhas de receita todas que tenha na Receita que escolheste -->
+
+            </rcp:LinhasReceita>
+        </Receitas>
+    </Vendas>
+
+</Documento>
