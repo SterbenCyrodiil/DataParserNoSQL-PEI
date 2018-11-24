@@ -66,7 +66,7 @@ Rui Silva, 8170283
                     <rcp:TotalLinha></rcp:TotalLinha>
                 </rcp:LinhaReceita>
                 
-				<rcp:LinhaReceita IDLinha="">
+                <rcp:LinhaReceita IDLinha="">
                     <rcp:Produto IDProduto="">
                         <prd:Codigo></prd:Codigo>
                         <prd:Nome></prd:Nome>
@@ -79,8 +79,7 @@ Rui Silva, 8170283
                     <rcp:Quantidade></rcp:Quantidade>
                     <rcp:TotalLinha></rcp:TotalLinha>
                 </rcp:LinhaReceita>
-				
-				<!-- Mais linhas de receita ... -->
+                <!-- Mais linhas de receita ... -->
             </rcp:LinhasReceita>
         </Receitas>
     </Vendas>
