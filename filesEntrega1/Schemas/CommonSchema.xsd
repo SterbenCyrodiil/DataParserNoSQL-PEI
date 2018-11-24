@@ -5,8 +5,8 @@ Schemas
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"
-           xmlns="ProjetoPEI/Grupo/Entrega1/CommonSchema"
+           targetNamespace="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
+           xmlns="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
            elementFormDefault="qualified">
 	
     <xs:simpleType name="typeEmail">
@@ -24,12 +24,6 @@ Schemas
     <xs:simpleType name="NIF">
         <xs:restriction base="xs:integer">
             <xs:pattern value="[0-9]{9}"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="typePrice">
-        <xs:restriction base="xs:decimal">
-            <xs:fractionDigits value="2"/>
         </xs:restriction>
     </xs:simpleType>
     

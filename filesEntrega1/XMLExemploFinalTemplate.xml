@@ -10,25 +10,27 @@ Rui Silva, 8170283
 
 <Documento
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xmlns='ProjetoPEI/Grupo/Entrega1/'
+    xmlns='ProjetoPEI/Grupo4/Entrega1/'
+    xsi:schemaLocation='ProjetoPEI/Grupo4/Entrega1/ Schemas/SchemaDocumentoGeral.xsd
+    ProjetoPEI/Grupo/Entrega1/Produto Schemas/SchemaProduto.xsd
+    ProjetoPEI/Grupo/Entrega1/ Schemas/SchemaDocumentoGeral.xsd
+    ProjetoPEI/Grupo/Entrega1/Receitas Schemas/SchemaReceitas.xsd
+    ProjetoPEI/Grupo/Entrega1/Cliente Schemas/SchemaCliente.xsd'
+    xmlns:loj='ProjetoPEI/Grupo4/Entrega1/Loja'
+    xmlns:prd='ProjetoPEI/Grupo4/Entrega1/Produto'
+    xmlns:rct='ProjetoPEI/Grupo4/Entrega1/Receitas'
+    xmlns:cli='ProjetoPEI/Grupo4/Entrega1/Cliente'
     
-    xmlns:loj='ProjetoPEI/Grupo/Entrega1/Loja'
-    xmlns:prd='ProjetoPEI/Grupo/Entrega1/Produto'
-    xmlns:rcp='ProjetoPEI/Grupo/Entrega1/Receitas'
-    xmlns:cli='ProjetoPEI/Grupo/Entrega1/Cliente'
-    xsi:schemaLocation='ProjetoPEI/Grupo/Entrega1/Loja Schemas/SchemaLoja.xsd
-   ProjetoPEI/Grupo/Entrega1/Produto Schemas/SchemaProduto.xsd
-   ProjetoPEI/Grupo/Entrega1/ Schemas/SchemaDocumentoGeral.xsd
-   ProjetoPEI/Grupo/Entrega1/Receitas Schemas/SchemaReceitas.xsd
-   ProjetoPEI/Grupo/Entrega1/Cliente Schemas/SchemaCliente.xsd'>
+    dataCriacao="2011-07-02T00:00:00.000">
     
-    <Loja>
+    <Loja IDLoja="">
         <loj:Nome></loj:Nome>
         <loj:Morada></loj:Morada>
         <loj:Contactos>
             <loj:Email></loj:Email>
             <loj:Telefone></loj:Telefone>
             <loj:Telefone></loj:Telefone>
+            <!-- ... -->
         </loj:Contactos>
         <loj:NIF></loj:NIF>
     </Loja>
@@ -37,50 +39,59 @@ Rui Silva, 8170283
         <Moeda IDTaxaCambio=""></Moeda>
         
         <Receitas IDReceita="">
-            <rcp:SubTotal></rcp:SubTotal>
-            <rcp:TaxaImposto></rcp:TaxaImposto>
+            <rct:SubTotal></rct:SubTotal>
+            <rct:TaxaImposto></rct:TaxaImposto>
             
-            <rcp:Cliente>
+            <rct:Cliente>
                 <cli:Nome>
-                    <cli:PrimeiroNome></cli:PrimeiroNome>
                     <cli:UltimoNome></cli:UltimoNome>
+                    <cli:PrimeiroNome></cli:PrimeiroNome>
                 </cli:Nome>
                 <cli:Morada></cli:Morada>
                 <cli:Telefone></cli:Telefone>
                 <cli:Email></cli:Email>
                 <cli:NIF></cli:NIF>
-            </rcp:Cliente>
+            </rct:Cliente>
             
-            <rcp:LinhasReceita>
-                <rcp:LinhaReceita IDLinha="">
-                    <rcp:Produto IDProduto="">
+            <rct:LinhasReceita>
+                <rct:LinhaReceita IDLinha="">
+                    <rct:Produto IDProduto="">
                         <prd:Codigo></prd:Codigo>
                         <prd:Nome></prd:Nome>
                         <prd:CodigoCor></prd:CodigoCor>
                         <prd:PrecoEmLista></prd:PrecoEmLista>
                         <prd:dataInicioVenda></prd:dataInicioVenda>
                         <prd:dataFinalVenda></prd:dataFinalVenda>
-                    </rcp:Produto>
-                    <rcp:PrecoPorUnidade></rcp:PrecoPorUnidade>
-                    <rcp:Quantidade></rcp:Quantidade>
-                    <rcp:TotalLinha></rcp:TotalLinha>
-                </rcp:LinhaReceita>
+                    </rct:Produto>
+                    <rct:PrecoPorUnidade></rct:PrecoPorUnidade>
+                    <rct:Quantidade></rct:Quantidade>
+                    <rct:TotalLinha></rct:TotalLinha>
+                </rct:LinhaReceita>
                 
-                <rcp:LinhaReceita IDLinha="">
-                    <rcp:Produto IDProduto="">
+                <rct:LinhaReceita IDLinha="">
+                    <rct:Produto IDProduto="">
+                        <prd:Codigo></prd:Codigo>
+                        <prd:dataInicioVenda></prd:dataInicioVenda>
+                        <prd:dataFinalVenda></prd:dataFinalVenda>
+                    </rct:Produto>
+                    <rct:PrecoPorUnidade></rct:PrecoPorUnidade>
+                    <rct:Quantidade></rct:Quantidade>
+                    <rct:TotalLinha></rct:TotalLinha>
+                </rct:LinhaReceita>
+                
+                <rct:LinhaReceita IDLinha="">
+                    <rct:Produto IDProduto="">
                         <prd:Codigo></prd:Codigo>
                         <prd:Nome></prd:Nome>
                         <prd:CodigoCor></prd:CodigoCor>
                         <prd:PrecoEmLista></prd:PrecoEmLista>
-                        <prd:dataInicioVenda></prd:dataInicioVenda>
-                        <prd:dataFinalVenda></prd:dataFinalVenda>
-                    </rcp:Produto>
-                    <rcp:PrecoPorUnidade></rcp:PrecoPorUnidade>
-                    <rcp:Quantidade></rcp:Quantidade>
-                    <rcp:TotalLinha></rcp:TotalLinha>
-                </rcp:LinhaReceita>
-                <!-- Mais linhas de receita ... -->
-            </rcp:LinhasReceita>
+                    </rct:Produto>
+                    <rct:PrecoPorUnidade></rct:PrecoPorUnidade>
+                    <rct:Quantidade></rct:Quantidade>
+                    <rct:TotalLinha></rct:TotalLinha>
+                </rct:LinhaReceita>
+                <!-- ... -->
+            </rct:LinhasReceita>
         </Receitas>
     </Vendas>
 

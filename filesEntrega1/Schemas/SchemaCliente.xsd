@@ -5,14 +5,14 @@ em outros Schemas
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo/Entrega1/Cliente"
-           xmlns="ProjetoPEI/Grupo/Entrega1/Cliente"
+           targetNamespace="ProjetoPEI/Grupo4/Entrega1/Cliente"
+           xmlns="ProjetoPEI/Grupo4/Entrega1/Cliente"
            
-           xmlns:cmn="ProjetoPEI/Grupo/Entrega1/CommonSchema"
+           xmlns:cmn="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
            elementFormDefault="qualified">
     
     <xs:import schemaLocation="CommonSchema.xsd" 
-               namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
+               namespace="ProjetoPEI/Grupo4/Entrega1/CommonSchema"/>
     
     <xs:complexType name="typeCliente">
         <xs:sequence>
@@ -29,7 +29,7 @@ em outros Schemas
             <xs:element name="Email" type="cmn:typeEmail"/>
             <xs:element name="NIF" type="cmn:NIF"/>
         </xs:sequence>
-        <xs:attribute name="IDCliente" type="xs:unsignedInt"/>
+        <xs:attribute name="IDCliente" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
 	
 </xs:schema>
