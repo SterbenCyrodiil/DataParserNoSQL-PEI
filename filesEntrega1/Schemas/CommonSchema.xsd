@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Definição de tipos repetidos ou conveninentes a serem utilizados por outros
+Schemas
+-->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
-           xmlns="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
+           targetNamespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"
+           xmlns="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
 	
     <xs:simpleType name="typeEmail">

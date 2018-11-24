@@ -66,8 +66,21 @@ Rui Silva, 8170283
                     <rcp:TotalLinha></rcp:TotalLinha>
                 </rcp:LinhaReceita>
                 
-<!-- Coloca as linhas de receita todas que tenha na Receita que escolheste -->
-
+				<rcp:LinhaReceita IDLinha="">
+                    <rcp:Produto IDProduto="">
+                        <prd:Codigo></prd:Codigo>
+                        <prd:Nome></prd:Nome>
+                        <prd:CodigoCor></prd:CodigoCor>
+                        <prd:PrecoEmLista></prd:PrecoEmLista>
+                        <prd:dataInicioVenda></prd:dataInicioVenda>
+                        <prd:dataFinalVenda></prd:dataFinalVenda>
+                    </rcp:Produto>
+                    <rcp:PrecoPorUnidade></rcp:PrecoPorUnidade>
+                    <rcp:Quantidade></rcp:Quantidade>
+                    <rcp:TotalLinha></rcp:TotalLinha>
+                </rcp:LinhaReceita>
+				
+				<!-- Mais linhas de receita ... -->
             </rcp:LinhasReceita>
         </Receitas>
     </Vendas>

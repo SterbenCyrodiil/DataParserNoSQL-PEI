@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- A forma como este Schema está feito está toda descrita em comentários!!!!
-não se esqueçam de os ler -->
+<!-- 
+Definição dos tipos referentes às Receitas das Vendas e à Moeda para ser utilizado
+no Schema principal (DocumentoGeral)
+-->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo4/Entrega1/Receitas"
-           xmlns="ProjetoPEI/Grupo4/Entrega1/Receitas"
+           targetNamespace="ProjetoPEI/Grupo/Entrega1/Receitas"
+           xmlns="ProjetoPEI/Grupo/Entrega1/Receitas"
            
-           xmlns:cli="ProjetoPEI/Grupo4/Entrega1/Cliente"
-           xmlns:prd="ProjetoPEI/Grupo4/Entrega1/Produto"
-           xmlns:cmn="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
+           xmlns:cli="ProjetoPEI/Grupo/Entrega1/Cliente"
+           xmlns:prd="ProjetoPEI/Grupo/Entrega1/Produto"
+           xmlns:cmn="ProjetoPEI/Grupo/Entrega1/CommonSchema"
            elementFormDefault="qualified">
     
     <xs:import schemaLocation="CommonSchema.xsd" 
-               namespace="ProjetoPEI/Grupo4/Entrega1/CommonSchema"/>
+               namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
     <xs:import schemaLocation="SchemaCliente.xsd" 
-               namespace="ProjetoPEI/Grupo4/Entrega1/Cliente"/>
+               namespace="ProjetoPEI/Grupo/Entrega1/Cliente"/>
     <xs:import schemaLocation="SchemaProduto.xsd" 
-               namespace="ProjetoPEI/Grupo4/Entrega1/Produto"/>
+               namespace="ProjetoPEI/Grupo/Entrega1/Produto"/>
     
     <xs:complexType name="typeMoeda">
         <xs:simpleContent>
@@ -27,11 +28,6 @@ não se esqueçam de os ler -->
         </xs:simpleContent>
     </xs:complexType>
     
-    <!-- Se forem ver o excel, as sales são identificadas pelas receitas.
-    Basicamente, NUMA DETERMINADA DATA uma loja tem UMA RECEITA dividida
-    em LINHAS DE RECEITA.
-    Então, a receita DE UMA LOJA refere UM CLIENTE, possui UM SUBTOTAL e 
-    divide-se em VÁRIAS LINHAS DE RECEITA!! -->
     <xs:complexType name="typeReceita">
         <xs:sequence>
             <xs:element name="SubTotal" type="cmn:typePrice"/>
@@ -47,8 +43,7 @@ não se esqueçam de os ler -->
         </xs:sequence>
         <xs:attribute name="IDReceita" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
-    
-    <!-- Finalmente, CADA LINHA DE RECEITA refere OS PRODUTOS e a sua quantidade -->
+
     <xs:complexType name="typeLinhaReceita">
         <xs:sequence>
             <xs:element name="Produto" type="prd:typeProduto"/>
