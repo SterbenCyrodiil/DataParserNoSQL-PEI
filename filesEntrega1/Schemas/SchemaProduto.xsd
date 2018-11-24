@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo/Entrega1/Produto"
-           xmlns="ProjetoPEI/Grupo/Entrega1/Produto"
+           targetNamespace="ProjetoPEI/Grupo4/Entrega1/Produto"
+           xmlns="ProjetoPEI/Grupo4/Entrega1/Produto"
            
-           xmlns:cmn="ProjetoPEI/Grupo/Entrega1/CommonSchema"
+           xmlns:cmn="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
            elementFormDefault="qualified">
     
     <xs:import schemaLocation="CommonSchema.xsd" 
-               namespace="ProjetoPEI/Grupo/Entrega1/CommonSchema"/>
+               namespace="ProjetoPEI/Grupo4/Entrega1/CommonSchema"/>
     
     <xs:simpleType name="typeCodigoProduto">
         <xs:restriction base="xs:string">
