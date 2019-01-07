@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+XML de Exemplo aos Schema produzidos com base no enunciado do trabalho!
+
+Grupo 4:
+José Baltar, 8170212
+Rodrigo Coelho, 8170282
+Rui Silva, 8170283
+-->
+
+<Documento
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='ProjetoPEI/Grupo4/Entrega1/'
+    xsi:schemaLocation='ProjetoPEI/Grupo4/Entrega1/ Schemas/SchemaDocumentoGeral.xsd
+    ProjetoPEI/Grupo/Entrega1/Produto Schemas/SchemaProduto.xsd
+    ProjetoPEI/Grupo/Entrega1/ Schemas/SchemaDocumentoGeral.xsd
+    ProjetoPEI/Grupo/Entrega1/Receitas Schemas/SchemaReceitas.xsd
+    ProjetoPEI/Grupo/Entrega1/Cliente Schemas/SchemaCliente.xsd'
+    xmlns:loj='ProjetoPEI/Grupo4/Entrega1/Loja'
+    xmlns:prd='ProjetoPEI/Grupo4/Entrega1/Produto'
+    xmlns:rct='ProjetoPEI/Grupo4/Entrega1/Receitas'
+    xmlns:cli='ProjetoPEI/Grupo4/Entrega1/Cliente'
+    
+    dataCriacao="2011-07-02T00:00:00.000">
+    
+    <Loja IDLoja="">
+        <loj:Nome></loj:Nome>
+        <loj:Morada></loj:Morada>
+        <loj:Contactos>
+            <loj:Email></loj:Email>
+            <loj:Telefone></loj:Telefone>
+            <loj:Telefone></loj:Telefone>
+            <!-- ... -->
+        </loj:Contactos>
+        <loj:NIF></loj:NIF>
+    </Loja>
+    
+    <Vendas dataInicio="" dataFim="">
+        <Moeda IDTaxaCambio=""></Moeda>
+        
+        <Receitas IDReceita="">
+            <rct:SubTotal></rct:SubTotal>
+            <rct:TaxaImposto></rct:TaxaImposto>
+            
+            <rct:Cliente>
+                <cli:Nome>
+                    <cli:UltimoNome></cli:UltimoNome>
+                    <cli:PrimeiroNome></cli:PrimeiroNome>
+                </cli:Nome>
+                <cli:Morada></cli:Morada>
+                <cli:Telefone></cli:Telefone>
+                <cli:Email></cli:Email>
+                <cli:NIF></cli:NIF>
+            </rct:Cliente>
+            
+            <rct:LinhasReceita>
+                <rct:LinhaReceita IDLinha="">
+                    <rct:Produto IDProduto="">
+                        <prd:Codigo></prd:Codigo>
+                        <prd:Nome></prd:Nome>
+                        <prd:CodigoCor></prd:CodigoCor>
+                        <prd:PrecoEmLista></prd:PrecoEmLista>
+                        <prd:dataInicioVenda></prd:dataInicioVenda>
+                        <prd:dataFinalVenda></prd:dataFinalVenda>
+                    </rct:Produto>
+                    <rct:PrecoPorUnidade></rct:PrecoPorUnidade>
+                    <rct:Quantidade></rct:Quantidade>
+                    <rct:TotalLinha></rct:TotalLinha>
+                </rct:LinhaReceita>
+                
+                <rct:LinhaReceita IDLinha="">
+                    <rct:Produto IDProduto="">
+                        <prd:Codigo></prd:Codigo>
+                        <prd:dataInicioVenda></prd:dataInicioVenda>
+                        <prd:dataFinalVenda></prd:dataFinalVenda>
+                    </rct:Produto>
+                    <rct:PrecoPorUnidade></rct:PrecoPorUnidade>
+                    <rct:Quantidade></rct:Quantidade>
+                    <rct:TotalLinha></rct:TotalLinha>
+                </rct:LinhaReceita>
+                
+                <rct:LinhaReceita IDLinha="">
+                    <rct:Produto IDProduto="">
+                        <prd:Codigo></prd:Codigo>
+                        <prd:Nome></prd:Nome>
+                        <prd:CodigoCor></prd:CodigoCor>
+                        <prd:PrecoEmLista></prd:PrecoEmLista>
+                    </rct:Produto>
+                    <rct:PrecoPorUnidade></rct:PrecoPorUnidade>
+                    <rct:Quantidade></rct:Quantidade>
+                    <rct:TotalLinha></rct:TotalLinha>
+                </rct:LinhaReceita>
+                <!-- ... -->
+            </rct:LinhasReceita>
+        </Receitas>
+    </Vendas>
+
+</Documento>

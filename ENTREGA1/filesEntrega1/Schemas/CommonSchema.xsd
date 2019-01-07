@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Definição de tipos repetidos ou conveninentes a serem utilizados por outros
+Schemas
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
+           xmlns="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
+           elementFormDefault="qualified">
+	
+    <xs:simpleType name="typeEmail">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^@]+@[^\.]+\..+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="typeTelefone">
+        <xs:restriction base="xs:integer">
+            <xs:pattern value="[0-9]{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="NIF">
+        <xs:restriction base="xs:integer">
+            <xs:pattern value="[0-9]{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="baseMoeda">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ARS"/>
+            <xs:enumeration value="AUD"/>
+            <xs:enumeration value="BRL"/>
+            <xs:enumeration value="CAD"/>
+            <xs:enumeration value="CNY"/>
+            <xs:enumeration value="DEM"/>
+            <xs:enumeration value="EUR"/>
+            <xs:enumeration value="FRF"/>
+            <xs:enumeration value="GBP"/>
+            <xs:enumeration value="JPY"/>
+            <xs:enumeration value="MXN"/>
+            <xs:enumeration value="SAR"/>
+            <xs:enumeration value="USD"/>
+            <xs:enumeration value="VEB"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="typeCor">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[#][0-9A-Za-z]{6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>
