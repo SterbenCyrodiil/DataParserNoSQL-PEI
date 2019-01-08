@@ -38,6 +38,7 @@ em outros Schemas
         </xs:sequence>
         <xs:attribute name="IDProduto" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
+	
 </xs:schema>   
       
               

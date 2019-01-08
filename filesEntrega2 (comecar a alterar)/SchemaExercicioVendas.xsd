@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Schema de um Documento que contém várias Auditorias 
+(consoante uma data ou uma loja em específico, por exemplo).
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/Entrega1/ExercicioVendas"
+           xmlns="ProjetoPEI/Grupo4/Entrega1/ExercicioVendas"
+              
+           xmlns:aud="ProjetoPEI/Grupo4/Entrega1/Auditoria"
+           elementFormDefault="qualified">
+		   
+    <xs:import schemaLocation="SchemaAuditoriaLoja.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega1/Auditoria"/>
+    
+    <xs:element name="ExercicioVendas">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <!-- adicionar aqui o que diz no segundo ponto do enunciado
+                Vejam a melhor maneira! Se não sabem estudem (leiam as api's
+                do xsd
+                esta aqui o link para os mais preguiçosos:
+                https://www.w3schools.com/xml/schema_intro.asp -->
+                <xs:element name="Auditoria" type="aud:typeAuditoria"/>
+				
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+</xs:schema>

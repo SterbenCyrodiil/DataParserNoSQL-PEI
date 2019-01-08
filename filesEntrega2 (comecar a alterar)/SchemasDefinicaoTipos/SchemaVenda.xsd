@@ -5,8 +5,8 @@ no Schema principal (DocumentoGeral)
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo4/Entrega1/Receitas"
-           xmlns="ProjetoPEI/Grupo4/Entrega1/Receitas"
+           targetNamespace="ProjetoPEI/Grupo4/Entrega1/Venda"
+           xmlns="ProjetoPEI/Grupo4/Entrega1/Venda"
            
            xmlns:cli="ProjetoPEI/Grupo4/Entrega1/Cliente"
            xmlns:prd="ProjetoPEI/Grupo4/Entrega1/Produto"
@@ -28,15 +28,18 @@ no Schema principal (DocumentoGeral)
         </xs:simpleContent>
     </xs:complexType>
     
-    <xs:complexType name="typeReceita">
+    <xs:complexType name="typeVenda">
         <xs:sequence>
+            <!-- adicionar aqui o que diz no primeiro ponto do enunciado
+                Vejam qual será a melhor maneira de organizar esse novos 
+            elementos  -->
             <xs:element name="SubTotal" type="xs:decimal"/>
             <xs:element name="TaxaImposto" type="xs:decimal"/>
             <xs:element name="Cliente" type="cli:typeCliente"/>
             <xs:element name="LinhasReceita">
                 <xs:complexType>
                     <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                        <xs:element name="LinhaReceita" type="typeLinhaReceita"/>
+                        <xs:element name="DadosLinha" type="typeLinhaRct"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -44,7 +47,7 @@ no Schema principal (DocumentoGeral)
         <xs:attribute name="IDReceita" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
 
-    <xs:complexType name="typeLinhaReceita">
+    <xs:complexType name="typeLinhaRct">
         <xs:sequence>
             <xs:element name="Produto" type="prd:typeProduto"/>
             <xs:element name="PrecoPorUnidade" type="xs:decimal"/>
