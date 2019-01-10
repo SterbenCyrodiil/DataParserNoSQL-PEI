@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Definição dos tipos referentes às Receitas das Vendas e à Moeda para ser utilizado
+no Schema principal (DocumentoGeral)
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/Entrega1/Venda"
+           xmlns="ProjetoPEI/Grupo4/Entrega1/Venda"
+           
+           xmlns:cli="ProjetoPEI/Grupo4/Entrega1/Cliente"
+           xmlns:prd="ProjetoPEI/Grupo4/Entrega1/Produto"
+           xmlns:cmn="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
+           elementFormDefault="qualified">
+    
+    <xs:import schemaLocation="CommonSchema.xsd" 
+               namespace="ProjetoPEI/Grupo4/Entrega1/CommonSchema"/>
+    <xs:import schemaLocation="SchemaCliente.xsd" 
+               namespace="ProjetoPEI/Grupo4/Entrega1/Cliente"/>
+    <xs:import schemaLocation="SchemaProduto.xsd" 
+               namespace="ProjetoPEI/Grupo4/Entrega1/Produto"/>
+    
+    <xs:complexType name="typeMoeda">
+        <xs:simpleContent>
+            <xs:extension base="cmn:baseMoeda">
+                <xs:attribute name="IDTaxaCambio" type="xs:unsignedInt"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:complexType name="typeVenda">
+        <xs:sequence>
+            <!-- adicionar aqui o que diz no primeiro ponto do enunciado
+                Vejam qual será a melhor maneira de organizar esse novos 
+            elementos  -->
+            <xs:element name="SubTotal" type="xs:decimal"/>
+            <xs:element name="TaxaImposto" type="xs:decimal"/>
+            <xs:element name="Cliente" type="cli:typeCliente"/>
+            <xs:element name="LinhasReceita">
+                <xs:complexType>
+                    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                        <xs:element name="DadosLinha" type="typeLinhaRct"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="IDReceita" type="xs:unsignedInt" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="typeLinhaRct">
+        <xs:sequence>
+            <xs:element name="Produto" type="prd:typeProduto"/>
+            <xs:element name="PrecoPorUnidade" type="xs:decimal"/>
+            <xs:element name="Quantidade" type="xs:unsignedInt"/>
+            <xs:element name="TotalLinha" type="xs:decimal"/>
+        </xs:sequence>
+        <xs:attribute name="IDLinha" type="xs:unsignedInt" use="required"/>
+    </xs:complexType>
+    
+</xs:schema>
