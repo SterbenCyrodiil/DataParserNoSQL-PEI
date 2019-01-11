@@ -8,13 +8,7 @@ Rui Silva, 8170283
 -->
 
 <Auditoria
-    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xmlns='ProjetoPEI/Grupo4/Entrega1/Auditoria'
-    xsi:schemaLocation='ProjetoPEI/Grupo4/Entrega1/Auditoria SchemaAuditoriaLoja.xsd'
-    xmlns:loj='ProjetoPEI/Grupo4/Entrega1/Loja'
-    xmlns:prd='ProjetoPEI/Grupo4/Entrega1/Produto'
-    xmlns:vnd='ProjetoPEI/Grupo4/Entrega1/Venda'
-    xmlns:cli='ProjetoPEI/Grupo4/Entrega1/Cliente'
+
     
     dataCriacao="2011-07-02T00:00:00.000">
     
