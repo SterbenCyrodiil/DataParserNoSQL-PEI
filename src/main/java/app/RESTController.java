@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * https://spring.io/guides/gs/accessing-mongodb-data-rest/
  */
 @RestController
-public class CollectionController {
+public class RESTController {
 
     @RequestMapping("/getStoreSaleByDate")
     public String getStoreSaleByDate(@RequestParam(value = "store") String storeID,
@@ -29,6 +29,11 @@ public class CollectionController {
         }
         */
     }
+
+    /*
+    Os métodos daqui para baixo são só para "Quality of Life" do utilizador.
+    Também são convenientes para fazer testes, mas o mesmo pode ser feito diretamente no mongoDB!
+     */
 
     @RequestMapping("/isCollectionExistent")
     public String isCollectionExistent(@RequestParam(value = "DB") String db,

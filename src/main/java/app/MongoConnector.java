@@ -1,6 +1,5 @@
 package app;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -12,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -28,6 +26,14 @@ public class MongoConnector {
         mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
     }
 
+    /**
+     * Procura na base de dados a existência da Venda relativa a uma loja e uma determinada data.
+     *
+     * @param storeField ID da loja a ser encontrada
+     * @param saleMonth mês referente à data (integer)
+     * @param saleYear ano referente à data (integer)
+     * @return
+     */
     public String getSaleDetails(String storeField, String saleMonth, String saleYear) {
         /*
         Eu coloquei a database e a collection que tenho no meu localhost!
@@ -107,7 +113,7 @@ public class MongoConnector {
      * @param query          A query deverá ser enviada com os parêntesis retos
      *                       (representando os vários stages aplicados ao método aggregate.
      *                       Por exemplo: "[{},{}]"
-     * @return
+     * @return String em formato JSON com os resultados
      */
     public String aggregateDataByQueryString(String databaseName, String collectionName, String query) {
         if (!this.isCollection(databaseName, collectionName)) {
