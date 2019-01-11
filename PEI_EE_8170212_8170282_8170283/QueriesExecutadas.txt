@@ -1,0 +1,73 @@
+QUERIES GENERALIZADAS:
+
+Atualizar os Produtos com Preço a zero:
+db.productdetails.find({ListPrice:0}).forEach(
+    function(doc){
+        var doc2=db.productlistpricehistory.findOne({ProductID:doc.ProductID});
+        if(doc2!=null){
+            doc.ListPrice=doc2.ListPrice;
+            db.productdetails.save(doc);
+            }
+        })
+
+__||__
+Queries 1: (Referentes a vendas)
+Número total de Produtos:
+db.salesdetails.aggregate([{$match:{ReceiptID:44100}},{$group:{_id:"$ReceiptID",QuantidadeTotal:{$sum:"$Quantity"}}}])
+
+Número total de Produtos Diferentes:
+db.salesdetails.aggregate([{$match:{ReceiptID:44100}},{$count:"produtos_unicos"}])
+
+Valor Médio do Preço de venda dos produtos:
+db.salesdetails.aggregate([{$match:{ReceiptID:44100}},{$group:{_id:"$ReceiptID", MediaPrecos:{$avg:"$LineTotal"}}}])
+
+__||__
+Queries 2: (Referentes a um Exercicio de uma loja)
+
+Número total de produtos:
+db.salesdetails.aggregate([{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},
+{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.dayOfMonth":{$dayOfMonth:"$OrderDate"}}},
+{$project:{"OrderDate":0}},{$match:{Store:1032,"Date.year":2011,"Date.month":7}},
+{$group:{_id:"$ReceiptID", QuantidadeTotalProdutos:{$sum:"$Quantity"}}}]).pretty()
+
+Número total de produtos únicos:
+db.salesdetails.aggregate([{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},
+{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.dayOfMonth":{$dayOfMonth:"$OrderDate"}}},
+{$project:{"OrderDate":0}},{$match:{Store:1032,"Date.year":2011,"Date.month":7}},
+{$count:"produtos_unicos"}]).pretty()
+
+Número total de clientes diferentes:
+db.salesdetails.aggregate([{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},
+{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.dayOfMonth":{$dayOfMonth:"$OrderDate"}}},
+{$project:{"OrderDate":0}},{$match:{Store:1032,"Date.year":2011,"Date.month":7}},
+{$group:{_id:"$Customer", QuantidadeTotalProdutos:{$sum:1}}},{ $count : "TotalClientes"}  ]).pretty()
+
+Valor vendido por cada cliente:
+db.salesdetails.aggregate([{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},
+{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.dayOfMonth":{$dayOfMonth:"$OrderDate"}}},
+{$project:{"OrderDate":0}},{$match:{Store:1032,"Date.year":2011,"Date.month":7}},
+{$group:{_id:"$Customer", ValorPorCliente:{$sum:"$LineTotal"}}},{$sort:{ValorPorCliente:-1}}]).pretty()
+
+Quantidade por Produto:
+db.salesdetails.aggregate([{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},
+{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.dayOfMonth":{$dayOfMonth:"$OrderDate"}}},
+{$project:{"OrderDate":0}},{$match:{Store:1032,"Date.year":2011,"Date.month":7}},
+{$group:{_id:"$ProductID", QuantidadePorProduto:{$sum:"$Quantity"}}},{$sort:{QuantidadePorProduto:-1}}]).pretty()
+
+Valor por moeda (falta substituir o nulo):
+db.salesdetails.aggregate([{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},
+{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.dayOfMonth":{$dayOfMonth:"$OrderDate"}}},
+{$project:{"OrderDate":0}},{$match:{Store:1032,"Date.year":2011,"Date.month":7}},
+{$group:{_id:"$CurrencyRateID", ValorPorMoedaUtilizada:{$sum:"$LineTotal"}}}]).pretty()
+
+__||__
+Queries 3: (Referentes ao geral da loja)
+
+db.salesdetails.aggregate([{$match:{Store:44100}},{$count:"TotalVendas"}])
+
+Número total de produtos numa loja:
+db.salesdetails.aggregate([{$match:{Store:44100}},{$group:{_id:"$Store",QuantidadeTotalLoja:{$sum:"$Quantity"}}}])
+
+Preço Médio dos Produtos numa loja:
+db.salesdetails.aggregate([{
+$match:{Store:1046}},{$group:{_id:"$Store", PreçoMédioPorVendaDeProduto:{$avg:"$UnitPrice"}}}])
