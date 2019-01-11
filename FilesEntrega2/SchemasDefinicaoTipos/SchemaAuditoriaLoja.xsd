@@ -1,20 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <!-- 
-Schema de um Documento de Autoria de uma Loja.
+Definição dos tipos relativos à Autoria de uma Loja.
 -->
-
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo4/Entrega1/Auditoria"
-           xmlns="ProjetoPEI/Grupo4/Entrega1/Auditoria"
+               targetNamespace="ProjetoPEI/Grupo4/Entrega2/Auditoria"
+               xmlns="ProjetoPEI/Grupo4/Entrega2/Auditoria"
               
-           xmlns:loj="ProjetoPEI/Grupo4/Entrega1/Loja"
-           xmlns:vnd="ProjetoPEI/Grupo4/Entrega1/Venda"
-           elementFormDefault="qualified">
+               xmlns:loj="ProjetoPEI/Grupo4/Entrega1/Loja"
+               xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda"
+               elementFormDefault="qualified">
 		   
-    <xs:import schemaLocation="SchemasDefinicaoTipos/SchemaLoja.xsd"
-               namespace="ProjetoPEI/Grupo4/Entrega1/Loja"/>
-    <xs:import schemaLocation="SchemasDefinicaoTipos/SchemaVenda.xsd"
-               namespace="ProjetoPEI/Grupo4/Entrega1/Venda"/>
+    <xs:import schemaLocation="SchemaLoja.xsd"
+                   namespace="ProjetoPEI/Grupo4/Entrega1/Loja"/>
+    <xs:import schemaLocation="SchemaVenda.xsd"
+                   namespace="ProjetoPEI/Grupo4/Entrega2/Venda"/>
     
     <xs:complexType name="typeAuditoria">
         <xs:sequence>
@@ -31,12 +30,9 @@ Schema de um Documento de Autoria de uma Loja.
                     <xs:attribute name="dataFim" type="xs:dateTime" use="required"/>
                 </xs:complexType>
             </xs:element>
-                
         </xs:sequence>
         <xs:attribute name="dataCriacao" type="xs:dateTime" use="required"/>
     </xs:complexType>
     
-    <!-- Este elemento serve para possibilitar a criação de um documento XML 
-    só com os dados deste Schema -->
-    <xs:element name="Auditoria" type="typeAuditoria"/>
 </xs:schema>
+    
