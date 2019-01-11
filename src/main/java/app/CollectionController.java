@@ -13,30 +13,53 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CollectionController {
 
-    @RequestMapping("/isCollection")
-    public boolean isCollection(@RequestParam(value="DB") String db,
-                                @RequestParam(value="collection") String clct) {
+    @RequestMapping("/getStoreSaleByDate")
+    public String getStoreSaleByDate(@RequestParam(value = "store") String storeID,
+                                     @RequestParam(value = "month") String month,
+                                     @RequestParam(value = "year") String year) {
         MongoConnector mongo = new MongoConnector();
-        boolean res = mongo.isCollection(db, clct);
-        return res;
+        return mongo.getSaleDetails(storeID, month, year);
+        /* Deixei ficar este Catch aqui como IssueTracking!
+        -> Basicamente eu estava a pensar que iamos utilizar os inputs em formato numerico
+        mas depois descobri que só vamos usar a string query, mais nada (no método aggregate)
+
+        } catch (NumberFormatException exc) {
+            return exc.getMessage() +
+                    "\nParametro introduzido não corresponde a um número inteiro!";
+        }
+        */
+    }
+
+    @RequestMapping("/isCollectionExistent")
+    public String isCollectionExistent(@RequestParam(value = "DB") String db,
+                                       @RequestParam(value = "collection") String clct) {
+        MongoConnector mongo = new MongoConnector();
+        try {
+            if (mongo.isCollection(db, clct))
+                return "Collection exists!";
+            else return "Collection does not exist!";
+        } catch (IllegalArgumentException exc) {
+            return "Invalid collection or database name.";
+        }
     }
 
     @RequestMapping("/getCollectionField")
-    public String getCollectionField(@RequestParam(value="DB") String db,
-            @RequestParam(value="collection") String clct, @RequestParam(value="field") String field,
-            @RequestParam(value = "value") String value) {
+    public String getCollectionField(@RequestParam(value = "DB") String db,
+                                     @RequestParam(value = "collection") String clct,
+                                     @RequestParam(value = "field") String field,
+                                     @RequestParam(value = "value") String value) {
         MongoConnector mongo = new MongoConnector();
-        String res = mongo.getFieldData(db, clct, field, value);
-        return res;
+        return mongo.getFieldData(db, clct, field, value);
     }
 
     @RequestMapping("/aggregateCollectionByQueryString")
-    public String aggregateCollectionByQueryString(@RequestParam(value="DB") String db,
-            @RequestParam(value="Collection") String clct, @RequestParam(value = "query") String query) {
+    public String aggregateCollectionByQueryString(
+            @RequestParam(value = "DB") String db,
+            @RequestParam(value = "collection") String clct,
+            @RequestParam(value = "query") String query) {
         //Example: %5B%7B%24group%3A%7B%22_id%22%3Anull%2Ccount%3A%7B%24sum%3A1%7D%7D%7D%5D 
         //para [{$group:{"_id":null,count:{$sum:1}}}] -> utilizar: https://meyerweb.com/eric/tools/dencoder/
         MongoConnector mongo = new MongoConnector();
-        String res = mongo.aggregateDataByQueryString(db, clct, query);
-        return res;
+        return mongo.aggregateDataByQueryString(db, clct, query);
     }
 }
