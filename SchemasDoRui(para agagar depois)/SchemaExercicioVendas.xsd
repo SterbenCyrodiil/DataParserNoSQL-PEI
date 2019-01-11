@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Schema de um Documento que contém várias Auditorias 
+(consoante uma data ou uma loja em específico, por exemplo).
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/Entrega1/ExercicioVendas"
+           xmlns="ProjetoPEI/Grupo4/Entrega1/ExercicioVendas"
+           xmlns:cmn="ProjetoPEI/Grupo4/Entrega1/CommonSchema"
+           xmlns:aud="ProjetoPEI/Grupo4/Entrega1/Auditoria"
+           elementFormDefault="qualified">
+		   
+    <xs:import schemaLocation="SchemaAuditoriaLoja.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega1/Auditoria"/>
+    <xs:import schemaLocation="CommonSchema.xsd" 
+               namespace="ProjetoPEI/Grupo4/Entrega1/CommonSchema"/>
+       
+    <xs:simpleType name="typeNumTotalClientesDif">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="unbounded"/>
+        </xs:restriction>
+    </xs:simpleType>    
+        
+    <xs:element name="ExercicioVendas">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded"> 
+                
+                <xs:element name="NumProdutosDiferentes" type="cmn:typeNumProdutosDiferents"/>
+                
+                <xs:element name="NumTotalProdutos" type="cmn:typeNumTotalProdutos"/>
+                
+                <xs:element name="NumTotalClientesDiferentes" type="typeNumTotalClientesDif"/>
+                
+                <xs:element name="DadosAdicionaisClientes">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:element name="ValorVendidoPorCliente" type="xs:decimal"/>
+                        </xs:sequence>
+                        <xs:attribute name="IDcliente" type="xs:integer" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                
+                 <xs:element name="DadosAdicionaisProdutos">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:element name="ProdutoIguaisVendidos" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                    <xs:attribute name="IDproduto" type="xs:integer" use="required"/>
+                </xs:element>
+                
+                <xs:element name="ValorTotalVenda>
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:element name="Valor" type="xs:decimal"/>
+                        </xs:sequence>
+                        <xs:attribute name="moeda" type="xs:cmn:baseMoeda" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="Auditoria" type="aud:typeAuditoria"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+</xs:schema>	
+                
+<!--><xs:element name="ClienteID" type="xs:decimal">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:decimal">
+                    <xs:attribute name="id" type="xs:integer"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element><!-->        
+               
+        
+    
+    
+    
+           
+                           
+                            
+                       
