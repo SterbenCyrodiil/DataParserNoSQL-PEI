@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<!-- 
+Schema de um Documento de Autoria de uma Loja.
+-->
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               targetNamespace="ProjetoPEI/Grupo4/Entrega1/Auditoria"
+               xmlns="ProjetoPEI/Grupo4/Entrega1/Auditoria"
+              
+               xmlns:loj="ProjetoPEI/Grupo4/Entrega1/Loja"
+               xmlns:vnd="ProjetoPEI/Grupo4/Entrega1/Venda"
+               elementFormDefault="qualified">
+		   
+        <xs:import schemaLocation="SchemasDefinicaoTipos/SchemaLoja.xsd"
+                   namespace="ProjetoPEI/Grupo4/Entrega1/Loja"/>
+        <xs:import schemaLocation="SchemasDefinicaoTipos/SchemaVenda.xsd"
+                   namespace="ProjetoPEI/Grupo4/Entrega1/Venda"/>
+    
+        <xs:complexType name="typeAuditoria">
+            <xs:sequence>
+            
+                <xs:element name="Loja" type="loj:typeLoja"/>
+				
+                <xs:element name="Venda" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Moeda" type="vnd:typeMoeda"/>
+                            <xs:element name="DadosVenda" type="vnd:typeVenda"/>
+                        </xs:sequence>
+                        <xs:attribute name="dataInicio" type="xs:dateTime" use="required"/>
+                        <xs:attribute name="dataFim" type="xs:dateTime" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                
+            </xs:sequence>
+            <xs:attribute name="dataCriacao" type="xs:dateTime" use="required"/>
+        </xs:complexType>
+    
+    </xs:schema>
+    
