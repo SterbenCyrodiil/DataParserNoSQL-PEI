@@ -7,37 +7,58 @@ and open the template in the editor.
 
 <xs:schema version="1.0"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo4/Entrega2/InformacaoGeral"
-           xmlns:xs="ProjetoPEI/Grupo4/Entrega2/InformacaoGeral"
+           targetNamespace="ProjetoPEI/Grupo4/Entrega1/InformacaoGeral"
+           xmlns:xs="ProjetoPEI/Grupo4/Entrega1/InformacaoGeral"
            elementFormDefault="qualified">
     
     <xs:complexType name="typeInformacaoAdicional">
         <xs:sequence minOccurs="0" max="unbounded">
             
-            <xs:element name="TotalProdutosVendidos">
+            <xs:element name="ProdutosIguaisVendidos">
                 <xs:complexType>
                     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-                        <xs:element name="Valor" type="xs:integer"/>
+                        <xs:element name="loja">
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:unsignedInt">
+                                        <xs:attribute name="IDloja" type="xs:integer"/>
+                                    </xs:extension>
+                                </xs:simpleContent>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
-                    <xs:attribute name="IDloja" type="xs:integer"/>
                 </xs:complexType>
             </xs:element>
             
-            <xs:element name="TotalVendas">
-                <xs:complexType>
-                    <xs:squence minOccurs="0" maxOccurs="unbounded">
-                        <xs:element name="Valor" type="xs:integer"/>
-                    </xs:squence>
-                    <xs:attribute name="IDloja" type="xs:integer"/>
-                </xs:complexType>
-            </xs:element>
-            
-            <xs:element name="MediaPrecoVendas>
+            <xs:element name="ValorTotalVendas">
                 <xs:complexType>
                     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-                        <xs:element name="Valor" type="xs:decimal"/>
+                        <xs:element name="loja>
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:decimal">
+                                        <xs:attribute name="id" type="xs:integer"/>
+                                    </xs:extension>
+                                </xs:simpleContent>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:sequence>
-                    <xs:attribute name="IDloja" type="xs:integer"/>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="PrecoMedioVendas">
+                <xs:complexType>
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                        <xs:element name="loja">
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:decimal">
+                                        <xs:attribute name="id" type="xs:integer"/>
+                                    </xs:extension>
+                                </xs:simpleContent>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
                 </xs:complexType>
             </xs:element>
             

@@ -30,9 +30,7 @@ no Schema principal (DocumentoGeral)
     
     <xs:complexType name="typeVenda">
         <xs:sequence>
-            <!-- adicionar aqui o que diz no primeiro ponto do enunciado
-                Vejam qual será a melhor maneira de organizar esse novos 
-            elementos  -->
+            
             <xs:element name="InfProdutos">
                 <xs:complexType>
                     <xs:sequence>
@@ -41,17 +39,20 @@ no Schema principal (DocumentoGeral)
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="PrecoMedioDeVendaDosProdutos" type="xs:decimal/>
-                <xs:element name="SubTotal" type="xs:decimal"/>
-                <xs:element name="TaxaImposto" type="xs:decimal"/>
-                <xs:element name="Cliente" type="cli:typeCliente"/>
-                <xs:element name="LinhasReceita">
-                    <xs:complexType>
-                        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                            <xs:element name="DadosLinha" type="typeLinhaRct"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
+            
+            <xs:element name="PrecoMedioDeVendaDosProdutos" type="xs:decimal"/>
+            <xs:element name="SubTotal" type="xs:decimal"/>
+            <xs:element name="TaxaImposto" type="xs:decimal"/>
+            <xs:element name="Cliente" type="cli:typeCliente"/>
+            
+            <xs:element name="LinhasReceita">
+                <xs:complexType>
+                    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                        <xs:element name="DadosLinha" type="typeLinhaRct"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
         </xs:sequence>
         <xs:attribute name="IDReceita" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
