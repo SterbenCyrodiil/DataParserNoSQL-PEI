@@ -1,0 +1,19 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://localhost:9090/aggregateCollectionByQueryString?DB=bikeOnTrackDB&collection=salesDetails&query=%5B%7B%24addFields%3A%7BOrderDate%3A%7B%24dateFromString%3A%7BdateString%3A%22%24OrderDate%22%7D%7D%7D%7D%2C%7B%24addFields%3A%7B%22Date.year%22%3A%7B%24year%3A%22%24OrderDate%22%7D%2C%22Date.month%22%3A%7B%24month%3A%22%24OrderDate%22%7D%2C%22Date.dayOfMonth%22%3A%7B%24dayOfMonth%3A%22%24OrderDate%22%7D%7D%7D%2C%7B%24project%3A%7B%22OrderDate%22%3A0%7D%7D%2C%7B%24match%3A%7BStore%3A1032%2C%22Date.year%22%3A2011%2C%22Date.month%22%3A7%7D%7D%5D
+
+return: JSONarray com o resultado da query.
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+http://localhost:9090/get/getCollectionField?DB=bikeOnTrackDB&collection=salesDetails&field=Store&value=1032
+
+return: JSONarray com o resultado encontrado.
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+http://localhost:9090/isCollectionExistent?DB=bikeOnTrackDB&collection=salesDetails
+
+return: "mensagem de true ou false"
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+http://localhost:9090/getStoreSaleByDate?store=1032&month=7&year=2011
+
+return: JSONarray com o resultado da sale.
+
