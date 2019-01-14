@@ -10,4 +10,7 @@ API em java correspondente (com planificação para transformação dos
 ficheiros JSON em XML)
 
 -> Entrega final:
-: ...
+: Finalizar a transformação dos JSON recolhidos através do mongoDB
+em documentos XML, tendo em conta o vocabulário criado pelos
+vários XSD Schemas desenvolvidos.
+: Realizar pesquisas nos XML criados através do uso do Apache Solr.

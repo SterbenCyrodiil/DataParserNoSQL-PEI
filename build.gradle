@@ -20,11 +20,13 @@ bootRun {
 }
 
 application {
-    mainClassName = "app.Application"
+    mainClassName = "restApp.Application"
 }
+
 repositories {
     mavenCentral()
 }
+
 version '1.0-SNAPSHOT'
 
 targetCompatibility = 1.8
@@ -36,6 +38,9 @@ bootJar {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.json/json
+    compile group: 'org.json', name: 'json', version: '20180813'
+    // https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.9.1'
     compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.springframework.boot:spring-boot-starter-test')
