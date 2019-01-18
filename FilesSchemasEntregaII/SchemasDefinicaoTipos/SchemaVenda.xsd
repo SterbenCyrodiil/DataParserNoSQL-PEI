@@ -37,23 +37,27 @@ Igualmente, estão definidos tipos para informação adicional de uso opcional.
             <!-- Novos campos adicionados relativos ao enunciado da segunda entrega -->
             <xs:element name="NumeroProdutos" minOccurs="0">
                 <xs:complexType>
+                    <!-- Corrigido: Agora é obrigatorio introduzir os dois elementos. (anteriormente seria opcional) -->
                     <xs:sequence>
-                        <xs:element name="Total" type="xs:unsignedInt" minOccurs="0"/>
-                        <xs:element name="TotalDiferentes" type="xs:unsignedInt" minOccurs="0"/>
+                        <xs:element name="Total" type="xs:unsignedInt"/>
+                        <xs:element name="TotalDiferentes" type="xs:unsignedInt"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="PrecoMedioVendaDosProdutos" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="PrecoMedioVendaProdutos" type="xs:decimal" minOccurs="0"/>
             <!-- ================================================================= -->
 
             <xs:element name="SubTotal" type="xs:decimal"/>
             <xs:element name="TaxaImposto" type="xs:decimal"/>
             <xs:element name="Cliente" type="cli:typeCliente"/>
+            <!-- Nota: se se achar necessário pode-se colocar aqui uma listagem de todos os produtos envolvidos
+             na venda (xs:complexType, xs:sequence)! No entanto, esses produtos já se encontram listados nas
+             linhas de venda asseguir... -->
 
-            <xs:element name="LinhasReceita">
+            <xs:element name="LinhasVenda">
                 <xs:complexType>
                     <xs:sequence maxOccurs="unbounded">
-                        <xs:element name="DadosLinha" type="typeLinhaRct"/>
+                        <xs:element name="DadosLinha" type="typeLinhaVnd"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -62,7 +66,7 @@ Igualmente, estão definidos tipos para informação adicional de uso opcional.
         <xs:attribute name="IDReceita" type="xs:unsignedInt" use="required"/>
     </xs:complexType>
 
-    <xs:complexType name="typeLinhaRct">
+    <xs:complexType name="typeLinhaVnd">
         <xs:sequence>
             <xs:element name="Produto" type="prd:typeProduto"/>
             <xs:element name="PrecoPorUnidade" type="xs:decimal"/>

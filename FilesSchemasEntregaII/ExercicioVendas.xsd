@@ -14,7 +14,7 @@ tal como informações adicionais, de adição opcional, sobre essas Auditorias.
 
     <xs:import schemaLocation="SchemasDefinicaoTipos/CommonSchema.xsd"
                namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
-    <xs:import schemaLocation="InformacaoAdicional.xsd"
+    <xs:import schemaLocation="SchemasDefinicaoTipos/SchemaInformacaoAdicional.xsd"
                namespace="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"/>
     <xs:import schemaLocation="SchemasDefinicaoTipos/SchemaAuditoriaLoja.xsd"
                namespace="ProjetoPEI/Grupo4/Entrega2/Auditoria"/>
@@ -28,9 +28,10 @@ tal como informações adicionais, de adição opcional, sobre essas Auditorias.
                 <!-- Novos campos adicionados relativos ao enunciado da segunda entrega -->
                 <xs:element name="NumeroProdutos" minOccurs="0">
                     <xs:complexType>
+                        <!-- Corrigido: Agora é obrigatorio introduzir os dois elementos. (anteriormente seria opcional) -->
                         <xs:sequence>
-                            <xs:element name="Total" type="xs:unsignedInt" minOccurs="0"/>
-                            <xs:element name="TotalDiferentes" type="xs:unsignedInt" minOccurs="0"/>
+                            <xs:element name="Total" type="xs:unsignedInt"/>
+                            <xs:element name="TotalDiferentes" type="xs:unsignedInt"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

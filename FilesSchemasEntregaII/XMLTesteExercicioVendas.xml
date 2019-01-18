@@ -16,12 +16,12 @@ XML de Exemplo para testar os Schemas definidos para a segunda entrega!
         xmlns:inf='ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional'
         xmlns='ProjetoPEI/Grupo4/Entrega2/ExercicioVendas'
         xsi:schemaLocation='ProjetoPEI/Grupo4/Entrega1/Cliente SchemasDefinicaoTipos/SchemaCliente.xsd
-       ProjetoPEI/Grupo4/Entrega1/Produto SchemasDefinicaoTipos/SchemaProduto.xsd
-       ProjetoPEI/Grupo4/Entrega1/Loja SchemasDefinicaoTipos/SchemaLoja.xsd
-       ProjetoPEI/Grupo4/Entrega2/Venda SchemasDefinicaoTipos/SchemaVenda.xsd
-       ProjetoPEI/Grupo4/Entrega2/Auditoria SchemasDefinicaoTipos/SchemaAuditoriaLoja.xsd
-       ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional InformacaoAdicional.xsd
-       ProjetoPEI/Grupo4/Entrega2/ExercicioVendas ExercicioVendas.xsd'>
+               ProjetoPEI/Grupo4/Entrega1/Produto SchemasDefinicaoTipos/SchemaProduto.xsd
+               ProjetoPEI/Grupo4/Entrega1/Loja SchemasDefinicaoTipos/SchemaLoja.xsd
+               ProjetoPEI/Grupo4/Entrega2/Venda SchemasDefinicaoTipos/SchemaVenda.xsd
+               ProjetoPEI/Grupo4/Entrega2/Auditoria SchemasDefinicaoTipos/SchemaAuditoriaLoja.xsd
+               ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional SchemasDefinicaoTipos/SchemaInformacaoAdicional.xsd
+               ProjetoPEI/Grupo4/Entrega2/ExercicioVendas ExercicioVendas.xsd'>
 
     <!-- Informação adicional obrigatória em todos os XML -->
     <InformacaoAdicional>
@@ -79,7 +79,7 @@ XML de Exemplo para testar os Schemas definidos para a segunda entrega!
                         <vnd:Total>23</vnd:Total>
                         <vnd:TotalDiferentes>132</vnd:TotalDiferentes>
                     </vnd:NumeroProdutos>
-                    <vnd:PrecoMedioVendaDosProdutos>23223</vnd:PrecoMedioVendaDosProdutos>
+                    <vnd:PrecoMedioVendaProdutos>23223</vnd:PrecoMedioVendaProdutos>
                     <!-- ===================== -->
 
                     <vnd:SubTotal>15124</vnd:SubTotal>
@@ -96,7 +96,7 @@ XML de Exemplo para testar os Schemas definidos para a segunda entrega!
                         </cli:Contactos>
                         <cli:NIF>324234324</cli:NIF>
                     </vnd:Cliente>
-                    <vnd:LinhasReceita>
+                    <vnd:LinhasVenda>
                         <vnd:DadosLinha IDLinha="1">
                             <vnd:Produto IDProduto="4">
                                 <prd:Codigo>AZ-1234</prd:Codigo>
@@ -104,9 +104,18 @@ XML de Exemplo para testar os Schemas definidos para a segunda entrega!
                             </vnd:Produto>
                             <vnd:PrecoPorUnidade>232</vnd:PrecoPorUnidade>
                             <vnd:Quantidade>1</vnd:Quantidade>
-                            <vnd:TotalLinha>2323</vnd:TotalLinha>
+                            <vnd:TotalLinha>232</vnd:TotalLinha>
                         </vnd:DadosLinha>
-                    </vnd:LinhasReceita>
+                        <vnd:DadosLinha IDLinha="2">
+                            <vnd:Produto IDProduto="1">
+                                <prd:Codigo>BB-4321-23</prd:Codigo>
+                                <prd:PrecoEmLista>123232</prd:PrecoEmLista>
+                            </vnd:Produto>
+                            <vnd:PrecoPorUnidade>111</vnd:PrecoPorUnidade>
+                            <vnd:Quantidade>3</vnd:Quantidade>
+                            <vnd:TotalLinha>333</vnd:TotalLinha>
+                        </vnd:DadosLinha>
+                    </vnd:LinhasVenda>
                 </aud:DadosVenda>
             </aud:Venda>
 
