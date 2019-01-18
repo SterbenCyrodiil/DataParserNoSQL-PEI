@@ -9,19 +9,27 @@ XML de Exemplo para testar os Schemas definidos para a segunda entrega!
         xmlns:cli='ProjetoPEI/Grupo4/Entrega1/Cliente'
         xmlns:prd='ProjetoPEI/Grupo4/Entrega1/Produto'
         xmlns:loj='ProjetoPEI/Grupo4/Entrega1/Loja'
-
         xmlns:vnd='ProjetoPEI/Grupo4/Entrega2/Venda'
         xmlns:aud='ProjetoPEI/Grupo4/Entrega2/Auditoria'
 
         xmlns:inf='ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional'
-        xmlns='ProjetoPEI/Grupo4/Entrega2/ExercicioVendas'
-        xsi:schemaLocation='ProjetoPEI/Grupo4/Entrega1/Cliente SchemasDefinicaoTipos/SchemaCliente.xsd
-               ProjetoPEI/Grupo4/Entrega1/Produto SchemasDefinicaoTipos/SchemaProduto.xsd
-               ProjetoPEI/Grupo4/Entrega1/Loja SchemasDefinicaoTipos/SchemaLoja.xsd
-               ProjetoPEI/Grupo4/Entrega2/Venda SchemasDefinicaoTipos/SchemaVenda.xsd
-               ProjetoPEI/Grupo4/Entrega2/Auditoria SchemasDefinicaoTipos/SchemaAuditoriaLoja.xsd
-               ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional SchemasDefinicaoTipos/SchemaInformacaoAdicional.xsd
-               ProjetoPEI/Grupo4/Entrega2/ExercicioVendas ExercicioVendas.xsd'>
+        xmlns:vndinf='ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda'
+        xmlns:audinf='ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias'
+
+        xmlns='ProjetoPEI/Grupo4/EntregaFinal/XSDTest'
+
+        xsi:schemaLocation
+                ='ProjetoPEI/Grupo4/Entrega1/Cliente SchemasDefinicaoModulos/SchemaCliente.xsd
+               ProjetoPEI/Grupo4/Entrega1/Produto SchemasDefinicaoModulos/SchemaProduto.xsd
+               ProjetoPEI/Grupo4/Entrega1/Loja SchemasDefinicaoModulos/SchemaLoja.xsd
+               ProjetoPEI/Grupo4/Entrega2/Venda SchemasDefinicaoModulos/SchemaVenda.xsd
+               ProjetoPEI/Grupo4/Entrega2/Auditoria SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd
+
+               ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional SchemasInformacaoAdicional/InformacaoAdicional.xsd
+               ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda SchemasInformacaoAdicional/InformacaoAdicionalVenda.xsd
+               ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias SchemasInformacaoAdicional/InformacaoAdicionalAuditorias.xsd
+
+               ProjetoPEI/Grupo4/EntregaFinal/XSDTest XSDParaTesteVocabulario.xsd'>
 
     <!-- Informação adicional obrigatória em todos os XML -->
     <InformacaoAdicional>
@@ -40,21 +48,23 @@ XML de Exemplo para testar os Schemas definidos para a segunda entrega!
     </InformacaoAdicional>
 
     <!-- Informações opcionais -->
-    <NumeroProdutos>
-        <Total>23</Total>
-        <TotalDiferentes>24</TotalDiferentes>
-    </NumeroProdutos>
-    <NumeroTotalClientesDiferentes>1</NumeroTotalClientesDiferentes>
-    <TotalProdutosVendidos>
-        <Produto id="3">2</Produto>
-        <Produto id="7">1</Produto>
-    </TotalProdutosVendidos>
-    <ValorVendidoPorCliente>
-        <Cliente id="3">5</Cliente>
-    </ValorVendidoPorCliente>
-    <ValorTotalVendidoPorMoeda>
-        <Moeda codigo="USD">34</Moeda>
-    </ValorTotalVendidoPorMoeda>
+    <InformacaoAdicionalAuditorias>
+        <audinf:NumeroProdutos>
+            <audinf:Total>23</audinf:Total>
+            <audinf:TotalDiferentes>24</audinf:TotalDiferentes>
+        </audinf:NumeroProdutos>
+        <audinf:NumeroTotalClientesDiferentes>1</audinf:NumeroTotalClientesDiferentes>
+        <audinf:TotalProdutosVendidos>
+            <audinf:Produto id="3">2</audinf:Produto>
+            <audinf:Produto id="7">1</audinf:Produto>
+        </audinf:TotalProdutosVendidos>
+        <audinf:ValorVendidoPorCliente>
+            <audinf:Cliente id="3">5</audinf:Cliente>
+        </audinf:ValorVendidoPorCliente>
+        <audinf:ValorTotalVendidoPorMoeda>
+            <audinf:Moeda codigo="USD">34</audinf:Moeda>
+        </audinf:ValorTotalVendidoPorMoeda>
+    </InformacaoAdicionalAuditorias>
 
     <!-- Listagem das auditorias referentes ao Exercicio -->
     <ExercicioVendas>
@@ -75,11 +85,13 @@ XML de Exemplo para testar os Schemas definidos para a segunda entrega!
 
                 <aud:DadosVenda IDReceita="4">
                     <!-- Informações opcionais -->
-                    <vnd:NumeroProdutos>
-                        <vnd:Total>23</vnd:Total>
-                        <vnd:TotalDiferentes>132</vnd:TotalDiferentes>
-                    </vnd:NumeroProdutos>
-                    <vnd:PrecoMedioVendaProdutos>23223</vnd:PrecoMedioVendaProdutos>
+                    <vnd:InformacaoAdicionalVenda>
+                        <vndinf:NumeroProdutos>
+                            <vndinf:Total>23</vndinf:Total>
+                            <vndinf:TotalDiferentes>132</vndinf:TotalDiferentes>
+                        </vndinf:NumeroProdutos>
+                        <vndinf:PrecoMedioVendaProdutos>23223</vndinf:PrecoMedioVendaProdutos>
+                    </vnd:InformacaoAdicionalVenda>
                     <!-- ===================== -->
 
                     <vnd:SubTotal>15124</vnd:SubTotal>

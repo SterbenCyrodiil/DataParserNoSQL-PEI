@@ -68,7 +68,7 @@ public class MongoConnector {
         //Mapear o resultado para um array em JSON
         return StreamSupport.stream(collection.aggregate(queryStages).spliterator(), false)
                 .map(Document::toJson)
-                .collect(Collectors.joining(", ", "[", "]")).toString();
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
     /**

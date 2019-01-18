@@ -12,6 +12,7 @@ Igualmente, estão definidos tipos para informação adicional de uso opcional.
            xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
            xmlns:cli="ProjetoPEI/Grupo4/Entrega1/Cliente"
            xmlns:prd="ProjetoPEI/Grupo4/Entrega1/Produto"
+           xmlns:vndinf="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda"
            elementFormDefault="qualified">
 
     <xs:import schemaLocation="CommonSchema.xsd"
@@ -20,6 +21,8 @@ Igualmente, estão definidos tipos para informação adicional de uso opcional.
                namespace="ProjetoPEI/Grupo4/Entrega1/Cliente"/>
     <xs:import schemaLocation="SchemaProduto.xsd"
                namespace="ProjetoPEI/Grupo4/Entrega1/Produto"/>
+    <xs:import schemaLocation="../SchemasInformacaoAdicional/InformacaoAdicionalVenda.xsd"
+               namespace="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda"/>
 
     <!-- Quando a moeda é a predefinida (ID da taxa de câmbio é "null" nos "SalesDetails")
     (neste caso o USD) o ID deverá ser 0 -->
@@ -34,18 +37,7 @@ Igualmente, estão definidos tipos para informação adicional de uso opcional.
 
     <xs:complexType name="typeVenda">
         <xs:sequence>
-            <!-- Novos campos adicionados relativos ao enunciado da segunda entrega -->
-            <xs:element name="NumeroProdutos" minOccurs="0">
-                <xs:complexType>
-                    <!-- Corrigido: Agora é obrigatorio introduzir os dois elementos. (anteriormente seria opcional) -->
-                    <xs:sequence>
-                        <xs:element name="Total" type="xs:unsignedInt"/>
-                        <xs:element name="TotalDiferentes" type="xs:unsignedInt"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="PrecoMedioVendaProdutos" type="xs:decimal" minOccurs="0"/>
-            <!-- ================================================================= -->
+            <xs:element name="InformacaoAdicionalVenda" type="vndinf:typeInformacaoAdicionalVenda"/>
 
             <xs:element name="SubTotal" type="xs:decimal"/>
             <xs:element name="TaxaImposto" type="xs:decimal"/>
