@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Este exemplo é baseado no Schema da auditoria das lojas presente nos schemas da
+segunda entrega!
+-->
+
+<Auditoria
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='ProjetoPEI/Grupo4/Entrega2/Auditoria'
+    xsi:schemaLocation='ProjetoPEI/Grupo4/Entrega2/Auditoria SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd'
+    xmlns:loj='ProjetoPEI/Grupo4/Entrega1/Loja'
+    xmlns:prd='ProjetoPEI/Grupo4/Entrega1/Produto'
+    xmlns:vnd='ProjetoPEI/Grupo4/Entrega2/Venda'
+    xmlns:cli='ProjetoPEI/Grupo4/Entrega1/Cliente'
+    
+    dataCriacao="2011-07-02T00:00:00.000">
+    
+    <Loja IDLoja="722">
+        <loj:Nome>Pedals Warehouse</loj:Nome>
+        <loj:Morada>Rua das Flores nº19</loj:Morada>
+        <loj:Contactos>
+            <loj:Email>pernasParaQueTeQuero@gmail.com</loj:Email>
+            <loj:Telefone>255444666</loj:Telefone>
+            <loj:Telefone>254675487</loj:Telefone>
+        </loj:Contactos>
+        <loj:NIF>267796451</loj:NIF>
+    </Loja>
+    
+    <Venda dataInicio="2011-05-31T00:00:00.000" dataFim="2011-07-01T00:00:00.000">
+        <Moeda idTaxaCambio="0">USD</Moeda>
+        
+        <DadosVenda IDReceita="43660">
+            <vnd:InformacaoAdicionalVenda>
+            </vnd:InformacaoAdicionalVenda>
+            
+            <vnd:SubTotal>1294.2529</vnd:SubTotal>
+            <vnd:TaxaImposto>124.2483</vnd:TaxaImposto>
+            
+            <vnd:Cliente IDCliente="29672">
+                <cli:Nome>
+                    <cli:PrimeiroNome>Alberto</cli:PrimeiroNome>
+                    <cli:UltimoNome>Caeiro</cli:UltimoNome>
+                </cli:Nome>
+                <cli:Morada>Rua das pedrinhas do Sal nº91</cli:Morada>
+                <cli:Contactos>
+                    <cli:Telefone>257856735</cli:Telefone>
+                    <cli:Email>albertoCaeiro@gmail.com</cli:Email>
+                </cli:Contactos>
+                <cli:NIF>765495643</cli:NIF>
+            </vnd:Cliente>
+            
+            <vnd:LinhasVenda>
+                <vnd:DadosLinha IDLinha="14">
+                    <vnd:Produto IDProduto="762">
+                        <prd:Codigo>BK-R50R-44</prd:Codigo>
+                        <prd:PrecoEmLista>782.99</prd:PrecoEmLista>
+                        <prd:Nome>Road-650 Red, 44</prd:Nome>
+                        <prd:CodigoCor>#FF0000</prd:CodigoCor>
+                        <prd:dataInicioVenda>2011-05-31T00:00:00.000</prd:dataInicioVenda>
+                        <prd:dataFinalVenda>2013-05-29T00:00:00.000</prd:dataFinalVenda>
+                    </vnd:Produto>
+                    <vnd:PrecoPorUnidade>419.4589</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>1</vnd:Quantidade>
+                    <vnd:TotalLinha>419.458900</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                
+                <vnd:DadosLinha IDLinha="15">
+                    <vnd:Produto IDProduto="758">
+                        <prd:Codigo>BK-R68R-52</prd:Codigo>
+                        <prd:PrecoEmLista>23</prd:PrecoEmLista>
+                        <prd:dataInicioVenda>2011-05-31T00:00:00.000</prd:dataInicioVenda>
+                        <prd:dataFinalVenda>2012-05-29T00:00:00.000</prd:dataFinalVenda>
+                    </vnd:Produto>
+                    <vnd:PrecoPorUnidade>874.794000</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>1</vnd:Quantidade>
+                    <vnd:TotalLinha>874.794000</vnd:TotalLinha>
+                </vnd:DadosLinha>
+            </vnd:LinhasVenda>
+        </DadosVenda>
+    </Venda>
+</Auditoria>
+
+ 
+            

@@ -33,6 +33,8 @@ Definição dos tipos relativos à Autoria de uma Loja.
         </xs:sequence>
         <xs:attribute name="dataCriacao" type="xs:dateTime" use="required"/>
     </xs:complexType>
-    
+
+    <xs:element name="Auditoria" type="typeAuditoria"/>
+
 </xs:schema>
     
