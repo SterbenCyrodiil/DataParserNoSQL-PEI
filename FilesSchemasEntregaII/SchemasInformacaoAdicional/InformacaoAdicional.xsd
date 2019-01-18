@@ -9,7 +9,7 @@ Definição dos tipos para um novo conjunto de informação a ser adicionada ao 
            xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
            elementFormDefault="qualified">
 
-    <xs:import schemaLocation="CommonSchema.xsd"
+    <xs:import schemaLocation="../SchemasDefinicaoModulos/CommonSchema.xsd"
                namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
     
     <xs:complexType name="typeInformacaoAdicional">

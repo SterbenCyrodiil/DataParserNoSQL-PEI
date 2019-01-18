@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Definição dos tipos para um novo conjunto de informação a ser adicionada ao documento XML gerado.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"
+           xmlns="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"
+
+           xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
+           elementFormDefault="qualified">
+
+    <xs:import schemaLocation="../SchemasDefinicaoModulos/CommonSchema.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
+    
+    <xs:complexType name="typeInformacaoAdicionalAuditorias">
+        <xs:all>
+
+            <!-- Novos campos adicionados relativos ao enunciado da segunda entrega -->
+            <xs:element name="NumeroProdutos" minOccurs="0">
+                <xs:complexType>
+                    <!-- Corrigido: Agora é obrigatorio introduzir os dois elementos. (anteriormente seria opcional) -->
+                    <xs:sequence>
+                        <xs:element name="Total" type="xs:unsignedInt"/>
+                        <xs:element name="TotalDiferentes" type="xs:unsignedInt"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NumeroTotalClientesDiferentes" type="xs:unsignedInt" minOccurs="0"/>
+
+            <xs:element name="TotalProdutosVendidos" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element name="Produto" type="cmn:typeNumeroPorCampo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ValorVendidoPorCliente" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element name="Cliente" type="cmn:typePrecoPorCampo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ValorTotalVendidoPorMoeda" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element name="Moeda">
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:decimal">
+                                        <xs:attribute name="codigo" type="cmn:baseMoeda" use="required"/>
+                                    </xs:extension>
+                                </xs:simpleContent>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+        </xs:all>
+    </xs:complexType>
+   
+</xs:schema>
+
+
+    
+    
+   
