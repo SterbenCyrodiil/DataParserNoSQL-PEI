@@ -1,4 +1,4 @@
-package transformer;
+package ExemploTransformerRepositorioUC;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -11,6 +11,10 @@ import org.bson.conversions.Bson;
 import org.json.JSONObject;
 import org.json.XML;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.TimeZone;
@@ -26,10 +30,10 @@ import static com.mongodb.client.model.Filters.eq;
  * <p>
  * Run the example using: gradle run
  */
-public class Demo {
+public class exemploDemo {
     public static void main(String args[]) {
         MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
-        MongoDatabase database = mongoClient.getDatabase("restaurantsDB");
+        MongoDatabase database = mongoClient.getDatabase("restaurantDB");
         MongoCollection<Document> collection = database.getCollection("restaurants");
         Bson filter = eq("borough", "Bronx");
         //como exemplo apenas estão a ser retornados dois documentos
@@ -38,13 +42,22 @@ public class Demo {
         int i = 1;
         while (it.hasNext()) {
             Document obj = (Document) it.next();
-            Demo.processDate(obj);
+            exemploDemo.processDate(obj);
 
             JSONObject json = new JSONObject(obj.toJson());
             String xml = XML.toString(json, "root").replace("$", "");
 
+            try {
+                BufferedWriter br = new BufferedWriter(new FileWriter(
+                        new File("resourcesExemploTransformerRepUC/XMLStringBeforeTransformg.txt")));
+                br.write(xml);
+                br.flush();
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             //invocação da classe responsável por aplicar o XSL
-            XSLTransformer.transform("resources/", xml, "transformationRules.xsl", "newXMlDocument" + i + ".xml");
+            exemploXSLTransformer.transform("resources/", xml, "transformationRules.xsl", "newXMlDocument" + i + ".xml");
             i++;
         }
         //fechar a ligação ao MongoDB

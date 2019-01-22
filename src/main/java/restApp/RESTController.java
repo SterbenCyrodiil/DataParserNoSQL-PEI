@@ -45,8 +45,8 @@ public class RESTController {
     }
 
     @RequestMapping("/getCollectionField")
-    public String getCollectionField(@RequestParam(value = "DB") String db,
-                                     @RequestParam(value = "collection") String clct,
+    public String getCollectionField(@RequestParam(value = "DB", defaultValue = "bikeOnTrackDB") String db,
+                                     @RequestParam(value = "collection", defaultValue = "salesDetails") String clct,
                                      @RequestParam(value = "field") String field,
                                      @RequestParam(value = "value") String value) {
         MongoConnector mongo = new MongoConnector();
@@ -54,10 +54,9 @@ public class RESTController {
     }
 
     @RequestMapping("/aggregateCollectionByQueryString")
-    public String aggregateCollectionByQueryString(
-            @RequestParam(value = "DB") String db,
-            @RequestParam(value = "collection") String clct,
-            @RequestParam(value = "query") String query) {
+    public String aggregateCollectionByQueryString(@RequestParam(value = "DB", defaultValue = "bikeOnTrackDB") String db,
+                                                   @RequestParam(value = "collection", defaultValue = "salesDetails") String clct,
+                                                   @RequestParam(value = "query") String query) {
         //Example: %5B%7B%24group%3A%7B%22_id%22%3Anull%2Ccount%3A%7B%24sum%3A1%7D%7D%7D%5D 
         //para [{$group:{"_id":null,count:{$sum:1}}}] -> utilizar: https://meyerweb.com/eric/tools/dencoder/
         MongoConnector mongo = new MongoConnector();
