@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aud:Auditoria xmlns:aud="ProjetoPEI/Grupo4/Entrega2/Auditoria" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="ProjetoPEI/Grupo4/Entrega2/Auditoria ../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Loja ../SchemasDefinicaoModulos/SchemaLoja.xsd ProjetoPEI/Grupo4/Entrega2/Venda ../SchemasDefinicaoModulos/SchemaVenda.xsd">
+    <aud:Loja IDLoja="1032">
+        <loj:Nome xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja">Brakes and Gears</loj:Nome>
+    </aud:Loja>
+    <aud:Venda dataInicio="2011-07-01T00:00:00.000Z">
+        <aud:Moeda idTaxaCambio="0"/>
+        <aud:DadosVenda IDVenda="43849">
+            <vnd:InformacaoAdicionalVenda xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda"/>
+            <vnd:SubTotal xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda">20544.7015</vnd:SubTotal>
+            <vnd:TaxaImposto xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda">1969.9765</vnd:TaxaImposto>
+            <vnd:Cliente xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda" IDCliente="29818"/>
+            <vnd:LinhasVenda xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda">
+                <vnd:DadosLinha IDLinha="535">
+                    <vnd:Produto IDProduto="776"/>
+                    <vnd:PrecoPorUnidade>2024.994</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>2</vnd:Quantidade>
+                    <vnd:TotalLinha>4049.988</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                <vnd:DadosLinha IDLinha="536">
+                    <vnd:Produto IDProduto="714"/>
+                    <vnd:PrecoPorUnidade>28.8404</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>1</vnd:Quantidade>
+                    <vnd:TotalLinha>28.8404</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                <vnd:DadosLinha IDLinha="537">
+                    <vnd:Produto IDProduto="777"/>
+                    <vnd:PrecoPorUnidade>2024.994</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>2</vnd:Quantidade>
+                    <vnd:TotalLinha>4049.988</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                <vnd:DadosLinha IDLinha="538">
+                    <vnd:Produto IDProduto="771"/>
+                    <vnd:PrecoPorUnidade>2039.994</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>2</vnd:Quantidade>
+                    <vnd:TotalLinha>4079.988</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                <vnd:DadosLinha IDLinha="539">
+                    <vnd:Produto IDProduto="711"/>
+                    <vnd:PrecoPorUnidade>20.1865</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>1</vnd:Quantidade>
+                    <vnd:TotalLinha>20.1865</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                <vnd:DadosLinha IDLinha="540">
+                    <vnd:Produto IDProduto="773"/>
+                    <vnd:PrecoPorUnidade>2039.994</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>1</vnd:Quantidade>
+                    <vnd:TotalLinha>2039.994</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                <vnd:DadosLinha IDLinha="541">
+                    <vnd:Produto IDProduto="715"/>
+                    <vnd:PrecoPorUnidade>28.8404</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>4</vnd:Quantidade>
+                    <vnd:TotalLinha>115.3616</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                <vnd:DadosLinha IDLinha="542">
+                    <vnd:Produto IDProduto="772"/>
+                    <vnd:PrecoPorUnidade>2039.994</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>1</vnd:Quantidade>
+                    <vnd:TotalLinha>2039.994</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                <vnd:DadosLinha IDLinha="543">
+                    <vnd:Produto IDProduto="707"/>
+                    <vnd:PrecoPorUnidade>20.1865</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>1</vnd:Quantidade>
+                    <vnd:TotalLinha>20.1865</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                <vnd:DadosLinha IDLinha="544">
+                    <vnd:Produto IDProduto="774"/>
+                    <vnd:PrecoPorUnidade>2039.994</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>2</vnd:Quantidade>
+                    <vnd:TotalLinha>4079.988</vnd:TotalLinha>
+                </vnd:DadosLinha>
+                <vnd:DadosLinha IDLinha="545">
+                    <vnd:Produto IDProduto="708"/>
+                    <vnd:PrecoPorUnidade>20.1865</vnd:PrecoPorUnidade>
+                    <vnd:Quantidade>1</vnd:Quantidade>
+                    <vnd:TotalLinha>20.1865</vnd:TotalLinha>
+                </vnd:DadosLinha>
+            </vnd:LinhasVenda>
+        </aud:DadosVenda>
+    </aud:Venda>
+</aud:Auditoria>

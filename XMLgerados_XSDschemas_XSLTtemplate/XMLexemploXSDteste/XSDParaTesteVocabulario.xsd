@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Schema de um Documento com várias Auditorias (consoante uma data ou uma loja em específico, por exemplo)
+tal como informações adicionais, de adição opcional, sobre essas Auditorias.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/XSDTest"
+           xmlns="ProjetoPEI/Grupo4/EntregaFinal/XSDTest"
+
+           xmlns:inf="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"
+           xmlns:audinf="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"
+           xmlns:aud="ProjetoPEI/Grupo4/Entrega2/Auditoria"
+           elementFormDefault="qualified">
+
+    <xs:import schemaLocation="../SchemasInformacaoAdicional/InformacaoAdicional.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"/>
+    <xs:import schemaLocation="../SchemasInformacaoAdicional/InformacaoAdicionalAuditorias.xsd"
+               namespace="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"/>
+    <xs:import schemaLocation="../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega2/Auditoria"/>
+
+    <xs:element name="Documento">
+        <xs:complexType>
+            <xs:sequence>
+                <!-- Informação Adicional sempre presente no XML -->
+                <xs:element name="InformacaoAdicional" type="inf:typeInformacaoAdicional"/>
+
+                <xs:element name="InformacaoAdicionalAuditorias" type="audinf:typeInformacaoAdicionalAuditorias"/>
+
+                <!-- Lista das Auditorias presentes no Exercicio -->
+                <xs:element name="ExercicioVendas">
+                    <xs:complexType>
+                        <xs:sequence maxOccurs="unbounded">
+                            <xs:element name="Auditoria" type="aud:typeAuditoria"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>	
+      
+               
+        
+    
+    
+    
+           
+                           
+                            
+                       

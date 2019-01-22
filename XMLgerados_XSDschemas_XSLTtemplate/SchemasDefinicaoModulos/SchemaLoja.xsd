@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Definição dos tipos referentes a uma Loja.
+(Nota: talvez fosse possível adicionar um campo relativo a produtos que estivessem
+disponíveis na loja refetente, mas as bases de dados não especificam isso...)
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/Loja"
+           xmlns="ProjetoPEI/Grupo4/EntregaFinal/Loja"
+
+           xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
+           elementFormDefault="qualified">
+
+    <xs:import schemaLocation="CommonSchema.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
+
+    <xs:complexType name="typeLoja">
+        <xs:sequence>
+            <!-- Parte da informação sobre a loja foi colocada como opcional (minOccurs="0") devido à inexistencia
+            de alguns dados nos CSV disponibilizados. (Sendo que só existem o ID e nome da loja)-->
+            <xs:element name="Nome" type="xs:string"/>
+            <xs:element name="Morada" type="xs:string" minOccurs="0"/>
+            <xs:element name="Contactos" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="Email" type="cmn:typeEmail"/>
+                        <xs:element name="Telefone" type="cmn:typeTelefone"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NIF" type="cmn:NIF" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="IDLoja" type="xs:unsignedInt" use="required"/>
+    </xs:complexType>
+
+</xs:schema>

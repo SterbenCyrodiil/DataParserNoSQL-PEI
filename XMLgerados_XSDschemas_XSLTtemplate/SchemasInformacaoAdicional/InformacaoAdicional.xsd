@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Definição dos tipos para um novo conjunto de informação a ser adicionada ao documento XML gerado.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"
+           xmlns="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"
+
+           xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
+           elementFormDefault="qualified">
+
+    <xs:import schemaLocation="../SchemasDefinicaoModulos/CommonSchema.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
+    
+    <xs:complexType name="typeInformacaoAdicional">
+        <xs:all>
+            
+            <xs:element name="TotalProdutosVendidosPorLoja" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element name="Loja" type="cmn:typeNumeroPorCampo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="ValorTotalVendas" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element name="Loja" type="cmn:typePrecoPorCampo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="PrecoMedioVendaProdutosPorLoja" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element name="Loja">
+                            <xs:complexType>
+                                <xs:sequence maxOccurs="unbounded">
+                                    <xs:element name="Produto" type="cmn:typePrecoPorCampo"/>
+                                </xs:sequence>
+                                <xs:attribute name="id" type="xs:integer" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+        </xs:all>
+    </xs:complexType>
+   
+</xs:schema>
+
+
+    
+    
+   

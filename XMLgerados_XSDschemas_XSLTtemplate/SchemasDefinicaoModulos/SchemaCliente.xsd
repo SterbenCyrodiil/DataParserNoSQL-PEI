@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Definição dos tipos referentes a um Cliente.
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/Cliente"
+           xmlns="ProjetoPEI/Grupo4/EntregaFinal/Cliente"
+           
+           xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
+           elementFormDefault="qualified">
+    
+    <xs:import schemaLocation="CommonSchema.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
+    
+    <xs:complexType name="typeCliente">
+        <xs:sequence>
+            <!-- A informação sobre o cliente foi colocada na sua totalidade (exluindo o ID) como opcional
+             (minOccurs="0") uma vez que não existem dados relativos nos documentos CSV! -->
+            <xs:element name="Nome" minOccurs="0">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="PrimeiroNome" type="xs:string"/>
+                        <xs:element name="UltimoNome" type="xs:string"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Morada" type="xs:string" minOccurs="0"/>
+            <xs:element name="Contactos" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="Email" type="cmn:typeEmail"/>
+                        <xs:element name="Telefone" type="cmn:typeTelefone"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NIF" type="cmn:NIF" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="IDCliente" type="xs:unsignedInt" use="required"/>
+    </xs:complexType>
+	
+</xs:schema>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Definição dos tipos referentes a um Produto.
+(Nota: Alguns campos dos produtos encontram-se opcionais, simplesmente para
+facilitar a introdução de dados em XML)
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/Produto"
+           xmlns="ProjetoPEI/Grupo4/EntregaFinal/Produto"
+           
+           xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
+           elementFormDefault="qualified">
+    
+    <xs:import schemaLocation="CommonSchema.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
+
+    <xs:simpleType name="typeCodigoProduto">
+        <xs:restriction base="xs:string">
+            <!--
+            primeiro parametro: identificacao (2 digitos)
+            segundo parametro: numero de identificacao (4 digitos)
+            terceiro parametro: dados adicionais (tamanho, calibre, ...)
+            -->
+            <xs:pattern value="[A-Z]{2}[-][A-Z0-9]{4}"/>
+            <xs:pattern value="[A-Z]{2}[-][A-Z0-9]{4}[-][A-Z]"/>
+            <xs:pattern value="[A-Z]{2}[-][A-Z0-9]{4}[-][0-9]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="typeProduto">
+        <xs:sequence>
+            <!-- Todas as informações sobre o produto são agora necessárias, passando a ser obrigatório a sua introdução.
+             (No entanto, o periodo de venda mantém-se opcional, por conveniencia... -->
+            <xs:element name="Codigo" type="typeCodigoProduto"/>
+            <xs:element name="PrecoEmLista" type="xs:decimal"/>
+            <xs:element name="Nome" type="xs:string"/>
+            <xs:element name="CodigoCor" type="cmn:typeCor"/>
+            <xs:element name="dataInicioVenda" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="dataFinalVenda" type="xs:dateTime" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="IDProduto" type="xs:unsignedInt" use="required"/>
+    </xs:complexType>
+	
+</xs:schema>   
+      
+              
+            
