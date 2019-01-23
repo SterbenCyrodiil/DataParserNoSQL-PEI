@@ -31,6 +31,7 @@ public class MongoConnector {
     private MongoClient mongoClient;
     private static final String noSuchCollectionMsg = "Collection does not exist!";
 
+
     public MongoConnector() {
         mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
     }

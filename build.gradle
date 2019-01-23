@@ -44,4 +44,5 @@ dependencies {
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.9.1'
     compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.springframework.boot:spring-boot-starter-test')
+    compile group: 'org.apache.solr', name: 'solr-solrj', version: '7.5.0'
 }
