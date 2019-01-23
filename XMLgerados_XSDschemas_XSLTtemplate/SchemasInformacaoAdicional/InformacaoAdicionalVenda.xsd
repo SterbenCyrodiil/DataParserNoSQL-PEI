@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 Definição dos tipos para um novo conjunto de informação OPCIONAL a ser adicionada a cada venda.
+
+ALTERAÇÃO PARA ENTREGA FINAL: A definição dos tipos referentes à informações adicionais pedidas no segundo enunciado
+foram transferidas para XSD particulares, para facilitar o uso do vocabulário.
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda"

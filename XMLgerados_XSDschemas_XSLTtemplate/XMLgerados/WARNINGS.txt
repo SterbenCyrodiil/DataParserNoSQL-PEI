@@ -1,1 +1,4 @@
-WARNING: Ficheiro de nome - XMLauditoria6.xml - não validado pelo Schema - XMLgerados_XSDschemas_XSLTtemplate/SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd -, resolver!
+WARNING:
+Ficheiro de nome - XMLauditoria1.xml - não validado pelo Schema - 
+XMLgerados_XSDschemas_XSLTtemplate/SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd -, resolver!
+(stacktrace imprimida na consola durante a ultima execução!)

@@ -50,7 +50,7 @@ public class RESTController {
                                      @RequestParam(value = "field") String field,
                                      @RequestParam(value = "value") String value) {
         MongoConnector mongo = new MongoConnector();
-        return mongo.getFieldData(db, clct, field, value);
+        return mongo.getCollectionField(db, clct, field, value);
     }
 
     @RequestMapping("/aggregateCollectionByQueryString")

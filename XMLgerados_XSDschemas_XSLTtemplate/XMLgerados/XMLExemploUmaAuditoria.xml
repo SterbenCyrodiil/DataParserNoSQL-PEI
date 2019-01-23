@@ -12,6 +12,7 @@ segunda entrega!
         xmlns:prd='ProjetoPEI/Grupo4/EntregaFinal/Produto'
         xmlns:vnd='ProjetoPEI/Grupo4/Entrega2/Venda'
         xmlns:cli='ProjetoPEI/Grupo4/EntregaFinal/Cliente'
+        xmlns:inf='ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional'
 
         dataCriacao="2011-07-02T00:00:00.000">
 
@@ -55,7 +56,7 @@ segunda entrega!
                         <prd:Codigo>BK-R50R-44</prd:Codigo>
                         <prd:PrecoEmLista>782.99</prd:PrecoEmLista>
                         <prd:Nome>Road-650 Red, 44</prd:Nome>
-                        <prd:CodigoCor>#FF0000</prd:CodigoCor>
+                        <prd:Cor>#FF0000</prd:Cor>
                         <prd:dataInicioVenda>2011-05-31T00:00:00.000</prd:dataInicioVenda>
                         <prd:dataFinalVenda>2013-05-29T00:00:00.000</prd:dataFinalVenda>
                     </vnd:Produto>
@@ -69,7 +70,7 @@ segunda entrega!
                         <prd:Codigo>BK-R68R-52</prd:Codigo>
                         <prd:PrecoEmLista>23</prd:PrecoEmLista>
                         <prd:Nome>asdas</prd:Nome>
-                        <prd:CodigoCor>#F23243</prd:CodigoCor>
+                        <prd:Cor>#F23243</prd:Cor>
                         <prd:dataInicioVenda>2011-05-31T00:00:00.000</prd:dataInicioVenda>
                         <prd:dataFinalVenda>2012-05-29T00:00:00.000</prd:dataFinalVenda>
                     </vnd:Produto>
@@ -80,6 +81,18 @@ segunda entrega!
             </vnd:LinhasVenda>
         </DadosVenda>
     </Venda>
+
+    <InformacaoAdicional>
+        <inf:ValorTotalVendas>
+            <inf:Loja id="2">4</inf:Loja>
+        </inf:ValorTotalVendas>
+        <inf:TotalProdutosVendidos>
+            <inf:Loja id="4">3</inf:Loja>
+        </inf:TotalProdutosVendidos>
+        <inf:ValorMedioPrecoVendaProdutos>
+            <inf:Loja id="4">23233</inf:Loja>
+        </inf:ValorMedioPrecoVendaProdutos>
+    </InformacaoAdicional>
 </Auditoria>
 
  

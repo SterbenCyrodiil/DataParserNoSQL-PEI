@@ -9,14 +9,14 @@ Igualmente, estão definidos tipos para informação adicional de uso opcional.
            targetNamespace="ProjetoPEI/Grupo4/Entrega2/Venda"
            xmlns="ProjetoPEI/Grupo4/Entrega2/Venda"
 
-           xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
+           xmlns:cmn="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"
            xmlns:cli="ProjetoPEI/Grupo4/EntregaFinal/Cliente"
            xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto"
            xmlns:vndinf="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda"
            elementFormDefault="qualified">
 
     <xs:import schemaLocation="CommonSchema.xsd"
-               namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
+               namespace="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"/>
     <xs:import schemaLocation="SchemaCliente.xsd"
                namespace="ProjetoPEI/Grupo4/EntregaFinal/Cliente"/>
     <xs:import schemaLocation="SchemaProduto.xsd"

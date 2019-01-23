@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 Definição dos tipos para um novo conjunto de informação a ser adicionada ao documento XML gerado.
+
+ALTERAÇÃO PARA ENTREGA FINAL: A definição dos tipos referentes à informações adicionais pedidas no segundo enunciado
+foram transferidas para XSD particulares, para facilitar o uso do vocabulário. (No entanto, este schema não serve
+para o contexto do enunciado, pois os XML finais que vão ser gerados automaticamente serão relativos a uma só auditoria
+de uma loja, com somente uma venda...)
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"
            xmlns="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"
 
-           xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
+           xmlns:cmn="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"
            elementFormDefault="qualified">
 
     <xs:import schemaLocation="../SchemasDefinicaoModulos/CommonSchema.xsd"
-               namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
+               namespace="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"/>
     
     <xs:complexType name="typeInformacaoAdicionalAuditorias">
         <xs:all>

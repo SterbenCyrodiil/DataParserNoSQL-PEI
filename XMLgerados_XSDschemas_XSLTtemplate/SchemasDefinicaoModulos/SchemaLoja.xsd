@@ -3,17 +3,20 @@
 Definição dos tipos referentes a uma Loja.
 (Nota: talvez fosse possível adicionar um campo relativo a produtos que estivessem
 disponíveis na loja refetente, mas as bases de dados não especificam isso...)
+
+ALTERAÇÃO PARA ENTREGA FINAL: Como não existe informação suficiente nos CSVs para o preenchimento automatico dos XML,
+alguns elementos foram colocados com minOccurs="0".
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/Loja"
            xmlns="ProjetoPEI/Grupo4/EntregaFinal/Loja"
 
-           xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
+           xmlns:cmn="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"
            elementFormDefault="qualified">
 
     <xs:import schemaLocation="CommonSchema.xsd"
-               namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
+               namespace="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"/>
 
     <xs:complexType name="typeLoja">
         <xs:sequence>

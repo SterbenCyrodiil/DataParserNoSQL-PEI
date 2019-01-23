@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 Definição de tipos utilizados por mais de um Schema ou de uso conveniente.
+
+ALTERAÇÃO PARA ENTREGA FINAL: typeCor removido. Deixou de fazer sentido para a transformação automatica dos XML na API
+do Java. O tipo da cor foi alterado para String.
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
-           xmlns="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
+           targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"
+           xmlns="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"
            elementFormDefault="qualified">
 
     <xs:simpleType name="typeEmail">
@@ -43,13 +46,6 @@ Definição de tipos utilizados por mais de um Schema ou de uso conveniente.
             <xs:enumeration value="SAR"/>
             <xs:enumeration value="USD"/>
             <xs:enumeration value="VEB"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="typeCor">
-        <xs:restriction base="xs:string">
-            <!-- A cor é apresentada utilizando o código de cor HTML correspondente! -->
-            <xs:pattern value="[#][0-9A-Za-z]{6}"/>
         </xs:restriction>
     </xs:simpleType>
 

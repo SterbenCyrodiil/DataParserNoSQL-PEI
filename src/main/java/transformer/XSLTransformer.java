@@ -54,10 +54,8 @@ public class XSLTransformer {
             conflitos com nomes. */
             File[] ficheiros = new File(xmlOutputDir).listFiles();
             int i = 1;
-            for (File f : ficheiros) {
-                if (f.isFile() && !f.getName().contains(xmlName+1)) {
-                    i++;
-                }
+            while (i < ficheiros.length && ficheiros[i].getName().equals(xmlName + i + ".xml")) {
+                i++;
             }
             String xmlFinal = "" + xmlName + i + ".xml";
             StreamResult result = new StreamResult(new File(xmlOutputDir + xmlFinal));

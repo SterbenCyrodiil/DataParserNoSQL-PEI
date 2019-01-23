@@ -1,25 +1,31 @@
 <?xml version="1.0"?>
 <!-- 
 Definição dos tipos relativos à Autoria de uma Loja.
+
+ALTERAÇÃO PARA ENTREGA FINAL: Adicionado um elemento ao Schema para que seja possivel fazer a validação de XML através
+deste XSD.
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-               targetNamespace="ProjetoPEI/Grupo4/Entrega2/Auditoria"
-               xmlns="ProjetoPEI/Grupo4/Entrega2/Auditoria"
-              
-               xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja"
-               xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda"
-               elementFormDefault="qualified">
-		   
+           targetNamespace="ProjetoPEI/Grupo4/Entrega2/Auditoria"
+           xmlns="ProjetoPEI/Grupo4/Entrega2/Auditoria"
+
+           xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja"
+           xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda"
+           xmlns:inf="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"
+           elementFormDefault="qualified">
+
     <xs:import schemaLocation="SchemaLoja.xsd"
-                   namespace="ProjetoPEI/Grupo4/EntregaFinal/Loja"/>
+               namespace="ProjetoPEI/Grupo4/EntregaFinal/Loja"/>
     <xs:import schemaLocation="SchemaVenda.xsd"
-                   namespace="ProjetoPEI/Grupo4/Entrega2/Venda"/>
-    
+               namespace="ProjetoPEI/Grupo4/Entrega2/Venda"/>
+    <xs:import schemaLocation="../SchemasInformacaoAdicional/InformacaoAdicional.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"/>
+
     <xs:complexType name="typeAuditoria">
         <xs:sequence>
-            
+
             <xs:element name="Loja" type="loj:typeLoja"/>
-				
+
             <xs:element name="Venda">
                 <xs:complexType>
                     <xs:sequence minOccurs="0">
@@ -29,6 +35,8 @@ Definição dos tipos relativos à Autoria de uma Loja.
                     <xs:attribute name="dataInicio" type="xs:dateTime" use="required"/>
                 </xs:complexType>
             </xs:element>
+
+            <xs:element name="InformacaoAdicional" type="inf:typeInformacaoAdicional"/>
         </xs:sequence>
         <!-- 'use="required"' retirado devido a nao ser possivel especificar a data através do XSLT... -->
         <xs:attribute name="dataCriacao" type="xs:dateTime"/>

@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 Definição dos tipos referentes a um Cliente.
+
+ALTERAÇÃO PARA ENTREGA FINAL: Como não existe informação suficiente nos CSVs para o preenchimento automatico dos XML,
+alguns elementos foram colocados com minOccurs="0".
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/Cliente"
            xmlns="ProjetoPEI/Grupo4/EntregaFinal/Cliente"
            
-           xmlns:cmn="ProjetoPEI/Grupo4/Entrega2/CommonSchema"
+           xmlns:cmn="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"
            elementFormDefault="qualified">
     
     <xs:import schemaLocation="CommonSchema.xsd"
-               namespace="ProjetoPEI/Grupo4/Entrega2/CommonSchema"/>
+               namespace="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"/>
     
     <xs:complexType name="typeCliente">
         <xs:sequence>

@@ -17,8 +17,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -41,44 +43,6 @@ public class MongoConnector {
      */
     public MongoConnector(String connection) {
         mongoClient = new MongoClient(new MongoClientURI(connection));
-    }
-
-    /**
-     * (Ainda em construção.) Tranformação dos docs encontrados pela query no mongoDB para XML
-     */
-    private void aggregateResultToXML(AggregateIterable<Document> results) {
-        //algoritmo baseado nos exemplos disponíveis no repositório GIT da UC
-        MongoCursor it = results.iterator();
-        /*o resultado da pesquisa so vai devolver 1 documento, no entanto deixa-se ficar este ciclo while para a
-        'flexibilidade' deste método. */
-        while (it.hasNext()) {
-            Document obj = (Document) it.next();
-            //a data ja se encontra formatada em "ISODate", realizado pela propria pesquisa no mongoDB (ver query)
-
-            JSONObject json = new JSONObject(obj.toJson());
-            String xml = XML.toString(json, "root").replace("$", "");
-
-            //invocação da classe responsável por aplicar o XSL (ter atenção às diretorias dos ficheiros!)
-            String filesDir = "XMLgerados_XSDschemas_XSLTtemplate/";
-            String xmlName = XSLTransformer.transform(xml, filesDir + "XSLTfiles/XSLTparaDefinicaoXML.xsl",
-                    filesDir + "XMLgerados/", "XMLauditoria");
-
-            try {
-                //validação do XML criado pelo vocabulário relaltivo ao problema
-                if (!XMLvalidator.validate(new File(filesDir + "XMLgerados/" + xmlName),
-                        new File(filesDir + "SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd"))) {
-
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(
-                            new File(filesDir + "XMLgerados/WARNINGS.txt")));
-                    bw.append("WARNING:\nFicheiro de nome - " + xmlName + " - não validado pelo Schema - \n" +
-                            filesDir + "SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd -, resolver!\n" +
-                            "(stacktrace imprimida na consola durante a ultima execução!)\n");
-                    bw.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     /**
@@ -137,21 +101,193 @@ public class MongoConnector {
                 "Quantity:\"$Quantity\"," +
                 "ProductID:\"$ProductID\"," +
                 "UnitPrice:\"$UnitPrice\"," +
-                "LineTotal:\"$LineTotal\"}}}}," +
-                //faz-se parse da data para string novamente para poder ser utilizada no XSLT
-                "{$addFields:{" +
-                "OrderDate:{$dateToString:{date:\"$OrderDate\"}}}}]";
+                "LineTotal:\"$LineTotal\"}}}}]";
 
         List<Document> queryStages = this.getAggregateStagesFromString(query);
         //aggregate
         AggregateIterable<Document> results = collection.aggregate(queryStages);
         //Criar o XML do resultado
-        aggregateResultToXML(results);
+        this.aggregateResultsToXML(results);
 
         //Mapear o resultado para um array em JSON
         return StreamSupport.stream(results.spliterator(), false)
                 .map(Document::toJson)
                 .collect(Collectors.joining(", ", "[", "]"));
+    }
+
+    /**
+     * Tranformação dos docs encontrados pela query no mongoDB para um documento XML!
+     * (algoritmo baseado nos exemplos disponíveis no repositório GIT da UC)
+     * <p>
+     * DEVELOPMENT NOTE: A xml string, que vai ser utilizada na transformação do XML a ser gerado, vai conter a
+     * informação dos 3 CSV necessários (SalesDetails, ProductDetails e CurrencyDetails), tal como a informação
+     * relativa às pesquisas sobre a informação adicional a ser introduzida.
+     * <p>
+     * Isto é, estará tudo organizado em diferentes elementos complexos relativos a cada parte referida
+     * anteriormente, descendentes de um elemento pai "/root".
+     *
+     * @param results instância iterável, devolvida pelo uso do método agregate do mongoDB, com os resultados.
+     */
+    private void aggregateResultsToXML(AggregateIterable<Document> results) {
+        MongoCursor it = results.iterator();
+        /*o resultado da pesquisa so vai devolver 1 documento, no entanto deixa-se ficar este ciclo while para a
+        'flexibilidade' deste método. */
+        while (it.hasNext()) {
+            Document obj = (Document) it.next();
+            //Formata a data ISODate para um formato "xs:dateTime"
+            this.dateFormat(obj, "OrderDate");
+
+            JSONObject json = new JSONObject(obj.toJson());
+            StringBuilder xmlTotal = new StringBuilder().append("<root>");
+            xmlTotal.append(XML.toString(json, "DadosVenda").replace("$", ""));
+            xmlTotal.append(this.getXmlDadosProdutos(json.getJSONArray("ReceiptLines")));
+            /*
+            Quando a CurrencyRateID == "NULL" (String) significa que não há taxa de câmbio e a moeda utilizada
+            é o USD (isto já está resolvido no XSLT, logo quando acontece simplesmente não adiciona os dados à xml String)
+            */
+            if (!(json.get("CurrencyRateID") instanceof String)) {
+                xmlTotal.append(this.getXmlDadosMoeda(json.getInt("CurrencyRateID")));
+            }
+            //adicionar a parte da informacao adicional (metodo abaixo)
+            xmlTotal.append("</root>");
+
+            //invocação da classe responsável por aplicar o XSL (ter atenção às diretorias dos ficheiros!)
+            String filesDir = "XMLgerados_XSDschemas_XSLTtemplate/";
+            String xmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTparaDefinicaoXML.xsl",
+                    filesDir + "XMLgerados/", "XMLauditoria");
+
+            try {
+                //validação do XML criado pelo vocabulário relaltivo ao problema
+                if (!XMLvalidator.validate(new File(filesDir + "XMLgerados/" + xmlName),
+                        new File(filesDir + "SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd"))) {
+
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(
+                            new File(filesDir + "XMLgerados/WARNINGS.txt")));
+                    bw.append("WARNING:\nFicheiro de nome - " + xmlName + " - não validado pelo Schema - \n" +
+                            filesDir + "SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd -, resolver!\n" +
+                            "(stacktrace imprimida na consola durante a ultima execução!)\n");
+                    bw.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Substitui a Key do Documento, que contém como valor uma data (passado por parametro) com um formato de data
+     * relativo ao tipo de dados XSD "xs:dateTime"
+     *
+     * @param docObj Documento com a key a ser substituida.
+     * @param key    Key a substituir
+     */
+    private void dateFormat(Document docObj, String key) {
+        SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        formattedDate.setTimeZone(TimeZone.getTimeZone("UTC"));
+        //substituição
+        if (docObj.get(key) instanceof String) {
+            try {
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+                Date date = format.parse((String) docObj.get(key));
+                docObj.replace(key, formattedDate.format(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            docObj.replace(key, formattedDate.format(docObj.getDate(key)));
+        }
+    }
+
+    /**
+     * Procura na collection "productDetails" documentos relativos aos "ProductID" encontrados nos JSONObjects que
+     * pertençam ao JSONArray passado em parametro.
+     * <p>
+     * De seguida, realiza o parse desses documentos para uma xml String com o formato:
+     * <p>
+     * "<DadosProdutos><DadosProduto>...</DadosProduto><DadosProduto>...</DadosProduto></DadosProdutos>"
+     * <p>
+     * São formatadas tambem as datas contidas nesses JSONObjects (através do uso do método "dataFormat")!
+     *
+     * @param array JSONArray com a informação a ser utilizada.
+     * @return xml String com os resultados do parse JSON to XML
+     */
+    private String getXmlDadosProdutos(JSONArray array) {
+        StringBuilder xmlDadosProdutos = new StringBuilder().append("<DadosProdutos>");
+        Iterator<Object> it = array.iterator();
+        while (it.hasNext()) {
+            JSONObject jsonObj = (JSONObject) it.next();
+
+            MongoCursor mongoIt = this.getIterableFieldData(
+                    "bikeOnTrackDB", "productDetails", "ProductID", jsonObj.getInt("ProductID")).iterator();
+            Document docObj = (Document) mongoIt.next();
+            //Formata a data ISODate para um formato "xs:dateTime"
+            if (!docObj.get("SellStartDate").equals("NULL")) {
+                this.dateFormat(docObj, "SellStartDate");
+            }
+            if (!docObj.get("SellEndDate").equals("NULL")) {
+                this.dateFormat(docObj, "SellEndDate");
+            }
+            JSONObject json = new JSONObject(docObj.toJson());
+            xmlDadosProdutos.append(XML.toString(json, "DadosProduto").replace("$", ""));
+        }
+        xmlDadosProdutos.append("</DadosProdutos>");
+        return xmlDadosProdutos.toString();
+    }
+
+    /**
+     * Procura na collection "currencyDetails" o documento relativo ao "CurrencyRateID" que se encontra no documento
+     * retornado da procura na collection "salesDetails".
+     * <p>
+     * De seguida, realiza o parse desse documento para uma xml String com o formato:
+     * <p>
+     * "<DadosMoeda>...</DadosMoeda>"
+     * <p>
+     * É também formatada a data que se encontra no documento retornado na procura (através do uso do método "dataFormat")!
+     *
+     * @param id id relativo à Key "CurrencyRateID"
+     * @return xml String com os resultados do parse JSON to XML
+     */
+    private String getXmlDadosMoeda(int id) {
+        MongoCursor mongoIt = getIterableFieldData(
+                "bikeOnTrackDB", "currencyDetails", "CurrencyRateID", id).iterator();
+        Document docObj = (Document) mongoIt.next();
+        //Formata a data ISODate para um formato "xs:dateTime"
+        this.dateFormat(docObj, "CurrencyRateDate");
+
+        JSONObject json = new JSONObject(docObj.toJson());
+        return XML.toString(json, "DadosMoeda").replace("$", "");
+    }
+
+    private String getXmlDadosPesquisasInformacaoAdicional(JSONArray array) {
+        StringBuilder xmlDadosProdutos = new StringBuilder().append("<Informacao>");
+        /*
+        Resultados das queries de pesquisa (Informação Adicional)
+         */
+        xmlDadosProdutos.append("</Informacao>");
+        return xmlDadosProdutos.toString();
+    }
+
+    /**
+     * Retorna uma instância do 'Iterable' com os resultados da procura relativa ao campo com o valor introduzido.
+     * (NOTA: "value" encontra-se como Object devido à possibilidade de incompatibilidade de dados na procura pelos
+     * docs JSON [ver nota no método "getCollectionField"]
+     *
+     * @param databaseName   nome da database
+     * @param collectionName nome da collection
+     * @param field          nome do campo
+     * @param value          valor do campo
+     * @return 'FindIterable' com os resultados encontrados.
+     */
+    public FindIterable<Document> getIterableFieldData(String databaseName, String collectionName, String field, Object value) {
+        if (!this.isCollection(databaseName, collectionName)) {
+            return null;
+        }
+        MongoDatabase database = mongoClient.getDatabase(databaseName);
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        Bson filter = eq(field, value);
+
+        return collection.find(filter);
     }
 
     /**
@@ -174,7 +310,9 @@ public class MongoConnector {
     }
 
     /**
-     * Retorna o resultado da procura relativa ao campo com o valor introduzido.
+     * Retorna o resultado da procura relativa ao campo com o valor introduzido num formato JSONArray.
+     * (NOTA: não funciona se "value" for um numero, pois só é passado como String e quando faz a procura nos docs
+     * JSON existe uma incompatibilidade de dados!)
      *
      * @param databaseName   nome da database
      * @param collectionName nome da collection
@@ -182,16 +320,15 @@ public class MongoConnector {
      * @param value          valor do campo
      * @return String em formato JSON com os resultados
      */
-    public String getFieldData(String databaseName, String collectionName, String field, String value) {
+    public String getCollectionField(String databaseName, String collectionName, String field, String value) {
         if (!this.isCollection(databaseName, collectionName)) {
             return noSuchCollectionMsg;
         }
         MongoDatabase database = mongoClient.getDatabase(databaseName);
         MongoCollection<Document> collection = database.getCollection(collectionName);
         Bson filter = eq(field, value);
-
-        //NOTA: Apenas apresenta os 10 primeiros resultados (limit(10))
-        return StreamSupport.stream(collection.find(filter).limit(10).spliterator(), false)
+        //NOTA: Apenas apresenta os 10 primeiros resultados (limit(10)) [retirado]
+        return StreamSupport.stream(collection.find(filter).spliterator(), false)
                 .map(Document::toJson)
                 .collect(Collectors.joining(", ", "[", "]")).toString();
     }
