@@ -1,5 +1,6 @@
 package restApp;
 
+import solr.SolrConnector;
 import transformer.XSLTransformer;
 import validator.XMLvalidator;
 
@@ -30,9 +31,11 @@ public class MongoConnector {
 
     private MongoClient mongoClient;
     private static final String noSuchCollectionMsg = "Collection does not exist!";
+    private SolrConnector solrConnector;
 
     public MongoConnector() {
         mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
+        solrConnector = new SolrConnector();
     }
 
     /**
@@ -132,6 +135,7 @@ public class MongoConnector {
         MongoCursor it = results.iterator();
         /*o resultado da pesquisa so vai devolver 1 documento, no entanto deixa-se ficar este ciclo while para a
         'flexibilidade' deste método. */
+        String fxmlName="";
         while (it.hasNext()) {
             Document obj = (Document) it.next();
             //Formata a data ISODate para um formato "xs:dateTime"
@@ -155,7 +159,10 @@ public class MongoConnector {
             String filesDir = "XMLgerados_XSDschemas_XSLTtemplate/";
             String xmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTparaDefinicaoXML.xsl",
                     filesDir + "XMLgerados/", "XMLauditoria");
+            fxmlName= System.getProperty("user.dir")+"\\XMLgerados\\"+xmlName;
+            System.out.println("\n \n \n \n "+fxmlName+ "\n \n \n \n");
         }
+        solrConnector.addDocument(fxmlName);
     }
 
     /**
