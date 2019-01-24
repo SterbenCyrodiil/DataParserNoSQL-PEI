@@ -1,48 +1,40 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 Definição dos tipos relativos à Autoria de uma Loja.
 
-ALTERAÇÃO PARA ENTREGA FINAL: Adicionado um elemento ao Schema para que seja possivel fazer a validação de XML através
-deste XSD.
+ALTERAÇÃO PARA ENTREGA FINAL: Adicionado um elemento com as informações sobre o exercicio relativo a esta auditoria.
+Foi também alterada a relação deste Schema com o Schema da definição dos tipos do módulo vendas. Resumidamente, o
+complexType que detinha os dados da venda e a moeda relativa fica definido no próprio Schema das vendas (esta alteração
+serve para que os namespaces estejam mais corretamente definidos no XML referente a este vocabulário).
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo4/Entrega2/Auditoria"
-           xmlns="ProjetoPEI/Grupo4/Entrega2/Auditoria"
+           targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/Auditoria"
+           xmlns="ProjetoPEI/Grupo4/EntregaFinal/Auditoria"
 
            xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja"
-           xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda"
-           xmlns:inf="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"
+           xmlns:vnd="ProjetoPEI/Grupo4/EntregaFinal/Venda"
+           xmlns:audinf="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"
            elementFormDefault="qualified">
 
     <xs:import schemaLocation="SchemaLoja.xsd"
                namespace="ProjetoPEI/Grupo4/EntregaFinal/Loja"/>
     <xs:import schemaLocation="SchemaVenda.xsd"
-               namespace="ProjetoPEI/Grupo4/Entrega2/Venda"/>
-    <xs:import schemaLocation="../SchemasInformacaoAdicional/InformacaoAdicional.xsd"
-               namespace="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"/>
+               namespace="ProjetoPEI/Grupo4/EntregaFinal/Venda"/>
+    <xs:import schemaLocation="../SchemasInformacaoAdicional/InformacaoAdicionalAuditorias.xsd"
+               namespace="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"/>
 
     <xs:complexType name="typeAuditoria">
         <xs:sequence>
 
             <xs:element name="Loja" type="loj:typeLoja"/>
 
-            <xs:element name="Venda">
-                <xs:complexType>
-                    <xs:sequence minOccurs="0">
-                        <xs:element name="Moeda" type="vnd:typeMoeda"/>
-                        <xs:element name="DadosVenda" type="vnd:typeVenda"/>
-                    </xs:sequence>
-                    <xs:attribute name="dataInicio" type="xs:dateTime" use="required"/>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="Venda" type="vnd:typeVenda"/>
 
-            <xs:element name="InformacaoAdicional" type="inf:typeInformacaoAdicional"/>
+            <xs:element name="InformacaoAdicional" type="audinf:typeInformacaoAdicionalAuditorias"/>
         </xs:sequence>
         <!-- 'use="required"' retirado devido a nao ser possivel especificar a data através do XSLT... -->
         <xs:attribute name="dataCriacao" type="xs:dateTime"/>
     </xs:complexType>
-
-    <xs:element name="Auditoria" type="typeAuditoria"/>
 
 </xs:schema>
     

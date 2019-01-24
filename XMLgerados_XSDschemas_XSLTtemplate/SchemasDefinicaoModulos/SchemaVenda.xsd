@@ -2,12 +2,16 @@
 <!-- 
 Definição dos tipos referentes a uma Venda.
 (contém a moeda utilizada e a respetiva Taxa de Câmbio, quando necessária tal como os dados respetivos)
-Igualmente, estão definidos tipos para informação adicional de uso opcional.
+Igualmente, estão definidos tipos para informação adicional referente à venda.
+
+ALTERAÇÃO PARA ENTREGA FINAL: Alterada a relação entre este  Schema com o Schema do módulo Auditoria. Resumidamente, o
+complexType que detinha os dados da venda e a moeda relativa fica definido no próprio Schema das vendas (esta alteração
+serve para que os namespaces estejam mais corretamente definidos no XML referente a este vocabulário).
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="ProjetoPEI/Grupo4/Entrega2/Venda"
-           xmlns="ProjetoPEI/Grupo4/Entrega2/Venda"
+           targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/Venda"
+           xmlns="ProjetoPEI/Grupo4/EntregaFinal/Venda"
 
            xmlns:cmn="ProjetoPEI/Grupo4/EntregaFinal/CommonSchema"
            xmlns:cli="ProjetoPEI/Grupo4/EntregaFinal/Cliente"
@@ -24,38 +28,43 @@ Igualmente, estão definidos tipos para informação adicional de uso opcional.
     <xs:import schemaLocation="../SchemasInformacaoAdicional/InformacaoAdicionalVenda.xsd"
                namespace="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda"/>
 
-    <!-- Quando a moeda é a predefinida (ID da taxa de câmbio é "null" nos "SalesDetails")
-    (neste caso o USD) o ID deverá ser 0 -->
-    <xs:complexType name="typeMoeda">
-        <xs:simpleContent>
-            <xs:extension base="cmn:baseMoeda">
-                <xs:attribute name="idTaxaCambio" type="xs:unsignedInt" use="required"/>
-                <xs:attribute name="dataTaxaCambio" type="xs:dateTime"/>
-            </xs:extension>
-        </xs:simpleContent>
-    </xs:complexType>
-
     <xs:complexType name="typeVenda">
-        <xs:sequence>
-            <xs:element name="InformacaoAdicionalVenda" type="vndinf:typeInformacaoAdicionalVenda"/>
-
-            <xs:element name="SubTotal" type="xs:decimal"/>
-            <xs:element name="TaxaImposto" type="xs:decimal"/>
-            <xs:element name="Cliente" type="cli:typeCliente"/>
-            <!-- Nota: se se achar necessário pode-se colocar aqui uma listagem de todos os produtos envolvidos
-             na venda (xs:complexType, xs:sequence)! No entanto, esses produtos já se encontram listados nas
-             linhas de venda asseguir... -->
-
-            <xs:element name="LinhasVenda">
+        <xs:sequence minOccurs="0">
+            <!-- Quando a moeda é a predefinida (ID da taxa de câmbio é "null" nos "SalesDetails")
+            (neste caso o USD) o ID deverá ser 0 -->
+            <xs:element name="Moeda">
                 <xs:complexType>
-                    <xs:sequence maxOccurs="unbounded">
-                        <xs:element name="DadosLinha" type="typeLinhaVnd"/>
-                    </xs:sequence>
+                    <xs:simpleContent>
+                        <xs:extension base="cmn:baseMoeda">
+                            <xs:attribute name="idTaxaCambio" type="xs:unsignedInt" use="required"/>
+                            <xs:attribute name="dataTaxaCambio" type="xs:dateTime"/>
+                        </xs:extension>
+                    </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
 
+            <xs:element name="DadosVenda">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="SubTotal" type="xs:decimal"/>
+                        <xs:element name="TaxaImposto" type="xs:decimal"/>
+                        <xs:element name="Cliente" type="cli:typeCliente"/>
+
+                        <xs:element name="LinhasVenda">
+                            <xs:complexType>
+                                <xs:sequence maxOccurs="unbounded">
+                                    <xs:element name="DadosLinha" type="typeLinhaVnd"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="IDVenda" type="xs:unsignedInt" use="required"/>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="InformacaoAdicional" type="vndinf:typeInformacaoAdicionalVenda"/>
         </xs:sequence>
-        <xs:attribute name="IDVenda" type="xs:unsignedInt" use="required"/>
+        <xs:attribute name="dataInicio" type="xs:dateTime" use="required"/>
     </xs:complexType>
 
     <xs:complexType name="typeLinhaVnd">

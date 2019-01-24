@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Definição dos elementos para a utilização deste documento para a validação dos XML a serem gerados pela API.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ProjetoPEI/Grupo4/EntregaFinal/Documento"
+           xmlns="ProjetoPEI/Grupo4/EntregaFinal/Documento"
+
+           xmlns:aud="ProjetoPEI/Grupo4/EntregaFinal/Auditoria"
+           xmlns:inf="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"
+           elementFormDefault="qualified">
+
+    <xs:import schemaLocation="SchemaAuditoriaLoja.xsd"
+               namespace="ProjetoPEI/Grupo4/EntregaFinal/Auditoria"/>
+    <xs:import schemaLocation="../SchemasInformacaoAdicional/InformacaoAdicional.xsd"
+               namespace="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"/>
+
+    <xs:element name="Documento">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Auditoria" type="aud:typeAuditoria"/>
+                <xs:element name="InformacaoAdicional" type="inf:typeInformacaoAdicional"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
