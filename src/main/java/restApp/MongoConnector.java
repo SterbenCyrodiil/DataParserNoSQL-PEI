@@ -53,14 +53,13 @@ public class MongoConnector {
      * @param saleYear   ano referente à data (integer)
      * @return
      */
-    public String getSaleDetails(String storeField, String saleMonth, String saleYear) {
+    public String getSaleDetails(String databaseName, String collectionName, String storeField, String saleMonth, String saleYear) {
         /*
-        Eu coloquei a database e a collection que tenho no meu localhost!
-        Ter isso em atenção para não dar problemas!
-        (talvez até pode ser melhor parametrizar isso no REST)
+        Tal como estava escrito neste coment anteriormente, a database e collection foram parametrizadas no REST
+        (no entanto, estão definidos parametros predefinidos (repetivamente, "bikestore" e "salesdetails"
          */
-        MongoDatabase database = mongoClient.getDatabase("bikeOnTrackDB");
-        MongoCollection<Document> collection = database.getCollection("salesDetails");
+        MongoDatabase database = mongoClient.getDatabase(databaseName);
+        MongoCollection<Document> collection = database.getCollection(collectionName);
 
         /* ALTERAÇÃO PARA A ENTREGA FINAL
         Na entrega final descobriu-se que era necessário juntar todas as ReceiptLines num só documento! (já que

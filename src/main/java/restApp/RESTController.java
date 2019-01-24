@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class RESTController {
 
     @RequestMapping("/getStoreSaleByDate")
-    public String getStoreSaleByDate(@RequestParam(value = "store") String storeID,
+    public String getStoreSaleByDate(@RequestParam(value = "DB", defaultValue = "bikestore") String db,
+                                     @RequestParam(value = "collection", defaultValue = "salesdetails") String collection,
+                                     @RequestParam(value = "store") String storeID,
                                      @RequestParam(value = "month") String month,
                                      @RequestParam(value = "year") String year) {
         MongoConnector mongo = new MongoConnector();
-        return mongo.getSaleDetails(storeID, month, year);
+        return mongo.getSaleDetails(db, collection, storeID, month, year);
         /* Deixei ficar este Catch aqui como IssueTracking!
         -> Basicamente eu estava a pensar que iamos utilizar os inputs em formato numerico
         mas depois descobri que só vamos usar a string query, mais nada (no método aggregate)
