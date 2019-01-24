@@ -32,6 +32,16 @@ public class RESTController {
         */
     }
 
+    @RequestMapping("/validateXMLwithXSD")
+    public String validateXMLwithXSD(
+            @RequestParam(value = "xmlDirectory", defaultValue = "XMLgerados_XSDschemas_XSLTtemplate/XMLgerados/") String xmlDir,
+            @RequestParam(value = "xmlFile") String xml,
+            @RequestParam(value = "xsdFilePath",
+                    defaultValue = "XMLgerados_XSDschemas_XSLTtemplate/SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd") String xsd) {
+        MongoConnector mongo = new MongoConnector();
+        return mongo.validateXMLwithXSD(xmlDir, xml, xsd);
+    }
+
     /*
     Os métodos daqui para baixo são só para "Quality of Life" do utilizador.
     Também são convenientes para fazer testes, mas o mesmo pode ser feito diretamente no mongoDB!

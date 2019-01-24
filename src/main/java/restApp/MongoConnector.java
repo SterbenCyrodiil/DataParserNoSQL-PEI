@@ -106,7 +106,7 @@ public class MongoConnector {
         //aggregate
         AggregateIterable<Document> results = collection.aggregate(queryStages);
         //Criar o XML do resultado
-        this.aggregateResultsToXML(results);
+        this.aggregateResultsToXML(collection, results);
 
         //Mapear o resultado para um array em JSON
         return StreamSupport.stream(results.spliterator(), false)
@@ -125,9 +125,10 @@ public class MongoConnector {
      * Isto é, estará tudo organizado em diferentes elementos complexos relativos a cada parte referida
      * anteriormente, descendentes de um elemento pai "/root".
      *
-     * @param results instância iterável, devolvida pelo uso do método agregate do mongoDB, com os resultados.
+     * @param collection coleção recebida pelo REST
+     * @param results    instância iterável, devolvida pelo uso do método agregate do mongoDB, com os resultados.
      */
-    private void aggregateResultsToXML(AggregateIterable<Document> results) {
+    private void aggregateResultsToXML(MongoCollection collection, AggregateIterable<Document> results) {
         MongoCursor it = results.iterator();
         /*o resultado da pesquisa so vai devolver 1 documento, no entanto deixa-se ficar este ciclo while para a
         'flexibilidade' deste método. */
@@ -139,13 +140,13 @@ public class MongoConnector {
             JSONObject json = new JSONObject(obj.toJson());
             StringBuilder xmlTotal = new StringBuilder().append("<root>");
             xmlTotal.append(XML.toString(json, "DadosVenda").replace("$", ""));
-            xmlTotal.append(this.getXmlDadosProdutos(json.getJSONArray("ReceiptLines")));
+            xmlTotal.append(this.getXmlDadosProdutos(collection, json.getJSONArray("ReceiptLines")));
             /*
             Quando a CurrencyRateID == "NULL" (String) significa que não há taxa de câmbio e a moeda utilizada
             é o USD (isto já está resolvido no XSLT, logo quando acontece simplesmente não adiciona os dados à xml String)
             */
             if (!(json.get("CurrencyRateID") instanceof String)) {
-                xmlTotal.append(this.getXmlDadosMoeda(json.getInt("CurrencyRateID")));
+                xmlTotal.append(this.getXmlDadosMoeda(collection, json.getInt("CurrencyRateID")));
             }
             //adicionar a parte da informacao adicional (metodo abaixo)
             xmlTotal.append("</root>");
@@ -154,22 +155,6 @@ public class MongoConnector {
             String filesDir = "XMLgerados_XSDschemas_XSLTtemplate/";
             String xmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTparaDefinicaoXML.xsl",
                     filesDir + "XMLgerados/", "XMLauditoria");
-
-            try {
-                //validação do XML criado pelo vocabulário relaltivo ao problema
-                if (!XMLvalidator.validate(new File(filesDir + "XMLgerados/" + xmlName),
-                        new File(filesDir + "SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd"))) {
-
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(
-                            new File(filesDir + "XMLgerados/WARNINGS.txt")));
-                    bw.append("WARNING:\nFicheiro de nome - " + xmlName + " - não validado pelo Schema - \n" +
-                            filesDir + "SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd -, resolver!\n" +
-                            "(stacktrace imprimida na consola durante a ultima execução!)\n");
-                    bw.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -208,17 +193,23 @@ public class MongoConnector {
      * <p>
      * São formatadas tambem as datas contidas nesses JSONObjects (através do uso do método "dataFormat")!
      *
-     * @param array JSONArray com a informação a ser utilizada.
+     * @param collection coleção recebida pelo REST
+     * @param array      JSONArray com a informação a ser utilizada.
      * @return xml String com os resultados do parse JSON to XML
      */
-    private String getXmlDadosProdutos(JSONArray array) {
+    private String getXmlDadosProdutos(MongoCollection collection, JSONArray array) {
+        String collectionName;
+        if (collection.getNamespace().getCollectionName().contains("salesDetails")) {
+            collectionName = "productDetails";
+        } else {
+            collectionName = "productdetails";
+        }
         StringBuilder xmlDadosProdutos = new StringBuilder().append("<DadosProdutos>");
         Iterator<Object> it = array.iterator();
         while (it.hasNext()) {
             JSONObject jsonObj = (JSONObject) it.next();
-
             MongoCursor mongoIt = this.getIterableFieldData(
-                    "bikeOnTrackDB", "productDetails", "ProductID", jsonObj.getInt("ProductID")).iterator();
+                    collection.getNamespace().getDatabaseName(), collectionName, "ProductID", jsonObj.getInt("ProductID")).iterator();
             Document docObj = (Document) mongoIt.next();
             //Formata a data ISODate para um formato "xs:dateTime"
             if (!docObj.get("SellStartDate").equals("NULL")) {
@@ -244,12 +235,19 @@ public class MongoConnector {
      * <p>
      * É também formatada a data que se encontra no documento retornado na procura (através do uso do método "dataFormat")!
      *
-     * @param id id relativo à Key "CurrencyRateID"
+     * @param collection coleção recebida pelo REST
+     * @param id         id relativo à Key "CurrencyRateID"
      * @return xml String com os resultados do parse JSON to XML
      */
-    private String getXmlDadosMoeda(int id) {
+    private String getXmlDadosMoeda(MongoCollection collection, int id) {
+        String collectionName;
+        if (collection.getNamespace().getCollectionName().contains("salesDetails")) {
+            collectionName = "currencyDetails";
+        } else {
+            collectionName = "currencydetails";
+        }
         MongoCursor mongoIt = getIterableFieldData(
-                "bikeOnTrackDB", "currencyDetails", "CurrencyRateID", id).iterator();
+                collection.getNamespace().getDatabaseName(), collectionName, "CurrencyRateID", id).iterator();
         Document docObj = (Document) mongoIt.next();
         //Formata a data ISODate para um formato "xs:dateTime"
         this.dateFormat(docObj, "CurrencyRateDate");
@@ -326,10 +324,11 @@ public class MongoConnector {
         MongoDatabase database = mongoClient.getDatabase(databaseName);
         MongoCollection<Document> collection = database.getCollection(collectionName);
         Bson filter = eq(field, value);
+
         //NOTA: Apenas apresenta os 10 primeiros resultados (limit(10)) [retirado]
         return StreamSupport.stream(collection.find(filter).spliterator(), false)
                 .map(Document::toJson)
-                .collect(Collectors.joining(", ", "[", "]")).toString();
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
     /**
@@ -353,7 +352,7 @@ public class MongoConnector {
         //Mapear o resultado para um array em JSON
         return StreamSupport.stream(collection.aggregate(myList).spliterator(), false)
                 .map(Document::toJson)
-                .collect(Collectors.joining(", ", "[", "]")).toString();
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
     /**
@@ -378,4 +377,52 @@ public class MongoConnector {
         return myList;
     }
 
+    /**
+     * Valida um documento XML relativo ao Schema passado por parametro.
+     * (No entanto, se "xmlName" for igual a "all", faz a validação para todos os documentos XML presentes na diretoria
+     * especificada.)
+     *
+     * @param filesDir diretoria com o(s) ficheiro(os) XML
+     * @param xmlName  nome do documento XML a verificar ("all" para validar tudo)
+     * @param xsdPath  caminho para o XSD a ser utilizado para a validação
+     * @return
+     */
+    public String validateXMLwithXSD(String filesDir, String xmlName, String xsdPath) {
+        final String valido = "INFO: XML - %s - validado com sucesso!\n";
+        final String invalido = "INFO: XML - %s - não validado! [stacktrace imprimida para a consola]\n";
+        final String exc = "* ERROR: %s - File(s) not found! | Couldn't read file(s)! *\n" +
+                "INFO: Valores predefinidos dos parametros:\n" +
+                "-> xmlDirectory: \"XMLgerados_XSDschemas_XSLTtemplate/XMLgerados/\"\n" +
+                "-> xsdFilePath: \"XMLgerados_XSDschemas_XSLTtemplate/SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd\"";
+
+        if (xmlName.equalsIgnoreCase("all")) {
+            StringBuilder str = new StringBuilder();
+            File[] files = new File(filesDir).listFiles();
+            try {
+                for (File f : files) {
+                    if (f.getName().contains(".xml")) {
+                        if (XMLvalidator.validate(new File(filesDir + f.getName()), new File(xsdPath))) {
+                            str.append(String.format(valido, f.getName()));
+                        }
+                        str.append(String.format(invalido, f.getName()));
+                    }
+                }
+                return str.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return String.format(exc, filesDir);
+            }
+
+        } else {
+            try {
+                if (XMLvalidator.validate(new File(filesDir + xmlName), new File(xsdPath))) {
+                    return String.format(valido, xmlName);
+                }
+                return String.format(invalido, xmlName);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return String.format(exc, xmlName);
+            }
+        }
+    }
 }

@@ -13,9 +13,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
+import java.io.*;
 
 /**
  * Classe de exemplo já disponibilizada: "ExemploJavaXSL", modificada para aceitar um documento XML como string ao
@@ -52,12 +50,22 @@ public class XSLTransformer {
             /*
             Procura se existem ficheiros na diretoria e numera o proximo ficheiro que vai ser criado, evitando diretamente
             conflitos com nomes. */
-            File[] ficheiros = new File(xmlOutputDir).listFiles();
-            int i = 1;
-            while (i < ficheiros.length && ficheiros[i].getName().equals(xmlName + i + ".xml")) {
-                i++;
+            FilenameFilter filter = new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    if (name.contains(".xml")) return true;
+                    return false;
+                }
+            };
+            File[] ficheiros = new File(xmlOutputDir).listFiles(filter);
+            int count = 1;
+            System.out.println("\nCOUNT_NUMERO_FICHEIRO: " + count + "\n");
+            for (int i = 0; i < ficheiros.length; i++) {
+                if (ficheiros[i].getName().contains(xmlName + count))
+                    count++;
             }
-            String xmlFinal = "" + xmlName + i + ".xml";
+            System.out.println("\nCOUNT_NUMERO_FICHEIRO: " + count + "\n");
+            String xmlFinal = "" + xmlName + count + ".xml";
             StreamResult result = new StreamResult(new File(xmlOutputDir + xmlFinal));
             transformer.transform(source, result);
             return xmlFinal;
