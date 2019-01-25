@@ -1,5 +1,6 @@
 package restApp;
 
+import org.xml.sax.SAXException;
 import solr.SolrConnector;
 import transformer.XSLTransformer;
 import validator.XMLvalidator;
@@ -14,6 +15,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -159,10 +163,12 @@ public class MongoConnector {
             String filesDir = "XMLgerados_XSDschemas_XSLTtemplate/";
             String xmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTparaDefinicaoXML.xsl",
                     filesDir + "XMLgerados/", "XMLauditoria");
-            fxmlName= System.getProperty("user.dir")+"\\XMLgerados\\"+xmlName;
-            System.out.println("\n \n \n \n "+fxmlName+ "\n \n \n \n");
+            fxmlName= System.getProperty("user.dir")+"\\XMLgerados_XSDschemas_XSLTtemplate\\XMLgerados\\"+xmlName;
+            File xmlfile = new File(fxmlName);
+            solrConnector.addDocument(xmlfile);
         }
-        solrConnector.addDocument(fxmlName);
+
+
     }
 
     /**

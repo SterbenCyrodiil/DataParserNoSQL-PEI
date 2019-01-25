@@ -17,6 +17,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
+import java.net.URI;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,24 +25,25 @@ import java.util.Map;
 public class SolrConnector {
 
 
-    private SolrClient solrClient;
+    private HttpSolrClient solrClient;
 
     public SolrConnector(){
         //instância-se o cliente. Atenção ao nome da coleção/core
-        solrClient= new HttpSolrClient.Builder("http://localhost:8983/solr/xmlteste").build();
+        solrClient= new HttpSolrClient.Builder("http://127.0.0.1:8983/solr/xmlteste").build();
     }
 
     /**
      * @param xml o próprio do ficheiro criado, na API aparece como "body", mas não explica o parâmetro.
      */
-    public void addDocument(String xml){
+    public void addDocument(File xml){
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
         Document doc = null;
+
         try {
             builder = factory.newDocumentBuilder();
-            doc = builder.parse(new File(xml));
+            doc = builder.parse(xml);
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (SAXException e) {
