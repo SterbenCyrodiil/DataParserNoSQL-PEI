@@ -59,7 +59,6 @@ public class XSLTransformer {
             };
             File[] ficheiros = new File(xmlOutputDir).listFiles(filter);
             int count = 1;
-            System.out.println("\nCOUNT_NUMERO_FICHEIRO: " + count + "\n");
             for (int i = 0; i < ficheiros.length; i++) {
                 if (ficheiros[i].getName().contains(xmlName + count))
                     count++;

@@ -13,9 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -47,6 +45,7 @@ public class MongoConnector {
 
     /**
      * Procura na base de dados a existência da Venda relativa a uma loja e uma determinada data.
+     * Também realiza a transformação dessa informação (em JSON) para XML.
      *
      * @param storeField ID da loja a ser encontrada
      * @param saleMonth  mês referente à data (integer)
@@ -103,10 +102,21 @@ public class MongoConnector {
                 "LineTotal:\"$LineTotal\"}}}}]";
 
         List<Document> queryStages = this.getAggregateStagesFromString(query);
-        //aggregate
+
+        /* REALIZAR A VERIFICAÇÃO DO LIST PRICE
+         * -> Eu pensei em colocar a verificação dos ListPrices a 0 a fazer aqui na API automaticamente.
+         * Descobri que é extremamente complicado. A query que temos em javascript para o mongoDB serve lindamente.
+         * Fica esta mensagem aqui para escrever depois no relatório se for preciso.
+         * this.verifyListPrice(database, collection);
+         * */
+
+        //aggregate, encontrar os resultados da pesquisa
         AggregateIterable<Document> results = collection.aggregate(queryStages);
-        //Criar o XML do resultado
-        this.aggregateResultsToXML(collection, results);
+
+        if (results.iterator().hasNext()) {
+            //Criar o XML do resultado (quando existem resultados)
+            this.aggregateResultsToXML(collection, results, query);
+        }
 
         //Mapear o resultado para um array em JSON
         return StreamSupport.stream(results.spliterator(), false)
@@ -123,13 +133,18 @@ public class MongoConnector {
      * relativa às pesquisas sobre a informação adicional a ser introduzida.
      * <p>
      * Isto é, estará tudo organizado em diferentes elementos complexos relativos a cada parte referida
-     * anteriormente, descendentes de um elemento pai "/root".
+     * anteriormente, descendentes de um elemento pai "<root></root>".
+     * <p>
+     * Seguiu-se esta abordagem devido à facilidade que proporciona na formação da template no documento XSLT para a
+     * transformação do XML a ser gerado.
      *
-     * @param collection coleção recebida pelo REST
-     * @param results    instância iterável, devolvida pelo uso do método agregate do mongoDB, com os resultados.
+     * @param collection     coleção recebida pelo REST
+     * @param results        instância iterável, devolvida pelo uso do método agregate do mongoDB, com os resultados.
+     * @param queryPrincipal String com a query que foi utilizada para devolver o documento com a auditoria
      */
-    private void aggregateResultsToXML(MongoCollection collection, AggregateIterable<Document> results) {
+    public void aggregateResultsToXML(MongoCollection collection, AggregateIterable<Document> results, String queryPrincipal) {
         MongoCursor it = results.iterator();
+
         /*o resultado da pesquisa so vai devolver 1 documento, no entanto deixa-se ficar este ciclo while para a
         'flexibilidade' deste método. */
         while (it.hasNext()) {
@@ -138,19 +153,32 @@ public class MongoConnector {
             this.dateFormat(obj, "OrderDate");
 
             JSONObject json = new JSONObject(obj.toJson());
+            //String Builder que vai fazer append de todos os elementos que vão ser utilizados no XSLT
             StringBuilder xmlTotal = new StringBuilder().append("<root>");
+
+            //adiciona à xml String os elementos XML com os dados relativos à Venda
             xmlTotal.append(XML.toString(json, "DadosVenda").replace("$", ""));
+
+            //adiciona à xml String os elementos XML com os dados relativos aos ProductIDs que estejam nos dados da Venda
             xmlTotal.append(this.getXmlDadosProdutos(collection, json.getJSONArray("ReceiptLines")));
+
             /*
+            adiciona à xml String os elementos XML com os dados relativos ao CurrencyRateID, e à respetiva moeda,
+            que estejam nos dados da Venda
+
             Quando a CurrencyRateID == "NULL" (String) significa que não há taxa de câmbio e a moeda utilizada
-            é o USD (isto já está resolvido no XSLT, logo quando acontece simplesmente não adiciona os dados à xml String)
+            é o USD (isso é resolvido no XSLT, logo quando acontece simplesmente não adiciona os dados à xml String)
             */
             if (!(json.get("CurrencyRateID") instanceof String)) {
                 xmlTotal.append(this.getXmlDadosMoeda(collection, json.getInt("CurrencyRateID")));
             }
-            //adicionar a parte da informacao adicional (metodo abaixo)
+
+            //adiciona à xml String os elementos XML com os dados relativos às informações adicionais sobre as lojas
+            xmlTotal.append(this.getXmlDadosInformacaoAdicional(collection));
+
             xmlTotal.append("</root>");
 
+            System.out.println("\n\nXML_TOTAL: " + xmlTotal.toString());
             //invocação da classe responsável por aplicar o XSL (ter atenção às diretorias dos ficheiros!)
             String filesDir = "XMLgerados_XSDschemas_XSLTtemplate/";
             String xmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTparaDefinicaoXML.xsl",
@@ -195,7 +223,7 @@ public class MongoConnector {
      *
      * @param collection coleção recebida pelo REST
      * @param array      JSONArray com a informação a ser utilizada.
-     * @return xml String com os resultados do parse JSON to XML
+     * @return xml String com os resultados do parse JSON to XML relativo à informação sobre os produtos
      */
     private String getXmlDadosProdutos(MongoCollection collection, JSONArray array) {
         String collectionName;
@@ -237,7 +265,7 @@ public class MongoConnector {
      *
      * @param collection coleção recebida pelo REST
      * @param id         id relativo à Key "CurrencyRateID"
-     * @return xml String com os resultados do parse JSON to XML
+     * @return xml String com os resultados do parse JSON to XML relativo à informação sobre a moeda
      */
     private String getXmlDadosMoeda(MongoCollection collection, int id) {
         String collectionName;
@@ -256,13 +284,107 @@ public class MongoConnector {
         return XML.toString(json, "DadosMoeda").replace("$", "");
     }
 
-    private String getXmlDadosPesquisasInformacaoAdicional(JSONArray array) {
-        StringBuilder xmlDadosProdutos = new StringBuilder().append("<Informacao>");
-        /*
-        Resultados das queries de pesquisa (Informação Adicional)
-         */
-        xmlDadosProdutos.append("</Informacao>");
-        return xmlDadosProdutos.toString();
+    /*
+    POR ENQUANTO NAO SE VAI FAZER ISTO, as informações estão feitas nas queries (pode-se adicionar manualmente aos XML)
+
+    O MOTIVO É BASTANTE SIMPLES, iria ser preciso repetir literalmente tudo o processo para as queries. Como cada query
+    é completamente diferente (a unica igualdade é o que já está feito dentro do método abaixo) não há possibilidade
+    de reutilizar quase nada. O periodo de tempo para entrega do projeto tambem não ajuda.
+
+    No entanto, o elemento que identifica estas informações no XML está presente nos XML gerados, só está vazio.
+
+    ATENÇÃO: este método é só para as informações relativas à venda e ao exercicio. As informações sobre as lojas
+    (que no enunciado eram as unicas informações que diziam explicitamente que era necessário adicionar ao XML) estão
+    adicionadas no método asseguir!
+
+    /**
+     * Utiliza várias queries (presentes no ficheiro de texto "Queries-Pesquisa-MongoDB.txt") que retornam as várias
+     * informações adicionais ao XML a ser gerado, a pedido do enunciado do Projeto relativo à segunda entrega.
+     * <p>
+     * Resumidamente, o processo baseia-se na abordagem já seguida anteriormente. Vão ser criados mais elementos, com
+     * a transformação da informação retornada pelo método 'aggregate()' em JSON para elementos XML, que vão ser
+     * adicionados posteriormente à xml String a ser utilizada pelo XSLT para a produção automática dos XML das auditorias.
+     *
+     * @param collection coleção recebida pelo REST
+     * @param resultsDoc jsonObject relativo ao documento de auditoria encontrado
+     * @param query query executada que devolve a auditoria de uma loja relativa aos parametros do REST
+     * @return xml String com os resultados do parse JSON to XML
+     * /
+    private String getXmlDadosInformacao(MongoCollection collection, JSONObject resultsDoc, String query) {
+        //utilizar só os stages da alteração da data e o $match
+        query = query.substring(0,264);
+        StringBuilder xmlDadosInformacoes = new StringBuilder().append("<Informacao>");
+        String numTotalProdutosVenda = query.concat("{$group:{_id:null,numTotalProdutos:{$sum:\"$Quantity\"}}},{$project:{_id:0}}])");
+
+        xmlDadosInformacoes.append("</Informacao>");
+        return xmlDadosInformacoes.toString();
+    } */
+
+    /**
+     * Utilizando as o método '.aggregate()' do mongoDB e as queries presentes no ficheiro de texto "Queries-Pesquisa-MongoDB.txt",
+     * produz os documentos JSON com as informações pedidas no enunciado a serem adicionadas ao XML.
+     * <p>
+     * De seguida, realiza o parse desse documento para uma xml String com o formato:
+     * <p>
+     * "<Informacao>...</Informacao>"
+     *
+     * @param collection coleção recebida pelo REST
+     * @return xml String com os resultados do parse JSON to XML relativo às informações adicionais sobre as lojas
+     */
+    private String getXmlDadosInformacaoAdicional(MongoCollection collection) {
+        StringBuilder xmlDadosInformacoes = new StringBuilder().append("<Informacao>");
+        List<Document> queryStages;
+        MongoCursor it;
+        String query;
+
+        /* QUERY - Total Produtos vendidos por cada Loja */
+        query = //agrupa todas as lojas com todos os produtos vendidos (ProductIDs)
+                "[{$group:{_id:{store:\"$Store\",product:\"$ProductID\"},Quantity:{$first:\"$Quantity\"}}}," +
+                        //agrupa cada loja fazendo o somatório da quantidade de cada ProductID encontrado
+                        "{$group:{_id:\"$_id.store\",valor:{$sum:\"$Quantity\"}}},{$sort:{\"_id\":1}}]";
+        queryStages = this.getAggregateStagesFromString(query);
+        //aggregate, encontrar os resultados da pesquisa
+        it = collection.aggregate(queryStages).iterator();
+        while (it.hasNext()) {
+            Document doc = (Document) it.next();
+            JSONObject obj = new JSONObject(doc.toJson());
+            xmlDadosInformacoes.append(XML.toString(obj, "TotalProdutosVendidosPorLoja").replace("$", ""));
+        }
+        System.out.println("\n\nPRIMEIRA_QUERY: " + query);
+        /* QUERY - Valor total das Vendas por cada Loja (subTotal + taxAmt) */
+        query = //agrupa todas as lojas com todas as vendas realizadas (ReceiptIDs) e os respetivos SubTotal e TaxAmount
+                "[{$group:{_id:{store:\"$Store\",sale:\"$ReceiptID\"},SubTotal:{$first:\"$SubTotal\"},TaxAmt:{$first:\"$TaxAmt\"}}}," +
+                        //realiza o somatório do SubTotal e o TaxAmount para ficar com o ValorTotal da venda
+                        "{$project:{\"_id\":1,valorTotalVenda:{$add:[\"$SubTotal\",\"$TaxAmt\"]}}}," +
+                        //agrupa cada loja fazendo o somatório do ValorTotal de cada venda
+                        "{$group:{_id:\"$_id.store\",valor:{$sum:\"$valorTotalVenda\"}}},{$sort:{\"_id\":1}}]";
+        queryStages = this.getAggregateStagesFromString(query);
+        //aggregate, encontrar os resultados da pesquisa
+        it = collection.aggregate(queryStages).iterator();
+        while (it.hasNext()) {
+            Document doc = (Document) it.next();
+            JSONObject obj = new JSONObject(doc.toJson());
+            xmlDadosInformacoes.append(XML.toString(obj, "ValorTotalVendas").replace("$", ""));
+        }
+        System.out.println("\n\nSEGUNDA_QUERY: " + query);
+        /* QUERY - Valor médio do preço de venda (UnitPrice) dos produtos por cada loja */
+        query = //agrupa todas as lojas com vendas realizadas respetivas, tal como a média do preço de venda (UnitPrice) dos produtos nessa venda
+                "[{$group:{_id:{store:\"$Store\",sale:\"$ReceiptID\"},mediaPrecoVendaProdutos:{$avg:\"$UnitPrice\"}}}," +
+                        //Para cada loja, soma as médias dos preços de venda dos produtos de cada venda
+                        "{$group:{_id:\"$_id.store\",valor:{$sum:\"$mediaPrecoVendaProdutos\"}}},{$sort:{\"_id\":1}}]";
+        queryStages = this.getAggregateStagesFromString(query);
+        //aggregate, encontrar os resultados da pesquisa
+        it = collection.aggregate(queryStages).iterator();
+        while (it.hasNext()) {
+            Document doc = (Document) it.next();
+            JSONObject obj = new JSONObject(doc.toJson());
+            xmlDadosInformacoes.append(XML.toString(obj, "ValorMedioPrecoVendaProdutos").replace("$", ""));
+        }
+        System.out.println("\n\nTERCEIRA_QUERY: " + query);
+        xmlDadosInformacoes.append("</Informacao>");
+
+        System.out.println("\n\nSTRING_XML_INFORMACOES: " + xmlDadosInformacoes.toString());
+        return xmlDadosInformacoes.toString();
     }
 
     /**
