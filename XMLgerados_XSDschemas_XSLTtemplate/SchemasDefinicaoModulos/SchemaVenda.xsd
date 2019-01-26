@@ -62,7 +62,7 @@ serve para que os namespaces estejam mais corretamente definidos no XML referent
                 </xs:complexType>
             </xs:element>
 
-            <xs:element name="InformacaoAdicional" type="vndinf:typeInformacaoAdicionalVenda"/>
+            <xs:element name="InformacaoAdicionalVenda" type="vndinf:typeInformacaoAdicional"/>
         </xs:sequence>
         <xs:attribute name="dataInicio" type="xs:dateTime" use="required"/>
     </xs:complexType>

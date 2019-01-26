@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Este é um dos XML gerados automaticamente, antes da mudança na abordagem da introdução dos dados aqui em falta. -->
 <aud:Auditoria xmlns:aud="ProjetoPEI/Grupo4/Entrega2/Auditoria" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="ProjetoPEI/Grupo4/Entrega2/Auditoria ../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Loja ../SchemasDefinicaoModulos/SchemaLoja.xsd ProjetoPEI/Grupo4/Entrega2/Venda ../SchemasDefinicaoModulos/SchemaVenda.xsd">
+               xsi:schemaLocation="ProjetoPEI/Grupo4/Entrega2/Auditoria ../../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Loja ../SchemasDefinicaoModulos/SchemaLoja.xsd ProjetoPEI/Grupo4/Entrega2/Venda ../SchemasDefinicaoModulos/SchemaVenda.xsd">
     <aud:Loja IDLoja="1032">
         <loj:Nome xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja">Brakes and Gears</loj:Nome>
     </aud:Loja>

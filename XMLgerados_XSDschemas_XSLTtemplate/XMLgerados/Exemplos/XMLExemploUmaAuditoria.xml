@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Este exemplo é baseado no Schema da auditoria das lojas presente nos schemas da
-segunda entrega!
+Este exemplo é baseado no Schema da auditoria das lojas da Segunda Entrega!
 -->
-
 <Auditoria
         xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
         xmlns='ProjetoPEI/Grupo4/Entrega2/Auditoria'
-        xsi:schemaLocation='ProjetoPEI/Grupo4/Entrega2/Auditoria ../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd'
+        xsi:schemaLocation='ProjetoPEI/Grupo4/Entrega2/Auditoria ../../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd'
         xmlns:loj='ProjetoPEI/Grupo4/EntregaFinal/Loja'
         xmlns:prd='ProjetoPEI/Grupo4/EntregaFinal/Produto'
-        xmlns:vnd='ProjetoPEI/Grupo4/Entrega2/Venda'
+        xmlns:vnd='ProjetoPEI/Grupo4/EntregaFinal/Venda'
         xmlns:cli='ProjetoPEI/Grupo4/EntregaFinal/Cliente'
         xmlns:inf='ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional'
 

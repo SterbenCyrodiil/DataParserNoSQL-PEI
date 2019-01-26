@@ -1,0 +1,212 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+QUERY PRINCIPAL (enunciado): Devolver a informação da Venda de uma Loja numa determinada Data.
+
+-> Devolve os vários documentos relativos às linhas de venda de uma Loja numa determinada data:
+db.salesDetails.aggregate([
+		{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},
+		{$addFields:
+			{"Date.year":{$year:"$OrderDate"},
+			"Date.month":{$month:"$OrderDate"},
+			"Date.day":{$dayOfMonth:"$OrderDate"}}},
+		{$project:{OrderDate:0}},
+		{$match:{Store:852,"Date.year":2011,"Date.month":5}}]).pretty()
+
+-> Este segundo é melhor (em vez de apagar o ISODate, apaga o documento embutido da Date criado)
+db.salesDetails.aggregate([
+		{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},
+		{$addFields:{
+			"Date.year":{$year:"$OrderDate"},
+			"Date.month":{$month:"$OrderDate"},
+			"Date.day":{$dayOfMonth:"$OrderDate"}}},
+		{$match:{Store:852,"Date.year":2011,"Date.month":5}},
+		{$project:{Date:0}}}).pretty()
+
+-> Stage a ser adicionado à query anterior que junta as ReceiptLines todas num documento embutido, para que seja mais facil fazer a transformação XSLT depois...
+[{$group:
+	{_id:null,
+	ReceiptID:{$first:"$ReceiptID"},
+	OrderDate:{$first:"$OrderDate"},
+	Customer:{$first:"$Customer"},
+	CurrencyRateID:{$first:"$CurrencyRateID"},
+	SubTotal:{$first:"$SubTotal"},
+	TaxAmt:{$first:"$TaxAmt"},
+	Store:{$first:"$Store"},
+	StoreName:{$first:"$StoreName"},
+	ReceiptLines:{$push:{
+			ReceiptLineID:"$ReceiptLineID",
+			Quantity:"$Quantity",
+			ProductID:"$ProductID",
+			UnitPrice:"$UnitPrice",
+			LineTotal:"$LineTotal"}}}}]
+
+-> Para voltar a colocar a data em String (DEPRECATED: isto já não é usado, teria sido feito para utilizar a data no XSLT. No entanto a API já trata disso.):
+{$addFields:{OrderDate:{$dateToString:{format:"%Y-%m-%dT%H:%M:%S.%L",date:"$OrderDate"}}}}]).pretty()
+
+(COPY-PASTE para o mongo):
+db.salesDetails.aggregate([{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},{$match:{Store:852,"Date.year":2011,"Date.month":5}},{$project:{Date:0}},{$group:{_id:null,ReceiptID:{$first:"$ReceiptID"}, OrderDate:{$first:"$OrderDate"},Customer:{$first:"$Customer"},CurrencyRateID:{$first:"$CurrencyRateID"},SubTotal:{$first:"$SubTotal"},TaxAmt:{$first:"$TaxAmt"},Store:{$first:"$Store"},StoreName:{$first:"$StoreName"},ReceiptLines:{$push:{ReceiptLineID:"$ReceiptLineID",Quantity:"$Quantity",ProductID:"$ProductID",UnitPrice:"$UnitPrice",LineTotal:"$LineTotal"}}}}]).pretty()
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+QUERIES SOBRE INFORMAÇÃO RELATIVA À VENDA PRESENTE NO XML:
+
+-> Número total de produtos existentes:
+db.salesDetails.aggregate([
+	//formatação da data
+	{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},
+	//procura da loja (o exemplo que esta aqui vai ser substituido pelos parametros do REST)
+	{$match:{Store:852,"Date.year":2011,"Date.month":5}},{$project:{Date:0}},
+	//para obter numTotalProdutos: {$sum:"$Quantity"}
+	{$group:{_id:null,numTotalProdutos:{$sum:"$Quantity"}}},{$project:{_id:0}}])
+
+-> Número total de produtos diferentes existentes:
+db.salesDetails.aggregate([
+	//formatação da data
+	{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},
+	//procura da loja
+	{$match:{Store:852,"Date.year":2011,"Date.month":5}},{$project:{Date:0}},
+	//para obter numTotalProdutosDiferentes: agrupar por ID, contar os IDs
+	{$group:{_id:"$ProductID"}},{$count:"numTotalProdutosDiferentes"}])
+
+-> Valor médio do preço de venda (UnitPrice) dos produtos existentes:
+db.salesDetails.aggregate([
+	//formatação da data
+	{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},
+	//procura da loja
+	{$match:{Store:852,"Date.year":2011,"Date.month":5}},{$project:{Date:0}},
+	//calcular o valor medio (mesmo que se faça a conta com um mesmo ProductID, é suposto pois, dependendo da venda, podem ter um UnitPrice diferente)
+	{$group:{_id:null,valorMedioPrecoVendaProdutos:{$avg:"$UnitPrice"}}},{$project:{_id:0}}])
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+QUERIES SOBRE INFORMAÇÃO RELATIVA AO EXERCICIO (conjunto de vendas) TENDO EM CONTA A DATA DA VENDA PRESENTE NO XML:
+
+-> Número total de produtos existentes no exercício:
+db.salesDetails.aggregate([
+	//formatação da data
+	{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},
+	//procura do exercicio relativo à venda (o exemplo que esta aqui vai ser substituido pelos parametros do REST)
+	{$match:{"Date.year":2011,"Date.month":5}},{$project:{Date:0}},
+	//cada linha de venda contém um produto e cada documento representa uma linha de venda
+	//logo, para obter numTotalProdutos no exercicio
+	{$group:{_id:null,numTotalProdutos:{$sum:"$Quantity"}}},{$project:{_id:0}}])
+
+-> Número total de produtos diferentes existentes no exercício:
+db.salesDetails.aggregate([
+	//formatação da data
+	{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},
+	//procura do exercicio relativo à venda
+	{$match:{"Date.year":2011,"Date.month":5}},{$project:{Date:0}},
+	//cada linha de venda contém um produto e cada documento representa uma linha de venda
+	//no entanto, estes stages tomam conta da possibilidade de repetiçao do ProductID
+	{$group:{_id:"$ProductID"}},{$count:"numTotalProdutosDiferentes"}])
+
+-> Número total de clientes diferentes existentes no exercício:
+db.salesDetails.aggregate([
+	//formatação da data
+	{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},
+	//procura do exercicio relativo à venda
+	{$match:{"Date.year":2011,"Date.month":5}},{$project:{Date:0}},
+	//numero de clientes
+	{$group:{_id:"$Customer"}},{$count:"numTotalClientes"}])
+
+-> Valor vendido por cada cliente. Ordenar o valor vendido por ordem decrescente:
+db.salesDetails.aggregate([
+	//formatação da data
+	{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},
+	//procura do exercicio relativo à venda
+	{$match:{"Date.year":2011,"Date.month":5}},{$project:{Date:0}},
+	//valor vendido em cada sale (SubTotal + TaxAmt)
+	{$group:{_id:"$ReceiptID",Customer:{$first:"$Customer"},SubTotal:{$first:"$SubTotal"},TaxAmt:{$first:"$TaxAmt"}}},
+	{$project:{"_id":1,"Customer":1,valorTotalVenda:{$add:["$SubTotal","$TaxAmt"]}}},
+	//valor vendido por cliente, ordem decrescente
+	{$group:{_id:"$Customer", valorVendido:{$sum:"$valorTotalVenda"}}},{$sort:{valorVendido:-1}}])
+
+-> Por produto, apresentar o total de unidades vendidas. Os resultados ordenados de forma descendente pelo número de unidades vendidas:
+db.salesDetails.aggregate([
+	//formatação da data
+	{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},
+	//procura do exercicio relativo à venda
+	{$match:{"Date.year":2011,"Date.month":5}},{$project:{Date:0}},
+	//quantidade vendida, por produto
+	{$group:{_id:"$ProductID", quantidadeVendida:{$sum:"$Quantity"}}},{$sort:{quantidadeVendida:-1}}])
+
+-> Valor total da venda por cada moeda utilizada (considere a moeda: USD para os valores: NULL):
+db.salesDetails.aggregate([
+	//formatação da data
+	{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},
+	//procura do exercicio relativo à venda
+	{$match:{"Date.year":2011,"Date.month":5}},{$project:{Date:0}},
+	//valor vendido em cada sale (SubTotal + TaxAmt)
+	{$group:{_id:"$ReceiptID",CurrencyRateID:{$first:"$CurrencyRateID"},SubTotal:{$first:"$SubTotal"},TaxAmt:{$first:"$TaxAmt"}}},
+	{$project:{"_id":1,"CurrencyRateID":1,valorTotalVenda:{$add:["$SubTotal","$TaxAmt"]}}},
+	//é retornado o CurrencyRateID, depois na API é feita a conversão para o Nome da moeda! (e resolvido o caso de ser NULL)
+	{$group:{_id:"$CurrencyRateID", valorTotalVenda:{$sum:"$valorTotalVenda"}}}])
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+QUERIES SOBRE INFORMAÇÃO ADICIONAL A SER ADICIONADA AO XML (possibilidade de ter em conta a data da venda relativa à auditoria no XML):
+
+//Como existem 342 lojas, o documento XML vai ter muitas linhas, 
+//logo decidiu-se que só será feita a procura dos documentos das lojas que pertencem ao Exercicio em questão.
+//(isso não está adicionado aqui, mas está na API)
+
+-> Total Produtos vendidos por cada Loja (todas):
+db.salesDetails.aggregate([
+	//agrupa todas as lojas com todos os produtos vendidos (ProductIDs)
+	{$group:{_id:{store:"$Store",product:"$ProductID"},Quantity:{$first:"$Quantity"}}},
+	//agrupa cada loja fazendo o somatório da quantidade de cada ProductID encontrado
+	{$group:{_id:"$_id.store",numProdutosVendidos:{$sum:"$Quantity"}}},{$sort:{"_id":1}}])
+
+-> Valor total das Vendas por cada Loja (subTotal + taxAmt) (todas):
+db.salesDetails.aggregate([
+	//agrupa todas as lojas com todas as vendas realizadas (ReceiptIDs) e os respetivos SubTotal e TaxAmount
+	{$group:{_id:{store:"$Store",sale:"$ReceiptID"},SubTotal:{$first:"$SubTotal"},TaxAmt:{$first:"$TaxAmt"}}},
+	//realiza o somatório do SubTotal e o TaxAmount para ficar com o ValorTotal da venda
+	{$project:{"_id":1,valorTotalVenda:{$add:["$SubTotal","$TaxAmt"]}}},
+	//agrupa cada loja fazendo o somatório do ValorTotal de cada venda
+	{$group:{_id:"$_id.store",valorTotalVendas:{$sum:"$valorTotalVenda"}}},{$sort:{"_id":1}}])
+
+-> Valor médio do preço de venda (UnitPrice) dos produtos por cada loja (todas):
+db.salesDetails.aggregate([
+	//agrupa todas as lojas com vendas realizadas respetivas, tal como a média do preço de venda (UnitPrice) dos produtos nessa venda
+	{$group:{_id:{store:"$Store",sale:"$ReceiptID"},mediaPrecoVendaProdutos:{$avg:"$UnitPrice"}}},
+	//Para cada loja, soma as médias dos preços de venda dos produtos de cada venda
+	{$group:{_id:"$_id.store",valorMedioPrecoVendaProdutos:{$sum:"$mediaPrecoVendaProdutos"}}},{$sort:{"_id":1}}])
+	
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+OUTRAS QUERIES:
+
+-> Retorna um counter de todas as vendas num determinado ano (ver o stage "$match")
+db.salesDetails.aggregate([{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"}}},{$match:{"Date.year":2013}},{$count:"numOfSales"}]).pretty()
+
+-> Counter com o número de Receipt Lines de cada venda, de cada loja:
+db.salesDetails.aggregate([{$group:{_id:{store:"$Store",sale:"$ReceiptID"},numReceiptLines:{$sum:1}}},{$sort:{"_id.store":1,"_id.sale":1}}]).pretty()
+
+-> Counter com o número total de Vendas de cada loja:
+db.salesDetails.aggregate([{$group:{_id:{store:"$Store",sale:"$ReceiptID"}}},{$group:{_id:"$_id.store",numSales:{$sum:1}}},{$sort:{"_id":1}}]).pretty()
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+QUERY PARA ATUALIZAR OS PRODUTOS COM LIST PRICE A ZERO:
+
+db.productdetails.find({ListPrice:0}).forEach(
+	function(product){
+		var productHistory = db.productlistpricehistory.find(
+			//encontra os documentos no Historico, ordena-os de forma decrescente relativamente
+			//à data de modificação e limita a seleção para o primeiro documento (o que possui a data maior)
+			//(a data de modificação chama-se "field5" porque os CSV estão mal estruturados...)
+				{ProductID:product.ProductID}).sort({field5:-1}).limit(1).next();
+		
+		if ( productHistory != null && productHistory.ListPrice > 0 ) {
+			product.ListPrice = productHistory.ListPrice;
+			print("ListPrice_Produto_" + product.ProductID + ":  " + product.ListPrice);
+			db.productdetails.save(product);
+						
+		} else if ( productHistory != null ){
+			//ListPrice encontrado no Histórico do produto é 0
+			print("Produto - " + product.ProductID + " - com ListPrice igual a " + product.ListPrice +
+				"\nAdicionado um campo sinalizando a necessidade de correção posterior.");
+			db.productdetails.updateOne(
+						{ProductID:product.ProductID},
+						{$set: {"updateListPrice":"ListPrice = 0, necessidade de correção."}});
+		} else {
+			//Quando o ProductID não existe no Histórico
+			print("Produto - " + product.ProductID + " - não existe no Histórico");
+		}
+	})

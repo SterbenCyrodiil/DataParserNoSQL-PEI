@@ -1,0 +1,41 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://localhost:9090/aggregateCollectionByQueryString?
+	DB=/* nome da database */&
+	collection=/* nome da collection */&
+	query=/* query a executar na procura */
+
+return: JSONarray com os documentos encontrados pela query inserida, utilizando o mongoDB aggregate().
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://localhost:9090/getCollectionField?
+	DB=/* nome da database */&
+	collection=/* nome da collection */&
+	field=/* exemplo: Store */&value=/* exemplo: 1032 */
+
+return: JSONarray com os documentos encontrados, utilizando o mongoDB find().
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://localhost:9090/isCollectionExistent?
+	DB=/* nome da database */&
+	collection=/* nome da collection */
+
+return: Verifica se a database e a collection existem na base de dados do mongoDB. (retorna true ou false)
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://localhost:9090/getStoreSaleByDate?
+	DB=/* nome da collection (por predefinição: bikestore) */&
+	collection=/* nome da collection (por predefinição: salesdetails) */&
+	store=/* exemplo: 1032 */&month=/* exemplo: 7 */&year=/* exemplo: 2011 */
+
+return: JSONarray com os documentos encontrados relativos aos dados introduzidos (uma Venda de uma Loja numa determinada data). 
+	Também cria um XML com a informação encontrada!
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://localhost:9090/validateXMLwithXSD?
+	xmlDirectory=/* diretoria onde se encontra o(s) ficheiro(s) XML 
+			(por predefinição: "XMLgerados_XSDschemas_XSLTtemplate/XMLgerados/") */&
+	xmlFile=/* nome do documento XML a ser validado 
+			(por predefinição, ao ser introduzido o nome "all", faz a validação de todos os documentos que se encontrem dentro da diretoria) */&
+	xsdFilePath=/* caminho para o ficheiro XSD que define o Schema para validação 
+			(por predifinição: "XMLgerados_XSDschemas_XSLTtemplate/SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd" */
+
+return: Devolve uma mensagem relativa ao sucesso, insucesso ou erros relativos à validação do documento
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

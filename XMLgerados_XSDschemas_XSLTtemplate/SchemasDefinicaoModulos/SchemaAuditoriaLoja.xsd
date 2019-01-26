@@ -30,7 +30,7 @@ serve para que os namespaces estejam mais corretamente definidos no XML referent
 
             <xs:element name="Venda" type="vnd:typeVenda"/>
 
-            <xs:element name="InformacaoAdicional" type="audinf:typeInformacaoAdicionalAuditorias"/>
+            <xs:element name="InformacaoAdicionalExercicio" type="audinf:typeInformacaoAdicional"/>
         </xs:sequence>
         <!-- 'use="required"' retirado devido a nao ser possivel especificar a data através do XSLT... -->
         <xs:attribute name="dataCriacao" type="xs:dateTime"/>

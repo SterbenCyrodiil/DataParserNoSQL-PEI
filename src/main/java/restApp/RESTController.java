@@ -37,7 +37,7 @@ public class RESTController {
             @RequestParam(value = "xmlDirectory", defaultValue = "XMLgerados_XSDschemas_XSLTtemplate/XMLgerados/") String xmlDir,
             @RequestParam(value = "xmlFile") String xml,
             @RequestParam(value = "xsdFilePath",
-                    defaultValue = "XMLgerados_XSDschemas_XSLTtemplate/SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd") String xsd) {
+                    defaultValue = "XMLgerados_XSDschemas_XSLTtemplate/SchemasDefinicaoModulos/DocumentoValidacao.xsd") String xsd) {
         MongoConnector mongo = new MongoConnector();
         return mongo.validateXMLwithXSD(xmlDir, xml, xsd);
     }

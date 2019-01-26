@@ -1,174 +1,376 @@
-<?xml version="1.0" encoding="utf-8"?>
-<aud:Auditoria xmlns:aud="ProjetoPEI/Grupo4/Entrega2/Auditoria" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="ProjetoPEI/Grupo4/Entrega2/Auditoria ../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Loja ../SchemasDefinicaoModulos/SchemaLoja.xsd ProjetoPEI/Grupo4/Entrega2/Venda ../SchemasDefinicaoModulos/SchemaVenda.xsd ProjetoPEI/Grupo4/EntregaFinal/Produto ../SchemasDefinicaoModulos/SchemaProduto.xsd">
-    <aud:Loja IDLoja="1032">
-        <loj:Nome xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja">Brakes and Gears</loj:Nome>
-    </aud:Loja>
-    <aud:Venda dataInicio="2011-07-01T00:00:00">
-        <aud:Moeda idTaxaCambio="0">USD</aud:Moeda>
-        <aud:DadosVenda IDVenda="43849">
-            <vnd:InformacaoAdicionalVenda xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda"/>
-            <vnd:SubTotal xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda">20544.7015</vnd:SubTotal>
-            <vnd:TaxaImposto xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda">1969.9765</vnd:TaxaImposto>
-            <vnd:Cliente xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda" IDCliente="29818"/>
-            <vnd:LinhasVenda xmlns:vnd="ProjetoPEI/Grupo4/Entrega2/Venda">
-                <vnd:DadosLinha IDLinha="535">
-                    <vnd:Produto IDProduto="776">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82B-42</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3374.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                        <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00
-                        </prd:dataFinalVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>2024.994</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>2</vnd:Quantidade>
-                    <vnd:TotalLinha>4049.988</vnd:TotalLinha>
-                </vnd:DadosLinha>
-                <vnd:DadosLinha IDLinha="536">
-                    <vnd:Produto IDProduto="714">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">LJ-0192-M</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">49.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Multi</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>28.8404</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>1</vnd:Quantidade>
-                    <vnd:TotalLinha>28.8404</vnd:TotalLinha>
-                </vnd:DadosLinha>
-                <vnd:DadosLinha IDLinha="537">
-                    <vnd:Produto IDProduto="777">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82B-44</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3374.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                        <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00
-                        </prd:dataFinalVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>2024.994</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>2</vnd:Quantidade>
-                    <vnd:TotalLinha>4049.988</vnd:TotalLinha>
-                </vnd:DadosLinha>
-                <vnd:DadosLinha IDLinha="538">
-                    <vnd:Produto IDProduto="771">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82S-38</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3399.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Silver</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                        <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00
-                        </prd:dataFinalVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>2039.994</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>2</vnd:Quantidade>
-                    <vnd:TotalLinha>4079.988</vnd:TotalLinha>
-                </vnd:DadosLinha>
-                <vnd:DadosLinha IDLinha="539">
-                    <vnd:Produto IDProduto="711">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL-U509-B</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">34.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Blue</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>20.1865</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>1</vnd:Quantidade>
-                    <vnd:TotalLinha>20.1865</vnd:TotalLinha>
-                </vnd:DadosLinha>
-                <vnd:DadosLinha IDLinha="540">
-                    <vnd:Produto IDProduto="773">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82S-44</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3399.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Silver</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                        <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00
-                        </prd:dataFinalVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>2039.994</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>1</vnd:Quantidade>
-                    <vnd:TotalLinha>2039.994</vnd:TotalLinha>
-                </vnd:DadosLinha>
-                <vnd:DadosLinha IDLinha="541">
-                    <vnd:Produto IDProduto="715">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">LJ-0192-L</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">49.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Multi</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>28.8404</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>4</vnd:Quantidade>
-                    <vnd:TotalLinha>115.3616</vnd:TotalLinha>
-                </vnd:DadosLinha>
-                <vnd:DadosLinha IDLinha="542">
-                    <vnd:Produto IDProduto="772">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82S-42</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3399.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Silver</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                        <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00
-                        </prd:dataFinalVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>2039.994</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>1</vnd:Quantidade>
-                    <vnd:TotalLinha>2039.994</vnd:TotalLinha>
-                </vnd:DadosLinha>
-                <vnd:DadosLinha IDLinha="543">
-                    <vnd:Produto IDProduto="707">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL-U509-R</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">34.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Red</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>20.1865</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>1</vnd:Quantidade>
-                    <vnd:TotalLinha>20.1865</vnd:TotalLinha>
-                </vnd:DadosLinha>
-                <vnd:DadosLinha IDLinha="544">
-                    <vnd:Produto IDProduto="774">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82S-48</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3399.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Silver</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                        <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00
-                        </prd:dataFinalVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>2039.994</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>2</vnd:Quantidade>
-                    <vnd:TotalLinha>4079.988</vnd:TotalLinha>
-                </vnd:DadosLinha>
-                <vnd:DadosLinha IDLinha="545">
-                    <vnd:Produto IDProduto="708">
-                        <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL-U509</prd:Codigo>
-                        <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">34.99</prd:PrecoEmLista>
-                        <prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
-                        <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
-                        <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00
-                        </prd:dataInicioVenda>
-                    </vnd:Produto>
-                    <vnd:PrecoPorUnidade>20.1865</vnd:PrecoPorUnidade>
-                    <vnd:Quantidade>1</vnd:Quantidade>
-                    <vnd:TotalLinha>20.1865</vnd:TotalLinha>
-                </vnd:DadosLinha>
-            </vnd:LinhasVenda>
-        </aud:DadosVenda>
-    </aud:Venda>
-    <aud:InformacaoAdicional/>
-</aud:Auditoria>
+<?xml version="1.0" encoding="utf-8"?><doc:Documento xmlns:doc="ProjetoPEI/Grupo4/EntregaFinal/Documento" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional ../SchemasInformacaoAdicional/InformacaoAdicional.xsd ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda ../SchemasInformacaoAdicional/InformacaoAdicionalVenda.xsd ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias ../SchemasInformacaoAdicional/InformacaoAdicionalAuditorias.xsd ProjetoPEI/Grupo4/EntregaFinal/Documento ../SchemasDefinicaoModulos/DocumentoValidacao.xsd ProjetoPEI/Grupo4/EntregaFinal/Auditoria ../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Loja ../SchemasDefinicaoModulos/SchemaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Venda ../SchemasDefinicaoModulos/SchemaVenda.xsd ProjetoPEI/Grupo4/EntregaFinal/Produto ../SchemasDefinicaoModulos/SchemaProduto.xsd">
+    <!-- XML gerado automaticamente utilizando a API e válido perante o vocabulário! -->
+<doc:Auditoria>
+<aud:Loja xmlns:aud="ProjetoPEI/Grupo4/EntregaFinal/Auditoria" IDLoja="852">
+<loj:Nome xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja">Original Bicycle Supply Company</loj:Nome>
+</aud:Loja>
+<aud:Venda xmlns:aud="ProjetoPEI/Grupo4/EntregaFinal/Auditoria" dataInicio="2011-05-31T00:00:00">
+<vnd:Moeda xmlns:vnd="ProjetoPEI/Grupo4/EntregaFinal/Venda" idTaxaCambio="4" dataTaxaCambio="2011-05-30T23:00:00">CAD</vnd:Moeda>
+<vnd:DadosVenda xmlns:vnd="ProjetoPEI/Grupo4/EntregaFinal/Venda" IDVenda="43661">
+<vnd:SubTotal>32726.4786</vnd:SubTotal>
+<vnd:TaxaImposto>3153.7696</vnd:TaxaImposto>
+<vnd:Cliente IDCliente="29734"/>
+<vnd:LinhasVenda>
+<vnd:DadosLinha IDLinha="15">
+<vnd:Produto IDProduto="745">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">FR-M94B-48</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">1349.6</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+<prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>809.76</vnd:PrecoPorUnidade>
+<vnd:Quantidade>1</vnd:Quantidade>
+<vnd:TotalLinha>809.76</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="16">
+<vnd:Produto IDProduto="743">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">FR-M94B-42</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">1349.6</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>714.7043</vnd:PrecoPorUnidade>
+<vnd:Quantidade>1</vnd:Quantidade>
+<vnd:TotalLinha>714.7043</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="17">
+<vnd:Produto IDProduto="747">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">FR-M94B-38</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">1349.6</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>714.7043</vnd:PrecoPorUnidade>
+<vnd:Quantidade>2</vnd:Quantidade>
+<vnd:TotalLinha>1429.4086</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="18">
+<vnd:Produto IDProduto="712">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">CA-1098</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">8.99</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Multi</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>5.1865</vnd:PrecoPorUnidade>
+<vnd:Quantidade>4</vnd:Quantidade>
+<vnd:TotalLinha>20.746</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="19">
+<vnd:Produto IDProduto="715">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">LJ-0192-L</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">49.99</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Multi</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>28.8404</vnd:PrecoPorUnidade>
+<vnd:Quantidade>4</vnd:Quantidade>
+<vnd:TotalLinha>115.3616</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="20">
+<vnd:Produto IDProduto="742">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">FR-M94S-46</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">1364.5</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Silver</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>722.5949</vnd:PrecoPorUnidade>
+<vnd:Quantidade>2</vnd:Quantidade>
+<vnd:TotalLinha>1445.1898</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="21">
+<vnd:Produto IDProduto="775">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82B-38</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3374.99</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+<prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>2024.994</vnd:PrecoPorUnidade>
+<vnd:Quantidade>3</vnd:Quantidade>
+<vnd:TotalLinha>6074.982</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="22">
+<vnd:Produto IDProduto="778">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82B-48</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3374.99</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+<prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>2024.994</vnd:PrecoPorUnidade>
+<vnd:Quantidade>2</vnd:Quantidade>
+<vnd:TotalLinha>4049.988</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="23">
+<vnd:Produto IDProduto="711">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL-U509-B</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">34.99</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Blue</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>20.1865</vnd:PrecoPorUnidade>
+<vnd:Quantidade>2</vnd:Quantidade>
+<vnd:TotalLinha>40.373</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="24">
+<vnd:Produto IDProduto="741">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">FR-M94S-52</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">1364.5</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Silver</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+<prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>818.7</vnd:PrecoPorUnidade>
+<vnd:Quantidade>2</vnd:Quantidade>
+<vnd:TotalLinha>1637.4</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="25">
+<vnd:Produto IDProduto="776">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82B-42</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3374.99</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+<prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>2024.994</vnd:PrecoPorUnidade>
+<vnd:Quantidade>4</vnd:Quantidade>
+<vnd:TotalLinha>8099.976</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="26">
+<vnd:Produto IDProduto="773">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82S-44</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3399.99</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Silver</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+<prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>2039.994</vnd:PrecoPorUnidade>
+<vnd:Quantidade>2</vnd:Quantidade>
+<vnd:TotalLinha>4079.988</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="27">
+<vnd:Produto IDProduto="716">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">LJ-0192-X</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">49.99</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Multi</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>28.8404</vnd:PrecoPorUnidade>
+<vnd:Quantidade>2</vnd:Quantidade>
+<vnd:TotalLinha>57.6808</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="28">
+<vnd:Produto IDProduto="777">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82B-44</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3374.99</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+<prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>2024.994</vnd:PrecoPorUnidade>
+<vnd:Quantidade>2</vnd:Quantidade>
+<vnd:TotalLinha>4049.988</vnd:TotalLinha>
+</vnd:DadosLinha>
+<vnd:DadosLinha IDLinha="29">
+<vnd:Produto IDProduto="708">
+<prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL-U509</prd:Codigo>
+<prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">34.99</prd:PrecoEmLista>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
+<prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
+</vnd:Produto>
+<vnd:PrecoPorUnidade>20.1865</vnd:PrecoPorUnidade>
+<vnd:Quantidade>5</vnd:Quantidade>
+<vnd:TotalLinha>100.9325</vnd:TotalLinha>
+</vnd:DadosLinha>
+</vnd:LinhasVenda>
+</vnd:DadosVenda>
+<vnd:InformacaoAdicionalVenda xmlns:vnd="ProjetoPEI/Grupo4/EntregaFinal/Venda">
+<ivnd:NumeroProdutos xmlns:ivnd="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda">
+<ivnd:Total>38</ivnd:Total>
+<ivnd:TotalDiferentes>15</ivnd:TotalDiferentes>
+</ivnd:NumeroProdutos>
+<ivnd:PrecoMedioVendaProdutos xmlns:ivnd="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda">934.9115866666667</ivnd:PrecoMedioVendaProdutos>
+</vnd:InformacaoAdicionalVenda>
+</aud:Venda>
+<aud:InformacaoAdicionalExercicio xmlns:aud="ProjetoPEI/Grupo4/EntregaFinal/Auditoria">
+<iexc:NumeroProdutos xmlns:iexc="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias">
+<iexc:Total>498</iexc:Total>
+<iexc:TotalDiferentes>45</iexc:TotalDiferentes>
+</iexc:NumeroProdutos>
+<iexc:NumeroTotalClientesDiferentes xmlns:iexc="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias">24</iexc:NumeroTotalClientesDiferentes>
+<iexc:ValorVendidoPorCliente xmlns:iexc="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias">
+<iexc:Cliente id="29825">22537.135499999997</iexc:Cliente>
+<iexc:Cliente id="29759">4247.5231</iexc:Cliente>
+<iexc:Cliente id="29614">39405.9216</iexc:Cliente>
+<iexc:Cliente id="29672">1418.5012</iexc:Cliente>
+<iexc:Cliente id="29497">46920.5822</iexc:Cliente>
+<iexc:Cliente id="29761">1441.8607</iexc:Cliente>
+<iexc:Cliente id="29580">15728.714</iexc:Cliente>
+<iexc:Cliente id="29596">2876.3227</iexc:Cliente>
+<iexc:Cliente id="29646">37268.8644</iexc:Cliente>
+<iexc:Cliente id="29734">35880.2482</iexc:Cliente>
+<iexc:Cliente id="29661">15110.610200000001</iexc:Cliente>
+<iexc:Cliente id="29747">785.2218</iexc:Cliente>
+<iexc:Cliente id="29606">3795.7765999999997</iexc:Cliente>
+<iexc:Cliente id="29489">12491.1386</iexc:Cliente>
+<iexc:Cliente id="29610">1379.1809</iexc:Cliente>
+<iexc:Cliente id="29566">6709.6423</iexc:Cliente>
+<iexc:Cliente id="29491">22510.963600000003</iexc:Cliente>
+<iexc:Cliente id="29811">15566.724</iexc:Cliente>
+<iexc:Cliente id="29533">1421.7928</iexc:Cliente>
+<iexc:Cliente id="29570">958.7742</iexc:Cliente>
+<iexc:Cliente id="29718">13940.9682</iexc:Cliente>
+<iexc:Cliente id="29824">8540.2119</iexc:Cliente>
+<iexc:Cliente id="29565">459.72700000000003</iexc:Cliente>
+<iexc:Cliente id="29549">22623.9597</iexc:Cliente>
+</iexc:ValorVendidoPorCliente>
+<iexc:TotalProdutosVendidos xmlns:iexc="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias">
+<iexc:Produto id="763">12</iexc:Produto>
+<iexc:Produto id="733">3</iexc:Produto>
+<iexc:Produto id="768">6</iexc:Produto>
+<iexc:Produto id="725">8</iexc:Produto>
+<iexc:Produto id="764">7</iexc:Produto>
+<iexc:Produto id="738">10</iexc:Produto>
+<iexc:Produto id="761">8</iexc:Produto>
+<iexc:Produto id="722">4</iexc:Produto>
+<iexc:Produto id="755">5</iexc:Produto>
+<iexc:Produto id="754">9</iexc:Produto>
+<iexc:Produto id="756">6</iexc:Produto>
+<iexc:Produto id="753">9</iexc:Produto>
+<iexc:Produto id="707">15</iexc:Produto>
+<iexc:Produto id="770">15</iexc:Produto>
+<iexc:Produto id="760">31</iexc:Produto>
+<iexc:Produto id="726">6</iexc:Produto>
+<iexc:Produto id="729">10</iexc:Produto>
+<iexc:Produto id="766">6</iexc:Produto>
+<iexc:Produto id="741">2</iexc:Produto>
+<iexc:Produto id="749">2</iexc:Produto>
+<iexc:Produto id="742">2</iexc:Produto>
+<iexc:Produto id="775">12</iexc:Produto>
+<iexc:Produto id="715">31</iexc:Produto>
+<iexc:Produto id="708">16</iexc:Produto>
+<iexc:Produto id="743">1</iexc:Produto>
+<iexc:Produto id="745">1</iexc:Produto>
+<iexc:Produto id="762">24</iexc:Produto>
+<iexc:Produto id="778">12</iexc:Produto>
+<iexc:Produto id="747">3</iexc:Produto>
+<iexc:Produto id="714">9</iexc:Produto>
+<iexc:Produto id="711">20</iexc:Produto>
+<iexc:Produto id="758">26</iexc:Produto>
+<iexc:Produto id="776">14</iexc:Produto>
+<iexc:Produto id="730">10</iexc:Produto>
+<iexc:Produto id="774">4</iexc:Produto>
+<iexc:Produto id="773">12</iexc:Produto>
+<iexc:Produto id="709">30</iexc:Produto>
+<iexc:Produto id="712">28</iexc:Produto>
+<iexc:Produto id="716">12</iexc:Produto>
+<iexc:Produto id="710">2</iexc:Produto>
+<iexc:Produto id="772">4</iexc:Produto>
+<iexc:Produto id="765">21</iexc:Produto>
+<iexc:Produto id="777">16</iexc:Produto>
+<iexc:Produto id="732">7</iexc:Produto>
+<iexc:Produto id="771">7</iexc:Produto>
+</iexc:TotalProdutosVendidos>
+<iexc:ValorTotalVendidoPorMoeda xmlns:iexc="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias">
+<iexc:Moeda codigo="CAD">88144.5651</iexc:Moeda>
+<iexc:Moeda codigo="USD">245875.8003</iexc:Moeda>
+</iexc:ValorTotalVendidoPorMoeda>
+</aud:InformacaoAdicionalExercicio>
+</doc:Auditoria>
+<doc:InformacaoAdicional>
+<inf:TotalProdutosVendidos xmlns:inf="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional">
+<inf:Loja id="302">30</inf:Loja>
+<inf:Loja id="306">23</inf:Loja>
+<inf:Loja id="318">38</inf:Loja>
+<inf:Loja id="392">6</inf:Loja>
+<inf:Loja id="440">23</inf:Loja>
+<inf:Loja id="484">1</inf:Loja>
+<inf:Loja id="488">6</inf:Loja>
+<inf:Loja id="496">1</inf:Loja>
+<inf:Loja id="518">20</inf:Loja>
+<inf:Loja id="552">3</inf:Loja>
+<inf:Loja id="574">5</inf:Loja>
+<inf:Loja id="584">3</inf:Loja>
+<inf:Loja id="592">93</inf:Loja>
+<inf:Loja id="662">66</inf:Loja>
+<inf:Loja id="698">44</inf:Loja>
+<inf:Loja id="722">2</inf:Loja>
+<inf:Loja id="820">20</inf:Loja>
+<inf:Loja id="852">38</inf:Loja>
+<inf:Loja id="880">1</inf:Loja>
+<inf:Loja id="904">8</inf:Loja>
+<inf:Loja id="908">5</inf:Loja>
+<inf:Loja id="1018">12</inf:Loja>
+<inf:Loja id="1044">24</inf:Loja>
+<inf:Loja id="1046">26</inf:Loja>
+</inf:TotalProdutosVendidos>
+<inf:ValorTotalVendas xmlns:inf="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional">
+<inf:Loja id="302">12491.1386</inf:Loja>
+<inf:Loja id="306">22510.963600000003</inf:Loja>
+<inf:Loja id="318">46920.5822</inf:Loja>
+<inf:Loja id="392">1421.7928</inf:Loja>
+<inf:Loja id="440">22623.9597</inf:Loja>
+<inf:Loja id="484">459.72700000000003</inf:Loja>
+<inf:Loja id="488">6709.6423</inf:Loja>
+<inf:Loja id="496">958.7742</inf:Loja>
+<inf:Loja id="518">15728.714</inf:Loja>
+<inf:Loja id="552">2876.3227</inf:Loja>
+<inf:Loja id="574">3795.7765999999997</inf:Loja>
+<inf:Loja id="584">1379.1809</inf:Loja>
+<inf:Loja id="592">39405.9216</inf:Loja>
+<inf:Loja id="662">37268.8644</inf:Loja>
+<inf:Loja id="698">15110.610200000001</inf:Loja>
+<inf:Loja id="722">1418.5012</inf:Loja>
+<inf:Loja id="820">13940.9682</inf:Loja>
+<inf:Loja id="852">35880.2482</inf:Loja>
+<inf:Loja id="880">785.2218</inf:Loja>
+<inf:Loja id="904">4247.5231</inf:Loja>
+<inf:Loja id="908">1441.8607</inf:Loja>
+<inf:Loja id="1018">15566.724</inf:Loja>
+<inf:Loja id="1044">8540.2119</inf:Loja>
+<inf:Loja id="1046">22537.135499999997</inf:Loja>
+</inf:ValorTotalVendas>
+<inf:ValorMedioPrecoVendaProdutos xmlns:inf="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional">
+<inf:Loja id="302">414.3619466666667</inf:Loja>
+<inf:Loja id="306">1228.48774</inf:Loja>
+<inf:Loja id="318">1101.5572615384615</inf:Loja>
+<inf:Loja id="392">218.236175</inf:Loja>
+<inf:Loja id="440">937.1269818181819</inf:Loja>
+<inf:Loja id="484">419.4589</inf:Loja>
+<inf:Loja id="488">1019.097</inf:Loja>
+<inf:Loja id="496">874.794</inf:Loja>
+<inf:Loja id="518">1022.0069899999999</inf:Loja>
+<inf:Loja id="552">874.794</inf:Loja>
+<inf:Loja id="574">571.2372666666666</inf:Loja>
+<inf:Loja id="584">419.4589</inf:Loja>
+<inf:Loja id="592">392.4222655172414</inf:Loja>
+<inf:Loja id="662">578.2499285714285</inf:Loja>
+<inf:Loja id="698">364.42209523809527</inf:Loja>
+<inf:Loja id="722">647.12645</inf:Loja>
+<inf:Loja id="820">594.5728818181818</inf:Loja>
+<inf:Loja id="852">934.9115866666667</inf:Loja>
+<inf:Loja id="880">714.7043</inf:Loja>
+<inf:Loja id="904">432.40222000000006</inf:Loja>
+<inf:Loja id="908">289.25273333333337</inf:Loja>
+<inf:Loja id="1018">1217.2764</inf:Loja>
+<inf:Loja id="1044">486.06030833333335</inf:Loja>
+<inf:Loja id="1046">1193.64265</inf:Loja>
+</inf:ValorMedioPrecoVendaProdutos>
+</doc:InformacaoAdicional>
+</doc:Documento>

@@ -16,6 +16,8 @@ Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: re
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0"
                 xmlns:doc="ProjetoPEI/Grupo4/EntregaFinal/Documento"
                 xmlns:inf="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"
+                xmlns:iexc="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"
+                xmlns:ivnd="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda"
                 xmlns:aud="ProjetoPEI/Grupo4/EntregaFinal/Auditoria"
                 xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja"
                 xmlns:vnd="ProjetoPEI/Grupo4/EntregaFinal/Venda"
@@ -30,7 +32,7 @@ Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: re
             <!-- Adição do atributo para a definição do 'schema instance' e os namespaces dos schemas para validação. -->
             <xsl:attribute name="xsi:schemaLocation">
                 <!-- O XSLT guarda os enters (&#10;), portanto não se pode usar o 'enter' na string abaixo ... -->
-                <xsl:text>ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional ../SchemasInformacaoAdicional/InformacaoAdicional.xsd ProjetoPEI/Grupo4/EntregaFinal/Documento ../SchemasDefinicaoModulos/DocumentoValidacao.xsd ProjetoPEI/Grupo4/EntregaFinal/Auditoria ../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Loja ../SchemasDefinicaoModulos/SchemaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Venda ../SchemasDefinicaoModulos/SchemaVenda.xsd ProjetoPEI/Grupo4/EntregaFinal/Produto ../SchemasDefinicaoModulos/SchemaProduto.xsd</xsl:text>
+                <xsl:text>ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional ../SchemasInformacaoAdicional/InformacaoAdicional.xsd ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda ../SchemasInformacaoAdicional/InformacaoAdicionalVenda.xsd ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias ../SchemasInformacaoAdicional/InformacaoAdicionalAuditorias.xsd ProjetoPEI/Grupo4/EntregaFinal/Documento ../SchemasDefinicaoModulos/DocumentoValidacao.xsd ProjetoPEI/Grupo4/EntregaFinal/Auditoria ../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Loja ../SchemasDefinicaoModulos/SchemaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Venda ../SchemasDefinicaoModulos/SchemaVenda.xsd ProjetoPEI/Grupo4/EntregaFinal/Produto ../SchemasDefinicaoModulos/SchemaProduto.xsd</xsl:text>
             </xsl:attribute>
 
             <xsl:element name="doc:Auditoria">
@@ -165,94 +167,90 @@ Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: re
                         </xsl:element>
                     </xsl:element>
 
-                    <xsl:element name="vnd:InformacaoAdicional">
+                    <xsl:element name="vnd:InformacaoAdicionalVenda">
                         <!-- Informações relativas à venda -->
-                        <!--
-                        <xsl:element name="vnd:NumeroProdutos">
-                            <xsl:element name="vnd:Total">
-                                <xsl:value-of select="/root/Informacao/Venda/Total/text()"/>
+                        <xsl:element name="ivnd:NumeroProdutos">
+                            <xsl:element name="ivnd:Total">
+                                <xsl:value-of select="/root/Informacao/TotalProdutosVenda/valor/text()"/>
                             </xsl:element>
-                            <xsl:element name="vnd:TotalDiferentes">
-                                <xsl:value-of select="/root/Informacao/Venda/TotalDiferentes/text()"/>
+                            <xsl:element name="ivnd:TotalDiferentes">
+                                <xsl:value-of select="/root/Informacao/TotalProdutosDiferentesVenda/valor/text()"/>
                             </xsl:element>
                         </xsl:element>
 
-                        <xsl:element name="vnd:PrecoMedioVendaProdutos">
-                            <xsl:value-of select="/root/Informacao/Venda/PrecoMedioVendaProdutos/text()"/>
+                        <xsl:element name="ivnd:PrecoMedioVendaProdutos">
+                            <xsl:value-of select="/root/Informacao/MediaPrecoVendaProdutosVenda/valor/text()"/>
                         </xsl:element>
-                        -->
                     </xsl:element>
                 </xsl:element>
 
-                <xsl:element name="aud:InformacaoAdicional">
-                    <!-- Informações relativas ao exercício -->
-                    <!--
-                    <xsl:element name="aud:NumeroProdutos">
-                        <xsl:element name="aud:Total">
-                            <xsl:value-of select="/root/Informacao/Exercicio/Total/text()"/>
+                <xsl:element name="aud:InformacaoAdicionalExercicio">
+                    <!-- Informações relativas ao exercício (auditorias) -->
+                    <xsl:element name="iexc:NumeroProdutos">
+                        <xsl:element name="iexc:Total">
+                            <xsl:value-of select="/root/Informacao/TotalProdutosExercicio/valor/text()"/>
                         </xsl:element>
-                        <xsl:element name="aud:TotalDiferentes">
-                            <xsl:value-of select="/root/Informacao/Exercicio/TotalDiferentes/text()"/>
+                        <xsl:element name="iexc:TotalDiferentes">
+                            <xsl:value-of select="/root/Informacao/TotalProdutosDiferentesExercicio/valor/text()"/>
                         </xsl:element>
                     </xsl:element>
 
-                    <xsl:element name="aud:NumeroTotalClientesDiferentes">
-                        <xsl:value-of select="/root/Informacao/Exercicio/TotalClientesDiferentes/text()"/>
+                    <xsl:element name="iexc:NumeroTotalClientesDiferentes">
+                        <xsl:value-of select="/root/Informacao/TotalClientesDiferentesExercicio/valor/text()"/>
                     </xsl:element>
 
-                    <xsl:element name="aud:ValorVendidoPorCliente">
-                        <xsl:for-each select="/root/Informacao/Exercicio/ValorVendidoCliente">
-                            <xsl:element name="aud:Cliente">
+                    <xsl:element name="iexc:ValorVendidoPorCliente">
+                        <xsl:for-each select="/root/Informacao/ValorVendidoClienteExercicio">
+                            <xsl:element name="iexc:Cliente">
                                 <xsl:attribute name="id">
-                                    <xsl:value-of select="IDCliente/text()"/>
+                                    <xsl:value-of select="_id/text()"/>
                                 </xsl:attribute>
-                                <xsl:value-of select="Valor/text()"/>
+                                <xsl:value-of select="valor/text()"/>
                             </xsl:element>
                         </xsl:for-each>
                     </xsl:element>
 
-                    <xsl:element name="aud:TotalProdutosVendidos">
-                        <xsl:for-each select="/root/Informacao/Exercicio/TotalVendidoProduto">
-                            <xsl:element name="aud:Produto">
+                    <xsl:element name="iexc:TotalProdutosVendidos">
+                        <xsl:for-each select="/root/Informacao/TotalUnidadesVendidasProdutoExercicio">
+                            <xsl:element name="iexc:Produto">
                                 <xsl:attribute name="id">
-                                    <xsl:value-of select="IDProduto/text()"/>
+                                    <xsl:value-of select="_id/text()"/>
                                 </xsl:attribute>
-                                <xsl:value-of select="Valor/text()"/>
+                                <xsl:value-of select="valor/text()"/>
                             </xsl:element>
                         </xsl:for-each>
                     </xsl:element>
 
-                    <!- Aqui é necessário ir ao CSV do currencyDetails para saber qual é a moeda, tendo em conta o
+                    <!-- Aqui é necessário ir ao CSV do currencyDetails para saber qual é a moeda, tendo em conta o
                      CurrencyRateID. Aqui está resolvido da mesma forma que se resolveu no CurrencyRateID relativo à
                      auditoria da loja que este XML vai representar. No entanto, o que foi feito na API, para esta situação,
                      foi colocar 3 elementos (CurrencyRateID, Identificação da moeda e o valor vendido pela moeda)
-                     no elemento <TotalVendidoMoeda>, assim é possível fazer a verificação do "NULL" aqui ->
-                    <xsl:element name="aud:ValorTotalVendidoPorMoeda">
-                        <xsl:for-each select="/root/Informacao/Exercicio/TotalVendidoMoeda">
-                            <xsl:element name="aud:Moeda">
+                     no elemento <TotalVendidoMoeda>, assim é possível fazer a verificação do "NULL" aqui -->
+                    <xsl:element name="iexc:ValorTotalVendidoPorMoeda">
+                        <xsl:for-each select="/root/Informacao/TotalVendaPorMoedaExercicio">
+                            <xsl:element name="iexc:Moeda">
                                 <xsl:attribute name="codigo">
                                     <xsl:choose>
-                                        <xsl:when test="contains(CurrencyRateID/text(),$checker)">
+                                        <xsl:when test="contains(CurrencyIDValorTotal/_id/text(),$checker)">
                                             <xsl:text>USD</xsl:text>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:value-of select="Moeda/text()"/>
+                                            <xsl:value-of select="DadosMoeda/ToCurrencyCode/text()"/>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:attribute>
-                                <xsl:value-of select="Valor/text()"/>
+                                <xsl:value-of select="CurrencyIDValorTotal/valor/text()"/>
                             </xsl:element>
                         </xsl:for-each>
                     </xsl:element>
-                    -->
                 </xsl:element>
             </xsl:element>
 
-            <xsl:element name="inf:InformacaoAdicional">
+            <xsl:element name="doc:InformacaoAdicional">
                 <!-- Informações adicionais relativas às lojas, no exercicio -->
-                <xsl:element name="doc:TotalProdutosVendidos">
+                <xsl:element name="inf:TotalProdutosVendidos">
                     <xsl:for-each select="/root/Informacao/TotalProdutosVendidosPorLoja">
-                        <xsl:element name="doc:Loja">
+                        <xsl:element name="inf:Loja">
                             <xsl:attribute name="id">
                                 <xsl:value-of select="_id/text()"/>
                             </xsl:attribute>
@@ -262,8 +260,8 @@ Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: re
                 </xsl:element>
 
                 <xsl:element name="inf:ValorTotalVendas">
-                    <xsl:for-each select="/root/Informacao/ValorTotalVendas">
-                        <xsl:element name="doc:Loja">
+                    <xsl:for-each select="/root/Informacao/ValorTotalVendasPorLoja">
+                        <xsl:element name="inf:Loja">
                             <xsl:attribute name="id">
                                 <xsl:value-of select="_id/text()"/>
                             </xsl:attribute>
@@ -273,8 +271,8 @@ Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: re
                 </xsl:element>
 
                 <xsl:element name="inf:ValorMedioPrecoVendaProdutos">
-                    <xsl:for-each select="/root/Informacao/ValorMedioPrecoVendaProdutos">
-                        <xsl:element name="doc:Loja">
+                    <xsl:for-each select="/root/Informacao/MediaPrecoVendaProdutosPorLoja">
+                        <xsl:element name="inf:Loja">
                             <xsl:attribute name="id">
                                 <xsl:value-of select="_id/text()"/>
                             </xsl:attribute>

@@ -11,7 +11,7 @@ foram transferidas para XSD particulares, para facilitar o uso do vocabulário.
 
            elementFormDefault="qualified">
     
-    <xs:complexType name="typeInformacaoAdicionalVenda">
+    <xs:complexType name="typeInformacaoAdicional">
         <xs:all>
 
             <!-- Novos campos adicionados relativos ao enunciado da segunda entrega
