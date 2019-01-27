@@ -173,9 +173,9 @@ public class MongoConnector {
             Quando a CurrencyRateID == "NULL" (String) significa que não há taxa de câmbio e a moeda utilizada
             é o USD (isso é resolvido no XSLT, logo quando acontece simplesmente não adiciona os dados à xml String)
             */
-            if (!(json.get("CurrencyRateID") instanceof String)) {
+            if (json.get("CurrencyRateID") instanceof String) {
+            } else
                 xmlTotal.append(this.getXmlDadosMoedaRelativosCurrencyRateID(collection, json.getInt("CurrencyRateID")));
-            }
 
             //adiciona à xml String os elementos XML com os dados relativos às informações adicionais sobre as lojas
             xmlTotal.append(this.getXmlDadosInformacaoAdicional(collection, queryFormatacaoData, queryBuscaAuditoria));
@@ -185,8 +185,12 @@ public class MongoConnector {
             System.out.println("\n\nXML_TOTAL: " + xmlTotal.toString());
             //invocação da classe responsável por aplicar o XSL (ter atenção às diretorias dos ficheiros!)
             String filesDir = "XMLgerados_XSDschemas_XSLTtemplate/";
-            String xmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTparaDefinicaoXML.xsl",
+            String namespaceXmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTdefinicaoNamespaceXML.xsl",
                     filesDir + "XMLgerados/", "XMLauditoria");
+            String indexingXmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTdefinicaoXMLIndexacaoApacheSolr.xsl",
+                    filesDir + "XMLgerados/SolrIndexing/", "XMLauditoriaIndexing");
+            System.out.println("\nFICHEIROS_CRIADOS:\n-> namespaceXML: " + namespaceXmlName + " | dir: " + filesDir + "XMLgerados/ \n" +
+                    "\n-> indexingXML: " + indexingXmlName + " | dir: " + filesDir + "XMLgerados/SolrIndexing/ \n");
         }
     }
 
@@ -513,9 +517,9 @@ public class MongoConnector {
             xmlInformacoesExercicio.append("<TotalVendaPorMoedaExercicio>");
             xmlInformacoesExercicio.append(XML.toString(obj, "CurrencyIDValorTotal").replace("$", ""));
             //Verificar se o CurrencyRateID é "NULL" e no contrário procurar pela Moeda correspondente
-            if (!(obj.get("_id") instanceof String)) {
+            if (obj.get("_id") instanceof String) {
+            } else
                 xmlInformacoesExercicio.append(this.getXmlDadosMoedaRelativosCurrencyRateID(collection, obj.getInt("_id")));
-            }
             xmlInformacoesExercicio.append("</TotalVendaPorMoedaExercicio>");
         }
 

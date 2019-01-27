@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?><doc:Documento xmlns:doc="ProjetoPEI/Grupo4/EntregaFinal/Documento" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional ../SchemasInformacaoAdicional/InformacaoAdicional.xsd ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda ../SchemasInformacaoAdicional/InformacaoAdicionalVenda.xsd ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias ../SchemasInformacaoAdicional/InformacaoAdicionalAuditorias.xsd ProjetoPEI/Grupo4/EntregaFinal/Documento ../SchemasDefinicaoModulos/DocumentoValidacao.xsd ProjetoPEI/Grupo4/EntregaFinal/Auditoria ../SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Loja ../SchemasDefinicaoModulos/SchemaLoja.xsd ProjetoPEI/Grupo4/EntregaFinal/Venda ../SchemasDefinicaoModulos/SchemaVenda.xsd ProjetoPEI/Grupo4/EntregaFinal/Produto ../SchemasDefinicaoModulos/SchemaProduto.xsd">
-    <!-- XML gerado automaticamente utilizando a API e válido perante o vocabulário! -->
 <doc:Auditoria>
 <aud:Loja xmlns:aud="ProjetoPEI/Grupo4/EntregaFinal/Auditoria" IDLoja="852">
 <loj:Nome xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja">Original Bicycle Supply Company</loj:Nome>
@@ -15,7 +14,7 @@
 <vnd:Produto IDProduto="745">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">FR-M94B-48</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">1349.6</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL Mountain Frame - Black. 48</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
@@ -28,7 +27,7 @@
 <vnd:Produto IDProduto="743">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">FR-M94B-42</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">1349.6</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL Mountain Frame - Black. 42</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 </vnd:Produto>
@@ -40,7 +39,7 @@
 <vnd:Produto IDProduto="747">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">FR-M94B-38</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">1349.6</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL Mountain Frame - Black. 38</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 </vnd:Produto>
@@ -52,7 +51,7 @@
 <vnd:Produto IDProduto="712">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">CA-1098</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">8.99</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">AWC Logo Cap</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Multi</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 </vnd:Produto>
@@ -64,7 +63,7 @@
 <vnd:Produto IDProduto="715">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">LJ-0192-L</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">49.99</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Long-Sleeve Logo Jersey. L</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Multi</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 </vnd:Produto>
@@ -76,7 +75,7 @@
 <vnd:Produto IDProduto="742">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">FR-M94S-46</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">1364.5</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL Mountain Frame - Silver. 46</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Silver</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 </vnd:Produto>
@@ -88,7 +87,7 @@
 <vnd:Produto IDProduto="775">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82B-38</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3374.99</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Mountain-100 Black. 38</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
@@ -101,7 +100,7 @@
 <vnd:Produto IDProduto="778">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82B-48</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3374.99</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Mountain-100 Black. 48</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
@@ -114,7 +113,7 @@
 <vnd:Produto IDProduto="711">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL-U509-B</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">34.99</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Sport-100 Helmet. Blue</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Blue</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 </vnd:Produto>
@@ -126,7 +125,7 @@
 <vnd:Produto IDProduto="741">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">FR-M94S-52</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">1364.5</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL Mountain Frame - Silver. 48</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Silver</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
@@ -139,7 +138,7 @@
 <vnd:Produto IDProduto="776">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82B-42</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3374.99</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Mountain-100 Black. 42</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
@@ -152,7 +151,7 @@
 <vnd:Produto IDProduto="773">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82S-44</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3399.99</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Mountain-100 Silver. 44</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Silver</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
@@ -165,7 +164,7 @@
 <vnd:Produto IDProduto="716">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">LJ-0192-X</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">49.99</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Long-Sleeve Logo Jersey. XL</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Multi</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 </vnd:Produto>
@@ -177,7 +176,7 @@
 <vnd:Produto IDProduto="777">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">BK-M82B-44</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">3374.99</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Mountain-100 Black. 44</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 <prd:dataFinalVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2012-05-28T23:00:00</prd:dataFinalVenda>
@@ -190,7 +189,7 @@
 <vnd:Produto IDProduto="708">
 <prd:Codigo xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">HL-U509</prd:Codigo>
 <prd:PrecoEmLista xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">34.99</prd:PrecoEmLista>
-<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:Nome>
+<prd:Nome xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Sport-100 Helmet. Black</prd:Nome>
 <prd:Cor xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">Black</prd:Cor>
 <prd:dataInicioVenda xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto">2011-05-30T23:00:00</prd:dataInicioVenda>
 </vnd:Produto>

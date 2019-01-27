@@ -4,7 +4,8 @@ Definição dos tipos referentes a um Produto.
 (Nota: Alguns campos dos produtos encontram-se opcionais, simplesmente para
 facilitar a introdução de dados em XML)
 
-ALTERAÇÃO PARA ENTREGA FINAL: O tipo da cor foi alterado para String.
+ALTERAÇÃO PARA ENTREGA FINAL: O tipo da cor foi alterado para String. Os únicos elementos opcionais agora são a cor
+e as datas de venda, uma vez que podem não existir na informação dos CSV.
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -37,7 +38,7 @@ ALTERAÇÃO PARA ENTREGA FINAL: O tipo da cor foi alterado para String.
             <xs:element name="Codigo" type="typeCodigoProduto"/>
             <xs:element name="PrecoEmLista" type="xs:decimal"/>
             <xs:element name="Nome" type="xs:string"/>
-            <xs:element name="Cor" type="xs:string"/>
+            <xs:element name="Cor" type="xs:string" minOccurs="0"/>
             <xs:element name="dataInicioVenda" type="xs:dateTime" minOccurs="0"/>
             <xs:element name="dataFinalVenda" type="xs:dateTime" minOccurs="0"/>
         </xs:sequence>

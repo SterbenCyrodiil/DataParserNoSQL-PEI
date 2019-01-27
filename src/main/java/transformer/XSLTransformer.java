@@ -63,7 +63,6 @@ public class XSLTransformer {
                 if (ficheiros[i].getName().contains(xmlName + count))
                     count++;
             }
-            System.out.println("\nCOUNT_NUMERO_FICHEIRO: " + count + "\n");
             String xmlFinal = "" + xmlName + count + ".xml";
             StreamResult result = new StreamResult(new File(xmlOutputDir + xmlFinal));
             transformer.transform(source, result);

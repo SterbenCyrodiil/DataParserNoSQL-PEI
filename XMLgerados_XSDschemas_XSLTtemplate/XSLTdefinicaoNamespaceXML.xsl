@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-Este Stylesheet vai no fundo definir uma template definitiva para os XML, com base na xml String que vai ser criada
-na API (com o uso da API 'org.json.XML').
+Este Stylesheet vai no fundo definir uma template definitiva, com namespaces, para os XML a serem gerados, para que
+seja dessa forma possível fazer a validação com o vocabulário definido.
+Isto é feito com base na xml String que vai ser criada na API (com o uso da API 'org.json.XML').
 
-Ainda vai ser adicionada mais informação nos produtos, moeda e as informações adicionais ...
-(NOTA: isto já está resolvido, basicamente o que eu fiz foi juntar a informação dos 3 CSV na mesma XML String
+(NOTA: A abordagem seguida para aceder aos dados foi juntar toda a informação dos 3 CSV na mesma XML String
 podendo asseder-se ao conteúdo específico através do uso do elemento relativo (para usar os dados dos produtos -
 "/DadosProdutos/<elemento>/text()" e das moedas "/DadosMoeda..." e a informação contida na venda "DadosVenda" -
 isto só é possivel utilizando a <xsl:template> no elemento "/root", como se pode ver abaixo...)
 
-EU ESTOU COMPLETAMENTE CONFUSO, nao percebo nada de como vamos fazer isto. Por exemplo, a pesquisa da loja
-naquele mês devolve vários JSON com as várias linhas de venda, mas com várias, outras, coisas repetidas...
-Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: resolvido, ver a alteração da query!)
+(NOTA: resolvido, a nova alteração na query junta todas as receipt lines num documento embutido!)
+*comentário_resolvido*: EU ESTOU COMPLETAMENTE CONFUSO, nao percebo nada de como vamos fazer isto. Por exemplo, a pesquisa
+da loja naquele mês devolve vários JSON com as várias linhas de venda, mas com várias, outras, coisas repetidas...
+Não sei como se vai traduzir isso para um só XSLT, porque se for para dividir isso tudo em vários XSLTs vai ser uma
+complexidade desgraçada na API depois...
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                version="1.0"
                 xmlns:doc="ProjetoPEI/Grupo4/EntregaFinal/Documento"
                 xmlns:inf="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"
                 xmlns:iexc="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"
@@ -38,9 +41,8 @@ Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: re
             <xsl:element name="doc:Auditoria">
                 <!-- Ainda nao sei como vamos adicionar o atributo da data de criação do documento... -->
                 <xsl:element name="aud:Loja">
-                    <!-- com os dados disponibilizados pelos profs, so temos o id e nome da loja... o resto que está
-                    nos schemas que foi adicionado é completamente useless... [NOTA: eu ja corrigi isto, basicamente
-                    algumas coisas ficaram com o minOccurs="0"... -->
+                    <!-- com os dados disponibilizados pelos profs, so temos o id e nome da loja...
+                    [NOTA: ja está corrigido, basicamente algumas coisas ficaram com o minOccurs="0"... -->
                     <xsl:attribute name="IDLoja">
                         <xsl:value-of select="/root/DadosVenda/Store/text()"/>
                     </xsl:attribute>
@@ -102,9 +104,8 @@ Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: re
 
                         <xsl:element name="vnd:LinhasVenda">
                             <xsl:for-each select="/root/DadosVenda/ReceiptLines">
-                                <!--
-                                Variável que possibilita aceder a filhos deste for-each dentro de outro for-each aninhado
-                                -->
+                                <!-- Variável que possibilita aceder a filhos deste for-each dentro de outro for-each
+                                aninhado (neste caso o for-each para encontrar o produto relacionado) -->
                                 <xsl:variable name="nestedCicleParent" select="."/>
 
                                 <xsl:element name="vnd:DadosLinha">
@@ -120,7 +121,8 @@ Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: re
                                         -->
                                         <xsl:for-each select="//DadosProdutos/DadosProduto">
                                             <!-- Procura pela ocorrencia do ProductID da venda na informação sobre os
-                                             produtos dentro do elemento <DadosProdutos> no XML -->
+                                             produtos dentro do elemento <DadosProdutos> no XML (esta abordagem é feia,
+                                             mas não tenho mais ideias nesta altura) -->
                                             <xsl:if test="contains($nestedCicleParent/ProductID/text(),ProductID/text())">
                                                 <xsl:attribute name="IDProduto">
                                                     <xsl:value-of select="ProductID/text()"/>
@@ -133,12 +135,14 @@ Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: re
                                                     <xsl:value-of select="ListPrice/text()"/>
                                                 </xsl:element>
                                                 <xsl:element name="prd:Nome">
-                                                    <xsl:value-of select="SellStartDate/text()"/>
+                                                    <xsl:value-of select="Name/text()"/>
                                                 </xsl:element>
-                                                <xsl:element name="prd:Cor">
-                                                    <xsl:value-of select="Color/text()"/>
-                                                </xsl:element>
-                                                <!-- Adiciona a data só quando não se encontra a 'NULL' -->
+                                                <!-- Adiciona a cor ou a data só quando não se encontram a 'NULL' -->
+                                                <xsl:if test="not(contains(Color/text(),$checker))">
+                                                    <xsl:element name="prd:Cor">
+                                                        <xsl:value-of select="Color/text()"/>
+                                                    </xsl:element>
+                                                </xsl:if>
                                                 <xsl:if test="not(contains(SellStartDate/text(),$checker))">
                                                     <xsl:element name="prd:dataInicioVenda">
                                                         <xsl:value-of select="SellStartDate/text()"/>
@@ -222,10 +226,10 @@ Não sei como se vai traduzir isso para o XSLT que vai fazer os XML... (NOTA: re
                     </xsl:element>
 
                     <!-- Aqui é necessário ir ao CSV do currencyDetails para saber qual é a moeda, tendo em conta o
-                     CurrencyRateID. Aqui está resolvido da mesma forma que se resolveu no CurrencyRateID relativo à
+                     CurrencyRateID. Está resolvido da mesma forma que se resolveu no CurrencyRateID relativo à
                      auditoria da loja que este XML vai representar. No entanto, o que foi feito na API, para esta situação,
                      foi colocar 3 elementos (CurrencyRateID, Identificação da moeda e o valor vendido pela moeda)
-                     no elemento <TotalVendidoMoeda>, assim é possível fazer a verificação do "NULL" aqui -->
+                     no elemento <TotalVendaPorMoedaExercicio>, assim é possível fazer a verificação do "NULL" aqui -->
                     <xsl:element name="iexc:ValorTotalVendidoPorMoeda">
                         <xsl:for-each select="/root/Informacao/TotalVendaPorMoedaExercicio">
                             <xsl:element name="iexc:Moeda">
