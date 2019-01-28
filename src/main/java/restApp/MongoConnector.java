@@ -50,10 +50,12 @@ public class MongoConnector {
      * Procura na base de dados a existência da Venda relativa a uma loja e uma determinada data.
      * Também realiza a transformação dessa informação (em JSON) para XML.
      *
+     * @param databaseName base de dados mongoDB introduzida pelo REST
+     * @param collectionName mongoDB collection introduzida pelo REST
      * @param storeField ID da loja a ser encontrada
      * @param saleMonth  mês referente à data (integer)
      * @param saleYear   ano referente à data (integer)
-     * @return
+     * @return JSONArray (String) com os resultados
      */
     public String getSaleDetails(String databaseName, String collectionName, String storeField, String saleMonth, String saleYear) {
         /*
@@ -138,7 +140,7 @@ public class MongoConnector {
      * relativa às pesquisas sobre a informação adicional a ser introduzida.
      * <p>
      * Isto é, estará tudo organizado em diferentes elementos complexos relativos a cada parte referida
-     * anteriormente, descendentes de um elemento pai "<root></root>".
+     * anteriormente, descendentes de um elemento pai "/root".
      * <p>
      * Seguiu-se esta abordagem devido à facilidade que proporciona na formação da template no documento XSLT para a
      * transformação do XML a ser gerado.
@@ -232,7 +234,7 @@ public class MongoConnector {
      * <p>
      * De seguida, realiza o parse desses documentos para uma xml String com o formato:
      * <p>
-     * "<DadosProdutos><DadosProduto>...</DadosProduto><DadosProduto>...</DadosProduto>...</DadosProdutos>"
+     * "/DadosProdutos/DadosProduto/fields..."
      * <p>
      * São formatadas tambem as datas contidas nesses JSONObjects (através do uso do método "dataFormat")!
      *
@@ -274,7 +276,7 @@ public class MongoConnector {
      * <p>
      * De seguida, realiza o parse desse documento para uma xml String com o formato:
      * <p>
-     * "<DadosMoeda>...</DadosMoeda>"
+     * "/DadosMoeda/fields..."
      * <p>
      * É também formatada a data que se encontra no documento retornado na procura (através do uso do método "dataFormat")!
      *
@@ -307,7 +309,7 @@ public class MongoConnector {
      * Resumidamente, o processo baseia-se na abordagem já seguida. Vão ser criados mais elementos, com através da
      * transformação dos documentos retornados em JSON para elementos XML, com a estrutura:
      * <p>
-     * "<Informacao><nomeDaInformacao>...</nomeDaInformacao>...</Informacao>"
+     * "/Informacao/nomeDaInformacao/fields..."
      * <p>
      * , e serão adicionados posteriormente à xml String a ser utilizada pelo XSLT para a produção automática dos
      * XML das auditorias.
@@ -653,7 +655,7 @@ public class MongoConnector {
      * @param filesDir diretoria com o(s) ficheiro(os) XML
      * @param xmlName  nome do documento XML a verificar ("all" para validar tudo)
      * @param xsdPath  caminho para o XSD a ser utilizado para a validação
-     * @return
+     * @return String com a mensagem de validação
      */
     public String validateXMLwithXSD(String filesDir, String xmlName, String xsdPath) {
         final String valido = "INFO: XML - %s - validado com sucesso!\n";

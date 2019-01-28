@@ -73,6 +73,7 @@ public class XMLvalidator {
      * @param xml Documento XML a processar
      * @param xsd Documento XSD a processar
      * @return valor booleano sinalizando sucesso/insucesso da operação
+     * @throws java.io.IOException exceção relativa à manipulação e existência dos ficheiros introduzidos
      */
     public static boolean validate(File xml, File xsd) throws IOException {
         Source schemaFile = new StreamSource(xsd), xmlFile = new StreamSource(xml);
@@ -95,7 +96,8 @@ public class XMLvalidator {
      * seu schema também previamente definido. Sem a existência de um xsd
      * retorna "true"
      *
-     * @return
+     * @return true se validado, false no contrário
+     * @throws java.io.IOException exceção relativa à manipulação e existência dos ficheiros introduzidos
      */
     public boolean validate() throws IOException {
         return xsdFile == null || xsdFile.isEmpty() ? true : XMLvalidator.validate(new File(xmlFile), new File(xsdFile));

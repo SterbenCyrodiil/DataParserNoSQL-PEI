@@ -27,7 +27,7 @@ http://localhost:9090/getStoreSaleByDate?
 return: JSONarray com os documentos encontrados relativos aos dados introduzidos (uma Venda de uma Loja numa determinada data). 
 	Também cria um XML com a informação encontrada!
 
-(copy-paste) http://localhost:9090/getStoreSaleByDate?DB=bikeOnTrack&collection=salesDetails&store=1032&month=7&year=2011
+(copy-paste) http://localhost:9090/getStoreSaleByDate?DB=bikeOnTrackDB&collection=salesDetails&store=1032&month=7&year=2011
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 http://localhost:9090/validateXMLwithXSD?
 	xmlDirectory=/* diretoria onde se encontra o(s) ficheiro(s) XML 
