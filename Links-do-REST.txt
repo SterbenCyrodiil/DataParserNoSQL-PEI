@@ -20,13 +20,14 @@ http://localhost:9090/isCollectionExistent?
 return: Verifica se a database e a collection existem na base de dados do mongoDB. (retorna true ou false)
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 http://localhost:9090/getStoreSaleByDate?
-	DB=/* nome da collection (por predefinição: bikestore) */&
+	DB=/* nome da database (por predefinição: bikestore) */&
 	collection=/* nome da collection (por predefinição: salesdetails) */&
 	store=/* exemplo: 1032 */&month=/* exemplo: 7 */&year=/* exemplo: 2011 */
 
 return: JSONarray com os documentos encontrados relativos aos dados introduzidos (uma Venda de uma Loja numa determinada data). 
 	Também cria um XML com a informação encontrada!
 
+(copy-paste) http://localhost:9090/getStoreSaleByDate?DB=bikeOnTrack&collection=salesDetails&store=1032&month=7&year=2011
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 http://localhost:9090/validateXMLwithXSD?
 	xmlDirectory=/* diretoria onde se encontra o(s) ficheiro(s) XML 

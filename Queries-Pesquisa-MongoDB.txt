@@ -44,6 +44,8 @@ db.salesDetails.aggregate([
 
 (COPY-PASTE para o mongo):
 db.salesDetails.aggregate([{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},{$match:{Store:852,"Date.year":2011,"Date.month":5}},{$project:{Date:0}},{$group:{_id:null,ReceiptID:{$first:"$ReceiptID"}, OrderDate:{$first:"$OrderDate"},Customer:{$first:"$Customer"},CurrencyRateID:{$first:"$CurrencyRateID"},SubTotal:{$first:"$SubTotal"},TaxAmt:{$first:"$TaxAmt"},Store:{$first:"$Store"},StoreName:{$first:"$StoreName"},ReceiptLines:{$push:{ReceiptLineID:"$ReceiptLineID",Quantity:"$Quantity",ProductID:"$ProductID",UnitPrice:"$UnitPrice",LineTotal:"$LineTotal"}}}}]).pretty()
+//ids lojas numa data
+db.salesDetails.aggregate([{$addFields:{OrderDate:{$dateFromString:{dateString:"$OrderDate"}}}},{$addFields:{"Date.year":{$year:"$OrderDate"},"Date.month":{$month:"$OrderDate"},"Date.day":{$dayOfMonth:"$OrderDate"}}},{$match:{"Date.year":2011,"Date.month":5}},{$project:{Date:0}},{$group:{_id:"$Store"}}])
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 QUERIES SOBRE INFORMAÇÃO RELATIVA À VENDA PRESENTE NO XML:
