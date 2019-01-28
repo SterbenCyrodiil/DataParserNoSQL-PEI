@@ -164,33 +164,17 @@
                         <xsl:attribute name="name">
                             <xsl:text>precoPorUnidade</xsl:text>
                         </xsl:attribute>
-                        <xsl:attribute name="multiValued">
-                            <xsl:text>false</xsl:text>
-                        </xsl:attribute>
-                        <xsl:attribute name="type">
-                            <xsl:text>float</xsl:text>
-                        </xsl:attribute>
                         <xsl:value-of select="UnitPrice/text()"/>
                     </xsl:element>
                     <xsl:element name="field">
                         <xsl:attribute name="name">
                             <xsl:text>quantidadeProduto</xsl:text>
                         </xsl:attribute>
-                        <xsl:attribute name="multiValued">
-                            <xsl:text>false</xsl:text>
-                        </xsl:attribute>
-
                         <xsl:value-of select="Quantity/text()"/>
                     </xsl:element>
                     <xsl:element name="field">
                         <xsl:attribute name="name">
                             <xsl:text>totalLinha</xsl:text>
-                        </xsl:attribute>
-                        <xsl:attribute name="multiValued">
-                            <xsl:text>false</xsl:text>
-                        </xsl:attribute>
-                        <xsl:attribute name="type">
-                            <xsl:text>float</xsl:text>
                         </xsl:attribute>
                         <xsl:value-of select="LineTotal/text()"/>
                     </xsl:element>
