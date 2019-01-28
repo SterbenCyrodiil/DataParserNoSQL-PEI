@@ -3,6 +3,7 @@ package restApp;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import solr.SolrConnector;
 
 /**
  * Building a RESTful Web Service retrieved from:
@@ -73,5 +74,12 @@ public class RESTController {
         //para [{$group:{"_id":null,count:{$sum:1}}}] -> utilizar: https://meyerweb.com/eric/tools/dencoder/
         MongoConnector mongo = new MongoConnector();
         return mongo.aggregateDataByQueryString(db, clct, query);
+    }
+
+    @RequestMapping("/solrBasicQuery")
+    public String solrBasicQuery(@RequestParam(value="field", defaultValue = "*") String field,
+                                @RequestParam(value="searchValue", defaultValue = "*") String searchValue){
+        SolrConnector solr = new SolrConnector();
+        return solr.simpleQuery(field, searchValue);
     }
 }

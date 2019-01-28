@@ -37,7 +37,14 @@ public class SolrConnector {
      */
     public void addDocument(File xml){
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process process = runtime.exec("java -Dc=\"xmlteste\" -jar post.jar "+xml);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+       /* DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
         Document doc = null;
 
@@ -54,9 +61,10 @@ public class SolrConnector {
 
         Element root = doc.getDocumentElement();
         String content = root.toString();
+        System.out.println(content);
 
         //O que aqui faz é pedir e receber o XML para o requesthandler
-        DirectXmlRequest xmlRequest = new DirectXmlRequest("/update", content);
+        DirectXmlRequest xmlRequest = new DirectXmlRequest("/update", xml.toString());
         ModifiableSolrParams params = new ModifiableSolrParams();
         //Aqui define os parâmetros que irá executar para o datahandler
         params.set("command", "full-import");
@@ -70,7 +78,7 @@ public class SolrConnector {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+ */
     }
 
     public String simpleQuery(String item, String value){
@@ -110,10 +118,15 @@ public class SolrConnector {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         documents = response.getResults();
         return documents.toString();
 
 
+    }
+
+    public String facetsQuery(QueryResponse response){
+       return response.getFacetFields().toString();
     }
 
     private long numberDocumetns(SolrDocumentList doc){

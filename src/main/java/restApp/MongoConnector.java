@@ -1,5 +1,6 @@
 package restApp;
 
+import solr.SolrConnector;
 import transformer.XSLTransformer;
 import validator.XMLvalidator;
 
@@ -28,9 +29,11 @@ public class MongoConnector {
 
     private MongoClient mongoClient;
     private static final String noSuchCollectionMsg = "Collection does not exist!";
+    private SolrConnector solrConnector;
 
     public MongoConnector() {
         mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
+        solrConnector = new SolrConnector();
     }
 
     /**
@@ -191,6 +194,10 @@ public class MongoConnector {
                     filesDir + "XMLgerados/SolrIndexing/", "XMLauditoriaIndexing");
             System.out.println("\nFICHEIROS_CRIADOS:\n-> namespaceXML: " + namespaceXmlName + " | dir: " + filesDir + "XMLgerados/ \n" +
                     "\n-> indexingXML: " + indexingXmlName + " | dir: " + filesDir + "XMLgerados/SolrIndexing/ \n");
+            File xmlIndex = new File(
+                    ".\\XMLgerados_XSDschemas_XSLTtemplate\\XMLgerados\\SolrIndexing\\"+indexingXmlName);
+            solrConnector.addDocument(xmlIndex);
+
         }
     }
 

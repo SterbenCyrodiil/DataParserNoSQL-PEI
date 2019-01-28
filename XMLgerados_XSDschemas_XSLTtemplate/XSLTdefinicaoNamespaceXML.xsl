@@ -25,7 +25,7 @@ complexidade desgraçada na API depois...
                 xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja"
                 xmlns:vnd="ProjetoPEI/Grupo4/EntregaFinal/Venda"
                 xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto" extension-element-prefixes="doc inf">
-    <xsl:output method="xml" indent="yes" encoding="utf-8"/>
+    <xsl:output method="xml" indent="no" encoding="utf-8"/>
     <!-- Variável que vai ser utilizada em condições relativas aos elementos que têm possibilidade ser ter como valor
      'NULL' (como as datas e a cor do produto) -->
     <xsl:variable name="checker" select="'NULL'"/>
