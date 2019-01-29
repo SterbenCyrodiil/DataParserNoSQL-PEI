@@ -2,6 +2,7 @@ package validator;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -10,7 +11,9 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Source;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -48,23 +51,57 @@ public class XMLvalidator {
     /**
      * Método responsável por ler (parse) um documento XML
      *
+     * @param xmlFile path para o documento xml
      * @return valor booleano sinalizando sucesso/insucesso da operação
      */
-    public boolean readXML() {
+    public static Document readXML(String xmlFile) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db;
+        Document document = null;
         try {
             db = dbf.newDocumentBuilder();
             db.setErrorHandler(new XMLErrorHandler());
             dbf.setIgnoringComments(true);
             dbf.setIgnoringElementContentWhitespace(true);
-            document = db.parse(this.xmlFile);
+            document = db.parse(xmlFile);
             document.getDocumentElement().normalize();
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             ex.printStackTrace();
-            return false;
+            return null;
         }
-        return true;
+        return document;
+    }
+
+    /**
+     * Imprime o conteúdo de um  Documento XML para uma String.
+     *
+     * @param xml parsed XML document
+     * @param stream stream onde será imprimido o conteúdo (String)
+     */
+    public static void printMenuXML(Document xml, StringWriter stream) {
+        try {
+            //criação do transformador de documentos
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+            Transformer transformer = tFactory.newTransformer();
+
+            /**
+             * Alteração das definições de output
+             *
+             * Neste caso 'INDENT' -> 'yes' serve para que as 'newlines' ('\n')
+             * no output estejam corretas
+             */
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+
+            //conteúdo do ficheiro
+            DOMSource source = new DOMSource(xml);
+            //output do resultado
+            StreamResult result = new StreamResult(stream);
+            transformer.transform(source, result);
+
+        } catch (NullPointerException | TransformerException exc) {
+            exc.printStackTrace();
+        }
     }
 
     /**
@@ -103,4 +140,12 @@ public class XMLvalidator {
         return xsdFile == null || xsdFile.isEmpty() ? true : XMLvalidator.validate(new File(xmlFile), new File(xsdFile));
     }
 
+    /**
+     * Metodo que permite ler um ficheiro XML presente na instância deste objeto.
+     *
+     * @return true se leu, false no contrário (stacktrace na consola)
+     */
+    public boolean readXML() {
+        return XMLvalidator.readXML(this.xmlFile) != null ? true : false;
+    }
 }

@@ -118,12 +118,6 @@
                                 <xsl:attribute name="name">
                                     <xsl:text>precoEmListaProduto</xsl:text>
                                 </xsl:attribute>
-                                <xsl:attribute name="multiValued">
-                                    <xsl:text>false</xsl:text>
-                                </xsl:attribute>
-                                <xsl:attribute name="type">
-                                    <xsl:text>float</xsl:text>
-                                </xsl:attribute>
                                 <xsl:value-of select="ListPrice/text()"/>
                             </xsl:element>
                             <xsl:element name="field">

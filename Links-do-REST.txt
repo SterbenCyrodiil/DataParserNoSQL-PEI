@@ -35,7 +35,7 @@ http://localhost:9090/validateXMLwithXSD?
 	xmlFile=/* nome do documento XML a ser validado 
 			(por predefinição, ao ser introduzido o nome "all", faz a validação de todos os documentos que se encontrem dentro da diretoria) */&
 	xsdFilePath=/* caminho para o ficheiro XSD que define o Schema para validação 
-			(por predifinição: "XMLgerados_XSDschemas_XSLTtemplate/SchemasDefinicaoModulos/SchemaAuditoriaLoja.xsd" */
+			(por predifinição: "XMLgerados_XSDschemas_XSLTtemplate/SchemasDefinicaoModulos/DocumentoValidacao.xsd" */
 
 return: Devolve uma mensagem relativa ao sucesso, insucesso ou erros relativos à validação do documento
 

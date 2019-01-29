@@ -16,6 +16,7 @@ import org.json.XML;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,10 @@ public class MongoConnector {
 
     private MongoClient mongoClient;
     private static final String noSuchCollectionMsg = "Collection does not exist!";
+    private static final String noResults = "Não existem resultados!\n Possíveis problemas:\n" +
+            "-> A database ou a collection não existem;\n" +
+            "-> Os parametros introduzidos não geram resultados ou não existem na base de dados.\n" +
+            "-> Problemas/erros na transformação para o XML! Ver stacktrace imprimida na consola.";
     private SolrConnector solrConnector;
 
     public MongoConnector() {
@@ -50,18 +55,17 @@ public class MongoConnector {
      * Procura na base de dados a existência da Venda relativa a uma loja e uma determinada data.
      * Também realiza a transformação dessa informação (em JSON) para XML.
      *
-     * @param databaseName base de dados mongoDB introduzida pelo REST
+     * @param databaseName   base de dados mongoDB introduzida pelo REST
      * @param collectionName mongoDB collection introduzida pelo REST
-     * @param storeField ID da loja a ser encontrada
-     * @param saleMonth  mês referente à data (integer)
-     * @param saleYear   ano referente à data (integer)
+     * @param storeField     ID da loja a ser encontrada
+     * @param saleMonth      mês referente à data (integer)
+     * @param saleYear       ano referente à data (integer)
      * @return JSONArray (String) com os resultados
      */
     public String getSaleDetails(String databaseName, String collectionName, String storeField, String saleMonth, String saleYear) {
         /*
         Tal como estava escrito neste coment anteriormente, a database e collection foram parametrizadas no REST
-        (no entanto, estão definidos parametros predefinidos (repetivamente, "bikestore" e "salesdetails"
-         */
+        (no entanto, estão definidos parametros pre-definidos (repetivamente, "bikestore" e "salesdetails") */
         MongoDatabase database = mongoClient.getDatabase(databaseName);
         MongoCollection<Document> collection = database.getCollection(collectionName);
 
@@ -121,14 +125,18 @@ public class MongoConnector {
         AggregateIterable<Document> results = collection.aggregate(queryStages);
 
         if (results.iterator().hasNext()) {
-            //Criar o XML do resultado (quando existem resultados)
-            this.aggregateResultsToXML(collection, results, queryFormatacaoData, queryBuscaAuditoria);
+            //Criar o XML do resultado
+            String xmlFile = aggregateResultsToXML(collection, results, queryFormatacaoData, queryBuscaAuditoria);
+            if (xmlFile == null) return noResults;
+            //utilização do transformer para realizar o print
+            StringWriter sr = new StringWriter();
+            XMLvalidator.printMenuXML(XMLvalidator.readXML(xmlFile), sr);
+            return "Último ficheiro criado/transformado relativo aos resultados da pesquisa efetuada\n" +
+                    "(outros documentos XML estão guardados nos respetivos ficheiros na diretoria predefinida" +
+                    "da API [XMLgerados_XSDschemas_XSLTtemplate/XMLgerados]):\n" + sr.toString();
+        } else {
+            return noResults;
         }
-
-        //Mapear o resultado para um array em JSON
-        return StreamSupport.stream(results.spliterator(), false)
-                .map(Document::toJson)
-                .collect(Collectors.joining(", ", "[", "]"));
     }
 
     /**
@@ -149,13 +157,16 @@ public class MongoConnector {
      * @param results             instância iterável, devolvida pelo uso do método agregate do mongoDB, com os resultados.
      * @param queryFormatacaoData mongoDB query com a formatacao da data a ser utilizada na procura dos documentos
      * @param queryBuscaAuditoria mongoDB query para a procura da auditoria especificada na base de dados
+     * @return String com o path do último documento XML a ser gerado
      */
-    public void aggregateResultsToXML(MongoCollection collection, AggregateIterable<Document> results,
-                                      String queryFormatacaoData, String queryBuscaAuditoria) {
+    public String aggregateResultsToXML(MongoCollection collection, AggregateIterable<Document> results,
+                                        String queryFormatacaoData, String queryBuscaAuditoria) {
         MongoCursor it = results.iterator();
-
-        /*o resultado da pesquisa so vai devolver 1 documento, no entanto deixa-se ficar este ciclo while para a
-        'flexibilidade' deste método. */
+        String filesDir = "XMLgerados_XSDschemas_XSLTtemplate/";
+        String namespaceXmlName = null;
+        /* o resultado da pesquisa so vai devolver 1 documento (com a venda da Loja na determinada data). No entanto,
+         pode-se deixar ficar este ciclo while para possibilitar gerar varios documentos XML (dependendo dos resultados
+         no mongoDB). */
         while (it.hasNext()) {
             Document obj = (Document) it.next();
             //Formata a data ISODate para um formato "xs:dateTime"
@@ -188,19 +199,25 @@ public class MongoConnector {
             xmlTotal.append("</root>");
 
             System.out.println("\n\nXML_TOTAL: " + xmlTotal.toString());
+
             //invocação da classe responsável por aplicar o XSL (ter atenção às diretorias dos ficheiros!)
-            String filesDir = "XMLgerados_XSDschemas_XSLTtemplate/";
-            String namespaceXmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTdefinicaoNamespaceXML.xsl",
+            //transformação dos resultados para um XML estruturado (com namespaces)
+            namespaceXmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTdefinicaoNamespaceXML.xsl",
                     filesDir + "XMLgerados/", "XMLauditoria");
+            if (namespaceXmlName == null) return null;
+            //transformação dos resultados para um XML com a estrutura de Indexing do Apache Solr
             String indexingXmlName = XSLTransformer.transform(xmlTotal.toString(), filesDir + "XSLTdefinicaoXMLIndexacaoApacheSolr.xsl",
                     filesDir + "XMLgerados/SolrIndexing/", "XMLauditoriaIndexing");
+            if (indexingXmlName == null) return null;
             System.out.println("\nFICHEIROS_CRIADOS:\n-> namespaceXML: " + namespaceXmlName + " | dir: " + filesDir + "XMLgerados/ \n" +
                     "\n-> indexingXML: " + indexingXmlName + " | dir: " + filesDir + "XMLgerados/SolrIndexing/ \n");
-            File xmlIndex = new File(
-                    ".\\XMLgerados_XSDschemas_XSLTtemplate\\XMLgerados\\SolrIndexing\\"+indexingXmlName);
-            solrConnector.addDocument(xmlIndex);
 
+            //Adicionar o ficheiro ao Apache Solr
+            File xmlIndex = new File(
+                    ".\\XMLgerados_XSDschemas_XSLTtemplate\\XMLgerados\\SolrIndexing\\" + indexingXmlName);
+            solrConnector.addDocument(xmlIndex);
         }
+        return filesDir + "XMLgerados/" + namespaceXmlName;
     }
 
     /**
@@ -249,10 +266,14 @@ public class MongoConnector {
         } else {
             collectionName = "productdetails";
         }
+
+        /* String Builder que cria a string que contém os elementos relativos aos vários ID dos produtos existentes
+        na Venda inserida pelo REST */
         StringBuilder xmlDadosProdutos = new StringBuilder().append("<DadosProdutos>");
         Iterator<Object> it = array.iterator();
         while (it.hasNext()) {
             JSONObject jsonObj = (JSONObject) it.next();
+            //Procura os dados no mongoDB
             MongoCursor mongoIt = this.getIterableFieldData(
                     collection.getNamespace().getDatabaseName(), collectionName, "ProductID", jsonObj.getInt("ProductID")).iterator();
             Document docObj = (Document) mongoIt.next();
@@ -291,6 +312,7 @@ public class MongoConnector {
         } else {
             collectionName = "currencydetails";
         }
+        //Procura os dados no mongoDB
         MongoCursor mongoIt = getIterableFieldData(
                 collection.getNamespace().getDatabaseName(), collectionName, "CurrencyRateID", id).iterator();
         Document docObj = (Document) mongoIt.next();

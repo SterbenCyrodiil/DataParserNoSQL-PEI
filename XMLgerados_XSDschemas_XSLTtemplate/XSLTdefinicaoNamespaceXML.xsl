@@ -2,7 +2,8 @@
 <!--
 Este Stylesheet vai no fundo definir uma template definitiva, com namespaces, para os XML a serem gerados, para que
 seja dessa forma possível fazer a validação com o vocabulário definido.
-Isto é feito com base na xml String que vai ser criada na API (com o uso da API 'org.json.XML').
+Isto é feito com base na xml String que vai ser criada na API (com o uso da API 'org.json.XML' e de várias pesquisas
+realizadas no mongoDB pelas várias collections).
 
 (NOTA: A abordagem seguida para aceder aos dados foi juntar toda a informação dos 3 CSV na mesma XML String
 podendo asseder-se ao conteúdo específico através do uso do elemento relativo (para usar os dados dos produtos -
@@ -16,22 +17,25 @@ Não sei como se vai traduzir isso para um só XSLT, porque se for para dividir 
 complexidade desgraçada na API depois...
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                version="1.0"
                 xmlns:doc="ProjetoPEI/Grupo4/EntregaFinal/Documento"
                 xmlns:inf="ProjetoPEI/Grupo4/Entrega2/InformacaoAdicional"
                 xmlns:iexc="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalAuditorias"
                 xmlns:ivnd="ProjetoPEI/Grupo4/EntregaFinal/InformacaoAdicionalVenda"
-                xmlns:aud="ProjetoPEI/Grupo4/EntregaFinal/Auditoria"
-                xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja"
-                xmlns:vnd="ProjetoPEI/Grupo4/EntregaFinal/Venda"
-                xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto" extension-element-prefixes="doc inf">
-    <xsl:output method="xml" indent="no" encoding="utf-8"/>
-    <!-- Variável que vai ser utilizada em condições relativas aos elementos que têm possibilidade ser ter como valor
+                xmlns:aud="ProjetoPEI/Grupo4/EntregaFinal/Auditoria" xmlns:loj="ProjetoPEI/Grupo4/EntregaFinal/Loja"
+                xmlns:vnd="ProjetoPEI/Grupo4/EntregaFinal/Venda" xmlns:prd="ProjetoPEI/Grupo4/EntregaFinal/Produto"
+                exclude-result-prefixes="doc" version="1.0">
+    <xsl:output method="xml" indent="yes" encoding="utf-8"/>
+    <!-- Controlo de whitespaces nos elementos -->
+    <xsl:strip-space elements="*"/>
+    <xsl:preserve-space elements="loj:Nome prd:Nome"/>
+
+    <!-- Variável que vai ser utilizada em condições relativas aos elementos que têm possibilidade ter como valor
      'NULL' (como as datas e a cor do produto) -->
     <xsl:variable name="checker" select="'NULL'"/>
-
+    <!-- Nova estrutura completa do documento XML -->
     <xsl:template match="/">
         <xsl:element name="doc:Documento">
+
             <!-- Adição do atributo para a definição do 'schema instance' e os namespaces dos schemas para validação. -->
             <xsl:attribute name="xsi:schemaLocation">
                 <!-- O XSLT guarda os enters (&#10;), portanto não se pode usar o 'enter' na string abaixo ... -->
